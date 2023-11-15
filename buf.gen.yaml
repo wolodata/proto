@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/wolodata/api/gen
+    default: github.com/wolodata/proto/gen
 plugins:
   - name: go
     out: gen
