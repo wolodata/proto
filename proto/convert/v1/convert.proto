@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package convert.v1;
+
+service ConvertService {
+  rpc PdfToHtml(PdfToHtmlRequest) returns (PdfToHtmlResponse) {}
+}
+
+message PdfToHtmlRequest {
+  bytes pdf = 1;
+}
+
+message PdfToHtmlResponse {
+  string html = 1;
+}
