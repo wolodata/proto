@@ -4,6 +4,7 @@ package user.v1;
 
 service UserService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
 }
 
 message LoginRequest {
@@ -13,4 +14,12 @@ message LoginRequest {
 
 message LoginResponse {
   string token = 1;
+}
+
+message GetUserInfoRequest {
+  string token = 1;
+}
+
+message GetUserInfoResponse {
+  string username = 1;
 }

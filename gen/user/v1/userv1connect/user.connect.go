@@ -35,17 +35,21 @@ const (
 const (
 	// UserServiceLoginProcedure is the fully-qualified name of the UserService's Login RPC.
 	UserServiceLoginProcedure = "/user.v1.UserService/Login"
+	// UserServiceGetUserInfoProcedure is the fully-qualified name of the UserService's GetUserInfo RPC.
+	UserServiceGetUserInfoProcedure = "/user.v1.UserService/GetUserInfo"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
-	userServiceServiceDescriptor     = v1.File_user_v1_user_proto.Services().ByName("UserService")
-	userServiceLoginMethodDescriptor = userServiceServiceDescriptor.Methods().ByName("Login")
+	userServiceServiceDescriptor           = v1.File_user_v1_user_proto.Services().ByName("UserService")
+	userServiceLoginMethodDescriptor       = userServiceServiceDescriptor.Methods().ByName("Login")
+	userServiceGetUserInfoMethodDescriptor = userServiceServiceDescriptor.Methods().ByName("GetUserInfo")
 )
 
 // UserServiceClient is a client for the user.v1.UserService service.
 type UserServiceClient interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	GetUserInfo(context.Context, *connect.Request[v1.GetUserInfoRequest]) (*connect.Response[v1.GetUserInfoResponse], error)
 }
 
 // NewUserServiceClient constructs a client for the user.v1.UserService service. By default, it uses
@@ -64,12 +68,19 @@ func NewUserServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(userServiceLoginMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		getUserInfo: connect.NewClient[v1.GetUserInfoRequest, v1.GetUserInfoResponse](
+			httpClient,
+			baseURL+UserServiceGetUserInfoProcedure,
+			connect.WithSchema(userServiceGetUserInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // userServiceClient implements UserServiceClient.
 type userServiceClient struct {
-	login *connect.Client[v1.LoginRequest, v1.LoginResponse]
+	login       *connect.Client[v1.LoginRequest, v1.LoginResponse]
+	getUserInfo *connect.Client[v1.GetUserInfoRequest, v1.GetUserInfoResponse]
 }
 
 // Login calls user.v1.UserService.Login.
@@ -77,9 +88,15 @@ func (c *userServiceClient) Login(ctx context.Context, req *connect.Request[v1.L
 	return c.login.CallUnary(ctx, req)
 }
 
+// GetUserInfo calls user.v1.UserService.GetUserInfo.
+func (c *userServiceClient) GetUserInfo(ctx context.Context, req *connect.Request[v1.GetUserInfoRequest]) (*connect.Response[v1.GetUserInfoResponse], error) {
+	return c.getUserInfo.CallUnary(ctx, req)
+}
+
 // UserServiceHandler is an implementation of the user.v1.UserService service.
 type UserServiceHandler interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	GetUserInfo(context.Context, *connect.Request[v1.GetUserInfoRequest]) (*connect.Response[v1.GetUserInfoResponse], error)
 }
 
 // NewUserServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -94,10 +111,18 @@ func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(userServiceLoginMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	userServiceGetUserInfoHandler := connect.NewUnaryHandler(
+		UserServiceGetUserInfoProcedure,
+		svc.GetUserInfo,
+		connect.WithSchema(userServiceGetUserInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/user.v1.UserService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case UserServiceLoginProcedure:
 			userServiceLoginHandler.ServeHTTP(w, r)
+		case UserServiceGetUserInfoProcedure:
+			userServiceGetUserInfoHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -109,4 +134,8 @@ type UnimplementedUserServiceHandler struct{}
 
 func (UnimplementedUserServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserService.Login is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) GetUserInfo(context.Context, *connect.Request[v1.GetUserInfoRequest]) (*connect.Response[v1.GetUserInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserService.GetUserInfo is not implemented"))
 }
