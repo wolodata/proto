@@ -1,6 +1,6 @@
 module github.com/wolodata/proto
 
-go 1.21.4
+go 1.21.5
 
 require (
 	connectrpc.com/connect v1.12.0

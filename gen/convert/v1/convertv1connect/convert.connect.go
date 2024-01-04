@@ -18,7 +18,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ConvertServiceName is the fully-qualified name of the ConvertService service.
@@ -36,6 +36,12 @@ const (
 	// ConvertServicePdfToHtmlProcedure is the fully-qualified name of the ConvertService's PdfToHtml
 	// RPC.
 	ConvertServicePdfToHtmlProcedure = "/convert.v1.ConvertService/PdfToHtml"
+)
+
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	convertServiceServiceDescriptor         = v1.File_convert_v1_convert_proto.Services().ByName("ConvertService")
+	convertServicePdfToHtmlMethodDescriptor = convertServiceServiceDescriptor.Methods().ByName("PdfToHtml")
 )
 
 // ConvertServiceClient is a client for the convert.v1.ConvertService service.
@@ -56,7 +62,8 @@ func NewConvertServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 		pdfToHtml: connect.NewClient[v1.PdfToHtmlRequest, v1.PdfToHtmlResponse](
 			httpClient,
 			baseURL+ConvertServicePdfToHtmlProcedure,
-			opts...,
+			connect.WithSchema(convertServicePdfToHtmlMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -85,7 +92,8 @@ func NewConvertServiceHandler(svc ConvertServiceHandler, opts ...connect.Handler
 	convertServicePdfToHtmlHandler := connect.NewUnaryHandler(
 		ConvertServicePdfToHtmlProcedure,
 		svc.PdfToHtml,
-		opts...,
+		connect.WithSchema(convertServicePdfToHtmlMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/convert.v1.ConvertService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
