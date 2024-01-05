@@ -10,3 +10,11 @@ plugins:
   - name: connect-go
     out: gen
     opt: paths=source_relative
+  - plugin: es
+    out: gen
+    opt:
+      - target=ts
+  - plugin: connect-es
+    out: gen
+    opt:
+      - target=ts
