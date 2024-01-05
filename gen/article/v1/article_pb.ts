@@ -18,21 +18,14 @@ export class ListArticlesRequest extends Message<ListArticlesRequest> {
   sourceId: string[] = [];
 
   /**
-   * @generated from field: int32 offset = 2;
+   * @generated from field: uint32 page_number = 2;
    */
-  offset = 0;
+  pageNumber = 0;
 
   /**
-   * @generated from field: int32 limit = 3;
+   * @generated from field: uint32 limit = 3;
    */
   limit = 0;
-
-  /**
-   * 最后一条id，防止翻页后出现重复数据
-   *
-   * @generated from field: int32 last_id = 4;
-   */
-  lastId = 0;
 
   constructor(data?: PartialMessage<ListArticlesRequest>) {
     super();
@@ -43,9 +36,8 @@ export class ListArticlesRequest extends Message<ListArticlesRequest> {
   static readonly typeName = "article.v1.ListArticlesRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 1, name: "source_id", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 2, name: "offset", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 4, name: "last_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "page_number", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListArticlesRequest {
@@ -70,14 +62,29 @@ export class ListArticlesRequest extends Message<ListArticlesRequest> {
  */
 export class ListArticlesResponse extends Message<ListArticlesResponse> {
   /**
-   * @generated from field: repeated article.v1.Article articles = 1;
-   */
-  articles: Article[] = [];
-
-  /**
-   * @generated from field: int32 total_count = 2;
+   * @generated from field: uint32 total_count = 1;
    */
   totalCount = 0;
+
+  /**
+   * @generated from field: uint32 page_size = 2;
+   */
+  pageSize = 0;
+
+  /**
+   * @generated from field: uint32 total_page = 3;
+   */
+  totalPage = 0;
+
+  /**
+   * @generated from field: uint32 current_page = 4;
+   */
+  currentPage = 0;
+
+  /**
+   * @generated from field: repeated article.v1.Article articles = 5;
+   */
+  articles: Article[] = [];
 
   constructor(data?: PartialMessage<ListArticlesResponse>) {
     super();
@@ -87,8 +94,11 @@ export class ListArticlesResponse extends Message<ListArticlesResponse> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "article.v1.ListArticlesResponse";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "articles", kind: "message", T: Article, repeated: true },
-    { no: 2, name: "total_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "total_count", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 2, name: "page_size", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "total_page", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "current_page", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 5, name: "articles", kind: "message", T: Article, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListArticlesResponse {
