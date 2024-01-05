@@ -9,12 +9,10 @@ service ArticleService {
 }
 
 message ListArticlesRequest {
-  string source_type = 1; // 信源类型
-  string source_category = 2; // 信源分类
-  string source_id = 3; // 信源id
-  int32 offset = 4;
-  int32 limit = 5;
-  int32 last_id = 6; // 最后一条id，防止翻页后出现重复数据
+  repeated string source_id = 1; // 信源id，不传就是查所有信源
+  int32 offset = 2;
+  int32 limit = 3;
+  int32 last_id = 4; // 最后一条id，防止翻页后出现重复数据
 }
 
 message ListArticlesResponse {

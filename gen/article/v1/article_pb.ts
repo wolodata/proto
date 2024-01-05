@@ -11,40 +11,26 @@ import { Message, proto3, Timestamp } from "@bufbuild/protobuf";
  */
 export class ListArticlesRequest extends Message<ListArticlesRequest> {
   /**
-   * 信源类型
+   * 信源id，不传就是查所有信源
    *
-   * @generated from field: string source_type = 1;
+   * @generated from field: repeated string source_id = 1;
    */
-  sourceType = "";
+  sourceId: string[] = [];
 
   /**
-   * 信源分类
-   *
-   * @generated from field: string source_category = 2;
-   */
-  sourceCategory = "";
-
-  /**
-   * 信源id
-   *
-   * @generated from field: string source_id = 3;
-   */
-  sourceId = "";
-
-  /**
-   * @generated from field: int32 offset = 4;
+   * @generated from field: int32 offset = 2;
    */
   offset = 0;
 
   /**
-   * @generated from field: int32 limit = 5;
+   * @generated from field: int32 limit = 3;
    */
   limit = 0;
 
   /**
    * 最后一条id，防止翻页后出现重复数据
    *
-   * @generated from field: int32 last_id = 6;
+   * @generated from field: int32 last_id = 4;
    */
   lastId = 0;
 
@@ -56,12 +42,10 @@ export class ListArticlesRequest extends Message<ListArticlesRequest> {
   static readonly runtime: typeof proto3 = proto3;
   static readonly typeName = "article.v1.ListArticlesRequest";
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "source_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "source_category", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "source_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "offset", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 5, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 6, name: "last_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "source_id", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "offset", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "limit", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "last_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListArticlesRequest {
