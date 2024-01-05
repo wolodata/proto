@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package article.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service ArticleService {
+  rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
+}
+
+message ListArticlesRequest {
+  string source_type = 1; // 信源类型
+  string source_category = 2; // 信源分类
+  string source_id = 3; // 信源id
+  int32 offset = 4;
+  int32 limit = 5;
+  int32 last_id = 6; // 最后一条id，防止翻页后出现重复数据
+}
+
+message ListArticlesResponse {
+  repeated Article articles = 1;
+  int32 total_count = 2;
+}
+
+message Article {
+  int32 id = 1;
+  string source_id = 2;
+  string title_chinese = 3;
+  string title_english = 4;
+  string preview_chinese = 5;
+  string preview_english = 6;
+  google.protobuf.Timestamp published_at = 7;
+}
