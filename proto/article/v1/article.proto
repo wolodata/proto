@@ -12,6 +12,10 @@ message ListArticlesRequest {
   repeated string source_id = 1; // 信源id，不传就是查所有信源
   uint32 page_number = 2;
   uint32 limit = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+  string search_keyword = 6;
+  SearchRange search_range = 7;
 }
 
 message ListArticlesResponse {
@@ -30,4 +34,11 @@ message Article {
   string text_chinese = 5;
   string text_english = 6;
   google.protobuf.Timestamp published_at = 7;
+}
+
+enum SearchRange {
+  SEARCH_RANGE_UNSPECIFIED = 0;
+  SEARCH_RANGE_ALL = 1;
+  SEARCH_RANGE_TITLE = 2;
+  SEARCH_RANGE_BODY = 3;
 }
