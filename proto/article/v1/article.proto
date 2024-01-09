@@ -31,8 +31,8 @@ message Article {
   string source_id = 2;
   string title_chinese = 3;
   string title_english = 4;
-  string text_chinese = 5;
-  string text_english = 6;
+  string preview_chinese = 5;
+  string preview_english = 6;
   google.protobuf.Timestamp published_at = 7;
 }
 

@@ -11,16 +11,6 @@ MAKEFLAGS += --no-print-directory
 lint:
 	buf lint
 
-.PHONY: generate
-export PATH := $(PWD)/node_modules/.bin:$(PATH)
-generate:
-	rm -rf gen
-	buf generate
-
 .PHONY: init
 init:
 	go install github.com/bufbuild/buf/cmd/buf@latest
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-	go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
-	npm install --save-dev @bufbuild/buf @bufbuild/protoc-gen-es @connectrpc/protoc-gen-connect-es
-	npm install @connectrpc/connect @bufbuild/protobuf
