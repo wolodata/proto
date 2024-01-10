@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
   rpc GetArticle(GetArticleRequest) returns (GetArticleResponse);
+  rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
 }
 
 message ListArticlesRequest {
@@ -78,4 +79,11 @@ message Article {
 message Tag {
   string tag_chinese = 1;
   string tag_english = 2;
+}
+
+message TranslateArticleRequest {
+  int32 id = 1;
+}
+
+message TranslateArticleResponse {
 }
