@@ -8,6 +8,7 @@ service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
   rpc GetArticle(GetArticleRequest) returns (GetArticleResponse);
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
+  rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
 }
 
 message ListArticlesRequest {
@@ -86,4 +87,11 @@ message TranslateArticleRequest {
 }
 
 message TranslateArticleResponse {
+}
+
+message SummaryArticleRequest {
+  int32 id = 1;
+}
+
+message SummaryArticleResponse {
 }
