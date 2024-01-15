@@ -9,6 +9,7 @@ service ArticleService {
   rpc GetArticle(GetArticleRequest) returns (GetArticleResponse);
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
+  rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
 }
 
 message ListArticlesRequest {
@@ -94,4 +95,12 @@ message SummaryArticleRequest {
 }
 
 message SummaryArticleResponse {
+}
+
+message StreamSummaryArticleRequest {
+  int32 id = 1;
+}
+
+message StreamSummaryArticleResponse {
+  string summary_chinese = 1;
 }
