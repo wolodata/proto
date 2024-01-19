@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package topic.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service TopicService {
+  rpc ListFollowTopics(ListFollowTopicsRequest) returns (ListFollowTopicsResponse) {}
+  rpc CreateFollowTopic(CreateFollowTopicRequest) returns (CreateFollowTopicResponse) {}
+  rpc UpdateFollowTopic(UpdateFollowTopicRequest) returns (UpdateFollowTopicResponse) {}
+  rpc DeleteFollowTopic(DeleteFollowTopicRequest) returns (DeleteFollowTopicResponse) {}
+}
+
+message ListFollowTopicsRequest {
+}
+
+message ListFollowTopicsResponse {
+  repeated FollowTopic follow_topics = 1;
+}
+
+message FollowTopic {
+  string keyword = 1;
+  bool follow_topic = 2;
+  bool follow_content = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message CreateFollowTopicRequest {
+  string keyword = 1;
+  bool follow_topic = 2;
+  bool follow_content = 3;
+}
+
+message CreateFollowTopicResponse {
+}
+
+message UpdateFollowTopicRequest {
+  string keyword = 1;
+  bool follow_topic = 2;
+  bool follow_content = 3;
+}
+
+message UpdateFollowTopicResponse {
+}
+
+message DeleteFollowTopicRequest {
+  string keyword = 1;
+}
+
+message DeleteFollowTopicResponse {
+}
