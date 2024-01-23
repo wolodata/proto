@@ -74,8 +74,10 @@ message Article {
   repeated Tag tags = 8;
   string html_chinese = 9;
   string html_english = 10;
-  string summary_chinese = 11;
-  google.protobuf.Timestamp published_at = 12;
+  string text_chinese = 11;
+  string text_english = 12;
+  string summary_chinese = 13;
+  google.protobuf.Timestamp published_at = 14;
 }
 
 message Tag {
