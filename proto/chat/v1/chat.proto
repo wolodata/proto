@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package chat.v1;
+
+service ChatService {
+  rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
+}
+
+message StreamChatRequest {
+  string model = 1;
+  repeated ChatCompletionMessage prompts = 2;
+}
+
+enum ChatCompletionMessageRole {
+  CHAT_COMPLETION_MESSAGE_ROLE_UNSPECIFIED = 0;
+  CHAT_COMPLETION_MESSAGE_ROLE_SYSTEM = 1;
+  CHAT_COMPLETION_MESSAGE_ROLE_USER = 2;
+  CHAT_COMPLETION_MESSAGE_ROLE_ASSISTANT = 3;
+}
+
+message ChatCompletionMessage {
+  ChatCompletionMessageRole role = 1;
+  string content = 2;
+}
+
+message StreamChatResponse {
+  string content = 1;
+}

@@ -13,7 +13,7 @@ service ArticleService {
 }
 
 message ListArticlesRequest {
-  repeated string source_id = 1; // 信源id，不传就是查所有信源
+  repeated string source_ids = 1; // 信源id，不传就是查所有信源
   uint32 page_number = 2;
   uint32 limit = 3;
   google.protobuf.Timestamp start_time = 4;
