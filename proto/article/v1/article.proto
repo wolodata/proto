@@ -39,6 +39,7 @@ message ArticleListItem {
   string preview_chinese = 6;
   string preview_english = 7;
   google.protobuf.Timestamp published_at = 8;
+  string category = 9;
 }
 
 enum SearchRange {
