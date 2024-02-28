@@ -78,6 +78,7 @@ message Article {
   string text_english = 12;
   string summary_chinese = 13;
   google.protobuf.Timestamp published_at = 14;
+  string category = 15;
 }
 
 message Tag {
