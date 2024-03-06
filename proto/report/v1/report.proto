@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package report.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service ReportService {
+  rpc ListReports(ListReportsRequest) returns (ListReportsResponse);
+  rpc GetReport(GetReportRequest) returns (GetReportResponse);
+}
+
+enum ReportType {
+  REPORT_TYPE_UNSPECIFIED = 0;
+  REPORT_TYPE_CUSTOM = 1;
+  REPORT_TYPE_DAILY = 2;
+  REPORT_TYPE_WEEKLY = 3;
+  REPORT_TYPE_MONTHLY = 4;
+}
+
+message ListReportsRequest {
+  ReportType report_type = 1;
+  uint32 page_number = 2;
+  uint32 limit = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+}
+
+message ListReportsResponse {
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated Report items = 5;
+}
+
+message Report  {
+  int32 id = 1;
+  ReportType report_type = 2;
+  int32 trigger_user_id = 3;
+  google.protobuf.Timestamp trigger_at = 4;
+  repeated int32 related_article_ids = 5;
+  string content = 6;
+  string reason = 7;
+  google.protobuf.Timestamp generated_at = 8;
+}
+
+message GetReportRequest {
+  int32 id = 1;
+}
+
+message GetReportResponse {
+  Report report = 1;
+}
