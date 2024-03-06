@@ -20,6 +20,7 @@ message ListArticlesRequest {
   google.protobuf.Timestamp end_time = 5;
   string search_keyword = 6;
   SearchRange search_range = 7;
+  bool is_china_related = 8;
 }
 
 message ListArticlesResponse {
