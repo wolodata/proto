@@ -10,6 +10,6 @@ message GetUserInfoRequest {
 }
 
 message GetUserInfoResponse {
-  int32 user_id = 1;
+  string user_id = 1;
   string username = 2;
 }
