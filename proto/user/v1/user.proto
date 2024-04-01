@@ -12,4 +12,5 @@ message GetUserInfoRequest {
 message GetUserInfoResponse {
   string user_id = 1;
   string username = 2;
+  bool is_admin = 3;
 }
