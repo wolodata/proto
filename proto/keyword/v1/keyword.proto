@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package keyword.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service KeywordService {
+  rpc ListKeywords(ListKeywordsRequest) returns (ListKeywordsResponse);
+  rpc UpdateKeywords(UpdateKeywordsRequest) returns (UpdateKeywordsResponse);
+}
+
+message ListKeywordsRequest {
+}
+
+message ListKeywordsResponse {
+  repeated KeywordItem items = 1;
+}
+
+message KeywordItem {
+  string id = 1;
+  string name = 2;
+  repeated string keywords = 3;
+  string color = 4;
+  uint64 order = 5;
+}
+
+message UpdateKeywordsRequest {
+  string id = 1;
+  repeated string keywords = 2;
+}
+
+
+message UpdateKeywordsResponse {
+}
