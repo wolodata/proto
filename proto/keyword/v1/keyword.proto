@@ -2,11 +2,14 @@ syntax = "proto3";
 
 package keyword.v1;
 
+import "google/protobuf/timestamp.proto";
+
 service KeywordService {
   rpc ListKeywords(ListKeywordsRequest) returns (ListKeywordsResponse);
   rpc CreateKeyword(CreateKeywordRequest) returns (CreateKeywordResponse);
   rpc UpdateKeyword(UpdateKeywordRequest) returns (UpdateKeywordResponse);
   rpc DeleteKeyword(DeleteKeywordRequest) returns (DeleteKeywordResponse);
+  rpc Reindex(ReindexRequest) returns (ReindexResponse);
 }
 
 message ListKeywordsRequest {
@@ -57,4 +60,12 @@ message DeleteKeywordRequest {
 }
 
 message DeleteKeywordResponse {
+}
+
+message ReindexRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+}
+
+message ReindexResponse {
 }
