@@ -4,7 +4,9 @@ package keyword.v1;
 
 service KeywordService {
   rpc ListKeywords(ListKeywordsRequest) returns (ListKeywordsResponse);
+  rpc CreateKeyword(CreateKeywordRequest) returns (CreateKeywordResponse);
   rpc UpdateKeyword(UpdateKeywordRequest) returns (UpdateKeywordResponse);
+  rpc DeleteKeyword(DeleteKeywordRequest) returns (DeleteKeywordResponse);
 }
 
 message ListKeywordsRequest {
@@ -24,6 +26,19 @@ message KeywordItem {
   uint64 sub_word_count = 7;
 }
 
+message CreateKeywordRequest {
+  uint64 category = 1;
+  string word = 2;
+  uint64 china_weak_related_count = 3;
+  uint64 china_strong_related_count = 4;
+  string sub_word = 5;
+  uint64 sub_word_count = 6;
+}
+
+message CreateKeywordResponse {
+  string id = 1;
+}
+
 message UpdateKeywordRequest {
   string id = 1;
   uint64 category = 2;
@@ -35,4 +50,11 @@ message UpdateKeywordRequest {
 }
 
 message UpdateKeywordResponse {
+}
+
+message DeleteKeywordRequest {
+  string id = 1;
+}
+
+message DeleteKeywordResponse {
 }
