@@ -8,7 +8,7 @@ service KeywordService {
   rpc ListKeywords(ListKeywordsRequest) returns (ListKeywordsResponse);
   rpc CreateKeyword(CreateKeywordRequest) returns (CreateKeywordResponse);
   rpc UpdateKeyword(UpdateKeywordRequest) returns (UpdateKeywordResponse);
-  rpc DeleteKeyword(DeleteKeywordRequest) returns (DeleteKeywordResponse);
+  rpc DeleteKeywords(DeleteKeywordsRequest) returns (DeleteKeywordsResponse);
   rpc Reindex(ReindexRequest) returns (ReindexResponse);
 }
 
@@ -55,11 +55,11 @@ message UpdateKeywordRequest {
 message UpdateKeywordResponse {
 }
 
-message DeleteKeywordRequest {
-  string id = 1;
+message DeleteKeywordsRequest {
+  repeated string id = 1;
 }
 
-message DeleteKeywordResponse {
+message DeleteKeywordsResponse {
 }
 
 message ReindexRequest {
