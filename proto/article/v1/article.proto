@@ -10,6 +10,7 @@ service ArticleService {
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
 }
 
 message ListArticlesRequest {
@@ -108,4 +109,25 @@ message StreamSummaryArticleRequest {
 
 message StreamSummaryArticleResponse {
   string summary_chinese = 1;
+}
+
+message UpdateArticleRequest {
+  string id = 1;
+  string title_chinese = 4;
+  string title_english = 5;
+  string author = 6;
+  google.protobuf.Timestamp published_at = 7;
+  string html_chinese = 8;
+  string html_english = 9;
+  string text_chinese = 10;
+  string text_english = 11;
+  repeated string images = 12;
+  bool is_china_related = 13;
+  repeated string china_related_keywords = 14;
+  bool is_china_strong_related = 15;
+  string china_related_category = 16;
+  string summary_chinese = 17;
+}
+
+message UpdateArticleResponse {
 }
