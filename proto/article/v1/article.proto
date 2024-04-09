@@ -22,6 +22,7 @@ message ListArticlesRequest {
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_china_related = 8;
+  string china_related_category = 9;
 }
 
 message ListArticlesResponse {
