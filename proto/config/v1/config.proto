@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package config.v1;
+
+service ConfigService {
+  rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse);
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+}
+
+message ListConfigsRequest {
+}
+
+message ListConfigsResponse {
+  repeated Config configs = 1;
+}
+
+message Config {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string api_url = 4;
+  string api_key = 5;
+  string prompt_system = 6;
+  string prompt_user = 7;
+}
+
+message UpdateConfigRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string api_url = 4;
+  string api_key = 5;
+  string prompt_system = 6;
+  string prompt_user = 7;
+}
+
+message UpdateConfigResponse {
+}
