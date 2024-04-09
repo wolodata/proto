@@ -86,7 +86,7 @@ message CreateStrongKeywordRequest {
   uint64 category = 1;
   string main = 2;
   uint64 main_count = 3;
-  uint64 sub = 4;
+  string sub = 4;
   uint64 sub_count = 5;
 }
 
