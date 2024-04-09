@@ -26,7 +26,6 @@ message Config {
 
 message UpdateConfigRequest {
   string id = 1;
-  string name = 2;
   string description = 3;
   string api_url = 4;
   string api_key = 5;
