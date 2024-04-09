@@ -76,7 +76,7 @@ message Article {
   string original_url = 3;
   string title_chinese = 4;
   string title_english = 5;
-  string author = 6;
+  repeated string author = 6;
   google.protobuf.Timestamp published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
@@ -116,7 +116,7 @@ message UpdateArticleRequest {
   string id = 1;
   string title_chinese = 4;
   string title_english = 5;
-  string author = 6;
+  repeated string author = 6;
   google.protobuf.Timestamp published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
