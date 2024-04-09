@@ -37,10 +37,11 @@ message Report  {
   string id = 1;
   ReportType report_type = 2;
   string trigger_user_id = 3;
-  google.protobuf.Timestamp date = 4;
-  google.protobuf.Timestamp trigger_at = 5;
-  string content = 6;
-  google.protobuf.Timestamp generated_at = 7;
+  google.protobuf.Timestamp trigger_at = 4;
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp end_time = 6;
+  string content = 7;
+  google.protobuf.Timestamp generated_at = 8;
 }
 
 message GetReportRequest {
