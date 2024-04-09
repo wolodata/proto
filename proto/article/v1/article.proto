@@ -117,7 +117,6 @@ message UpdateArticleRequest {
   string title_chinese = 4;
   string title_english = 5;
   repeated string authors = 6;
-  google.protobuf.Timestamp published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
   string text_chinese = 10;
