@@ -10,7 +10,7 @@ service ReportService {
   rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse);
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse);
   rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse);
-  rpc CreateCustomReport(CreateCustomReportRequest) returns (CreateCustomReportResponse);
+  rpc CreateCustomReportTask(CreateCustomReportTaskRequest) returns (CreateCustomReportTaskResponse);
 }
 
 enum ReportType {
@@ -86,14 +86,13 @@ message UpdateReportRequest {
 message UpdateReportResponse {
 }
 
-message CreateCustomReportRequest {
-  string trigger_user_id = 1;
-  google.protobuf.Timestamp trigger_at = 2;
-  google.protobuf.Timestamp start_time = 3;
-  google.protobuf.Timestamp end_time = 4;
-  google.protobuf.Timestamp generated_at = 6;
+message CreateCustomReportTaskRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  repeated string source_ids = 3;
+  string category = 4;
 }
 
-message CreateCustomReportResponse {
+message CreateCustomReportTaskResponse {
   string id = 1;
 }
