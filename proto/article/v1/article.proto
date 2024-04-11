@@ -47,8 +47,9 @@ message ArticleListItem {
   string preview_english = 6;
   google.protobuf.Timestamp published_at = 7;
   repeated string images = 8;
-  repeated WeakKeyword weak_keywords = 9;
-  string strong_related_category = 10;
+  bool is_weak_related = 9;
+  repeated WeakKeyword weak_keywords = 10;
+  string strong_related_category = 11;
 }
 
 
@@ -87,9 +88,10 @@ message Article {
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  repeated WeakKeyword weak_keywords = 13;
-  string strong_related_category = 14;
-  string summary_chinese = 15;
+  bool is_weak_related = 13;
+  repeated WeakKeyword weak_keywords = 14;
+  string strong_related_category = 15;
+  string summary_chinese = 16;
 }
 
 message TranslateArticleRequest {
@@ -124,9 +126,10 @@ message UpdateArticleRequest {
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  repeated WeakKeyword weak_keywords = 13;
-  string strong_related_category = 14;
-  string summary_chinese = 15;
+  bool is_weak_related = 13;
+  repeated WeakKeyword weak_keywords = 14;
+  string strong_related_category = 15;
+  string summary_chinese = 16;
 }
 
 message UpdateArticleResponse {
