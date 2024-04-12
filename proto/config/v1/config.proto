@@ -2,9 +2,12 @@ syntax = "proto3";
 
 package config.v1;
 
+import "google/protobuf/timestamp.proto";
+
 service ConfigService {
   rpc ListConfigs(ListConfigsRequest) returns (ListConfigsResponse);
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  rpc Redeploy(RedeployRequest) returns (RedeployResponse);
 }
 
 message ListConfigsRequest {
@@ -36,4 +39,13 @@ message UpdateConfigRequest {
 }
 
 message UpdateConfigResponse {
+}
+
+message RedeployRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  string id = 3;
+}
+
+message RedeployResponse {
 }
