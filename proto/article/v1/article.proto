@@ -142,7 +142,7 @@ message CreateArticleRequest {
   string title = 3;
   repeated string authors = 4;
   google.protobuf.Timestamp published_at = 5;
-  string html_chinese = 6;
+  string html = 6;
   repeated string images = 7;
 }
 
