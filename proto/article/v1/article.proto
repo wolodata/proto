@@ -11,6 +11,7 @@ service ArticleService {
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
+  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
 }
 
 message ListArticlesRequest {
@@ -133,4 +134,18 @@ message UpdateArticleRequest {
 }
 
 message UpdateArticleResponse {
+}
+
+message CreateArticleRequest {
+  string source_id = 1;
+  string url = 2;
+  string title = 3;
+  repeated string authors = 4;
+  google.protobuf.Timestamp published_at = 5;
+  string html_chinese = 6;
+  repeated string images = 7;
+}
+
+message CreateArticleResponse {
+  string id = 1;
 }
