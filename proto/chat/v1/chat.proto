@@ -4,6 +4,7 @@ package chat.v1;
 
 service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
+  rpc Brain(BrainRequest) returns(BrainResponse);
 }
 
 message StreamChatRequest {
@@ -25,4 +26,12 @@ message ChatCompletionMessage {
 
 message StreamChatResponse {
   string content = 1;
+}
+
+message BrainRequest {
+  string question = 1;
+}
+
+message BrainResponse {
+  string answer = 1;
 }
