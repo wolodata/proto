@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package brain.v1;
+
+service BrainService {
+  rpc StreamSearch(StreamSearchRequest) returns(stream StreamSearchResponse);
+}
+
+message StreamSearchRequest {
+  string question = 1;
+}
+
+message StreamSearchResponse {
+  string answer = 1;
+}
