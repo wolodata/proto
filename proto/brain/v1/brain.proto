@@ -4,6 +4,8 @@ package brain.v1;
 
 service BrainService {
   rpc StreamSearch(StreamSearchRequest) returns(stream StreamSearchResponse);
+  rpc ListHistories(ListHistoriesRequest) returns (ListHistoriesResponse);
+  rpc DeleteHistory(DeleteHistoryRequest) returns (DeleteHistoryResponse);
 }
 
 message StreamSearchRequest {
@@ -12,4 +14,30 @@ message StreamSearchRequest {
 
 message StreamSearchResponse {
   string answer = 1;
+}
+
+message ListHistoriesRequest {
+  uint32 page_number = 1;
+  uint32 limit = 2;
+}
+
+message ListHistoriesResponse {
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated History histories = 5;
+}
+
+message History {
+  string id = 1;
+  string question = 2;
+  string answer = 3;
+}
+
+message DeleteHistoryRequest {
+  string id = 1;
+}
+
+message DeleteHistoryResponse {
 }
