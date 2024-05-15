@@ -3,9 +3,18 @@ syntax = "proto3";
 package brain.v1;
 
 service BrainService {
+  rpc Search(SearchRequest) returns (SearchResponse);
   rpc StreamSearch(StreamSearchRequest) returns(stream StreamSearchResponse);
   rpc ListHistories(ListHistoriesRequest) returns (ListHistoriesResponse);
   rpc DeleteHistories(DeleteHistoriesRequest) returns (DeleteHistoriesResponse);
+}
+
+message SearchRequest {
+  string question = 1;
+}
+
+message SearchResponse {
+  string answer = 1;
 }
 
 message StreamSearchRequest {
