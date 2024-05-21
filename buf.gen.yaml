@@ -1,20 +1,19 @@
-version: v1
+version: v2
 managed:
   enabled: true
-  go_package_prefix:
-    default: github.com/wolodata/proto/gen
+  override:
+    - file_option: go_package_prefix
+      value: github.com/wolodata/proto/gen
 plugins:
-  - name: go
+  - local: protoc-gen-go
     out: gen
     opt: paths=source_relative
-  - name: connect-go
+  - local: protoc-gen-connect-go
     out: gen
     opt: paths=source_relative
-  - plugin: es
+  - local: protoc-gen-es
     out: gen
-    opt:
-      - target=ts
-  - plugin: connect-es
+    opt: target=ts
+  - local: protoc-gen-connect-es
     out: gen
-    opt:
-      - target=ts
+    opt: target=ts

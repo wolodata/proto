@@ -151,10 +151,10 @@ message CreateArticleResponse {
   string id = 1;
 }
 
-message ExistsArticleRequest {
+message ExportArticlesRequest {
   repeated string ids = 1;
 }
 
-message ExistsArticleResponse {
+message ExportArticlesResponse {
   repeated Article items = 1;
 }
