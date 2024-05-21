@@ -12,6 +12,7 @@ service ArticleService {
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
+  rpc ExportArticles(ExportArticlesRequest) returns (stream ExportArticlesResponse);
 }
 
 message ListArticlesRequest {
@@ -148,4 +149,12 @@ message CreateArticleRequest {
 
 message CreateArticleResponse {
   string id = 1;
+}
+
+message ExistsArticleRequest {
+  repeated string ids = 1;
+}
+
+message ExistsArticleResponse {
+  repeated Article items = 1;
 }
