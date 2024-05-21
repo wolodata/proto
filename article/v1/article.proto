@@ -13,6 +13,7 @@ service ArticleService {
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
   rpc ExportArticles(ExportArticlesRequest) returns (ExportArticlesResponse);
+  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse);
 }
 
 message ListArticlesRequest {
@@ -157,4 +158,11 @@ message ExportArticlesRequest {
 
 message ExportArticlesResponse {
   repeated Article items = 1;
+}
+
+message DeleteArticlesRequest {
+  repeated string ids = 1;
+}
+
+message DeleteArticlesResponse {
 }
