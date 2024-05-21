@@ -12,7 +12,7 @@ service ArticleService {
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
-  rpc ExportArticles(ExportArticlesRequest) returns (stream ExportArticlesResponse);
+  rpc ExportArticles(ExportArticlesRequest) returns (ExportArticlesResponse);
 }
 
 message ListArticlesRequest {
