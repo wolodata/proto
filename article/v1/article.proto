@@ -154,6 +154,7 @@ message CreateArticleResponse {
 
 message ExportArticlesRequest {
   repeated string ids = 1;
+  bool desc = 2;
 }
 
 message ExportArticlesResponse {
