@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package config.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service PromptConfigService {
+  rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse);
+  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse);
+  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse);
+}
+
+message ListPromptConfigsRequest {
+}
+
+message ListPromptConfigsResponse {
+  repeated PromptConfig items = 1;
+}
+
+message PromptConfig {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string api_model = 4;
+  string api_url = 5;
+  string api_key = 6;
+  string prompt_system = 7;
+  string prompt_user = 8;
+}
+
+message UpdatePromptConfigRequest {
+  string id = 1;
+  string description = 3;
+  string api_model = 4;
+  string api_url = 5;
+  string api_key = 6;
+  string prompt_system = 7;
+  string prompt_user = 8;
+}
+
+message UpdatePromptConfigResponse {
+}
+
+message RedeployPromptConfigRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  string id = 3;
+}
+
+message RedeployPromptConfigResponse {
+}

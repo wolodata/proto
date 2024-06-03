@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package config.v1;
+
+service SystemConfigService {
+  rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse);
+  rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse);
+}
+
+message ListSystemConfigsRequest {
+}
+
+message ListSystemConfigsResponse {
+  repeated SystemConfig items = 1;
+}
+
+message SystemConfig {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string value = 4;
+}
+
+message UpdateSystemConfigRequest {
+  string id = 1;
+  string description = 3;
+  string value = 4;
+}
+
+message UpdateSystemConfigResponse {
+}
