@@ -25,7 +25,7 @@ message ListArticlesRequest {
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_weak_related = 8;
-  string strong_related_category = 9;
+  repeated string strong_related_categories = 9;
 }
 
 message ListArticlesResponse {
