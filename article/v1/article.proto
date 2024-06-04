@@ -90,10 +90,19 @@ message Article {
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  bool is_weak_related = 13;
-  repeated WeakKeyword weak_keywords = 14;
-  string strong_related_category = 15;
-  string summary_chinese = 16;
+  bool image_uploaded = 13;
+  bool weak_keyword_processed = 14;
+  bool weak_keyword_related = 15;
+  repeated WeakKeyword weak_keywords = 16;
+  bool strong_keyword_processed = 17;
+  bool strong_keyword_related = 18;
+  bool strong_related_processed = 19;
+  bool strong_related = 20;
+  bool strong_related_category_processed = 21;
+  string strong_related_category = 22;
+  string summary_chinese = 23;
+  bool strong_related_summary_chinese_processed = 24;
+  string strong_related_summary_chinese = 25;
 }
 
 message TranslateArticleRequest {
@@ -122,15 +131,25 @@ message UpdateArticleRequest {
   string id = 1;
   string title_chinese = 4;
   string title_english = 5;
+  google.protobuf.Timestamp published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  bool is_weak_related = 13;
-  repeated WeakKeyword weak_keywords = 14;
-  string strong_related_category = 15;
-  string summary_chinese = 16;
+  bool image_uploaded = 13;
+  bool weak_keyword_processed = 14;
+  bool weak_keyword_related = 15;
+  repeated WeakKeyword weak_keywords = 16;
+  bool strong_keyword_processed = 17;
+  bool strong_keyword_related = 18;
+  bool strong_related_processed = 19;
+  bool strong_related = 20;
+  bool strong_related_category_processed = 21;
+  string strong_related_category = 22;
+  string summary_chinese = 23;
+  bool strong_related_summary_chinese_processed = 24;
+  string strong_related_summary_chinese = 25;
 }
 
 message UpdateArticleResponse {
