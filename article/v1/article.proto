@@ -54,6 +54,7 @@ message ArticleListItem {
   bool is_weak_related = 9;
   repeated WeakKeyword weak_keywords = 10;
   string strong_related_category = 11;
+  string strong_related_summary_chinese = 12;
 }
 
 
