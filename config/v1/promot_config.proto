@@ -3,11 +3,14 @@ syntax = "proto3";
 package config.v1;
 
 import "google/protobuf/timestamp.proto";
+import "permission/v1/permission.proto";
 
 service PromptConfigService {
   rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse);
-  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse);
-  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse);
+
+  // admin
+  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {option (permission.v1.permission) = "admin";};
+  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListPromptConfigsRequest {

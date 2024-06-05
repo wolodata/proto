@@ -2,9 +2,12 @@ syntax = "proto3";
 
 package config.v1;
 
+import "permission/v1/permission.proto";
+
 service SystemConfigService {
-  rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse);
-  rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse);
+  // admin
+  rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListSystemConfigsRequest {

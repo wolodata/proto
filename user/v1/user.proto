@@ -2,8 +2,28 @@ syntax = "proto3";
 
 package user.v1;
 
+import "google/protobuf/timestamp.proto";
+import "permission/v1/permission.proto";
+
 service UserService {
-  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {};
+  rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {};
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {};
+
+  // admin
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.permission) = "admin";};
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {option (permission.v1.permission) = "admin";};
+  rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateUserLevel(UpdateUserLevelRequest) returns (UpdateUserLevelResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {option (permission.v1.permission) = "admin";};
+  rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {option (permission.v1.permission) = "admin";};
+}
+
+enum Level {
+  LEVEL_UNSPECIFIED = 0;
+  LEVEL_AIR = 1;
+  LEVEL_PRO = 2;
+  LEVEL_MAX = 3;
 }
 
 message GetUserInfoRequest {
@@ -13,4 +33,90 @@ message GetUserInfoResponse {
   string user_id = 1;
   string username = 2;
   bool is_admin = 3;
+  Level level = 4;
+  string nickname = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message ChangeNicknameRequest {
+  string nickname = 1;
+}
+
+message ChangeNicknameResponse {
+}
+
+message ChangePasswordRequest {
+  string password = 1;
+}
+
+message ChangePasswordResponse {
+}
+
+message ListUsersRequest {
+  uint32 page_number = 1;
+  uint32 limit = 2;
+}
+
+message ListUsersResponse {
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated UserWithDescription items = 5;
+}
+
+message UserWithDescription {
+  string user_id = 1;
+  string username = 2;
+  bool is_admin = 3;
+  Level level = 4;
+  bool enabled = 5;
+  string nickname = 6;
+  string description = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string password = 2;
+  Level level = 3;
+  string nickname = 4;
+  string description = 5;
+}
+
+message CreateUserResponse {
+  string user_id = 1;
+}
+
+message AdminUpdateUserPasswordRequest {
+  string user_id = 1;
+  string password = 2;
+}
+
+message AdminUpdateUserPasswordResponse {
+}
+
+message UpdateUserLevelRequest {
+  string user_id = 1;
+  Level level = 2;
+}
+
+message UpdateUserLevelResponse {
+}
+
+message UpdateUserStatusRequest {
+  string user_id = 1;
+  bool enabled = 2;
+}
+
+message UpdateUserStatusResponse {
+}
+
+message AdminUpdateUserNicknameAndDescriptionRequest {
+  string user_id = 1;
+  string nickname = 2;
+  string description = 3;
+}
+
+message AdminUpdateUserNicknameAndDescriptionResponse {
 }

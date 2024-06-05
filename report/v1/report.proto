@@ -3,14 +3,17 @@ syntax = "proto3";
 package report.v1;
 
 import "google/protobuf/timestamp.proto";
+import "permission/v1/permission.proto";
 
 service ReportService {
   rpc ListReports(ListReportsRequest) returns (ListReportsResponse);
   rpc GetReport(GetReportRequest) returns (GetReportResponse);
-  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse);
-  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse);
-  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse);
   rpc CreateCustomReportTask(CreateCustomReportTaskRequest) returns (CreateCustomReportTaskResponse);
+
+  // admin
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {option (permission.v1.permission) = "admin";};
+  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse) {option (permission.v1.permission) = "admin";};
 }
 
 enum ReportType {

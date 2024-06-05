@@ -3,6 +3,7 @@ syntax = "proto3";
 package article.v1;
 
 import "google/protobuf/timestamp.proto";
+import "permission/v1/permission.proto";
 
 service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
@@ -10,10 +11,12 @@ service ArticleService {
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
-  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
-  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
-  rpc ExportArticles(ExportArticlesRequest) returns (ExportArticlesResponse);
-  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse);
+
+  // admin
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.permission) = "admin";};
+  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.permission) = "admin";};
+  rpc ExportArticles(ExportArticlesRequest) returns (ExportArticlesResponse) {option (permission.v1.permission) = "admin";};
+  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListArticlesRequest {
