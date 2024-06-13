@@ -7,8 +7,7 @@ service ChatService {
 }
 
 message StreamChatRequest {
-  string model = 1;
-  repeated ChatCompletionMessage prompts = 2;
+  repeated ChatCompletionMessage prompts = 1;
 }
 
 enum ChatCompletionMessageRole {

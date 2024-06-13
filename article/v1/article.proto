@@ -11,6 +11,8 @@ service ArticleService {
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
+  // 猜测我感兴趣的问题
+  rpc GuessMyInterestedQuestion(GuessMyInterestedQuestionRequest) returns (stream GuessMyInterestedQuestionResponse);
 
   // admin
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.permission) = "admin";};
@@ -130,6 +132,14 @@ message StreamSummaryArticleRequest {
 
 message StreamSummaryArticleResponse {
   string summary_chinese = 1;
+}
+
+message GuessMyInterestedQuestionRequest{
+  string id = 1;
+}
+
+message GuessMyInterestedQuestionResponse{
+  string content = 1;
 }
 
 message UpdateArticleRequest {
