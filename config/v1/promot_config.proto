@@ -25,16 +25,18 @@ message PromptConfig {
   string name = 2;
   string description = 3;
   string endpoint = 4;
-  string prompt_system = 5;
-  string prompt_user = 6;
+  string endpoint_ref_id = 5;
+  string prompt_system = 6;
+  string prompt_user = 7;
 }
 
 message UpdatePromptConfigRequest {
   string id = 1;
   string description = 3;
   string endpoint = 4;
-  string prompt_system = 5;
-  string prompt_user = 6;
+  string endpoint_ref_id = 5;
+  string prompt_system = 6;
+  string prompt_user = 7;
 }
 
 message UpdatePromptConfigResponse {
