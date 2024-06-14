@@ -2,11 +2,13 @@ syntax = "proto3";
 
 package chat.v1;
 
+import "permission/v1/permission.proto";
+
 service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
 
   // admin
-  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse);
+  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message StreamChatRequest {
