@@ -4,10 +4,14 @@ package chat.v1;
 
 service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
+
+  // admin
+  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse);
 }
 
 message StreamChatRequest {
-  repeated ChatCompletionMessage prompts = 1;
+  string article_id = 1;
+  repeated ChatCompletionMessage prompts = 2;
 }
 
 enum ChatCompletionMessageRole {
@@ -23,5 +27,13 @@ message ChatCompletionMessage {
 }
 
 message StreamChatResponse {
+  string content = 1;
+}
+
+message FreeAskRequest {
+  repeated ChatCompletionMessage prompts = 1;
+}
+
+message FreeAskResponse {
   string content = 1;
 }
