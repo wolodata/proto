@@ -28,6 +28,8 @@ message PromptConfig {
   string endpoint_ref_id = 5;
   string prompt_system = 6;
   string prompt_user = 7;
+  double temperature = 8;
+  double top_p = 9;
 }
 
 message UpdatePromptConfigRequest {
@@ -37,6 +39,8 @@ message UpdatePromptConfigRequest {
   string endpoint_ref_id = 5;
   string prompt_system = 6;
   string prompt_user = 7;
+  double temperature = 8;
+  double top_p = 9;
 }
 
 message UpdatePromptConfigResponse {
