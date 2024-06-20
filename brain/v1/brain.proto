@@ -2,27 +2,43 @@ syntax = "proto3";
 
 package brain.v1;
 
+import "google/protobuf/timestamp.proto";
+
 service BrainService {
-  rpc Search(SearchRequest) returns (SearchResponse);
-  rpc StreamSearch(StreamSearchRequest) returns(stream StreamSearchResponse);
+  rpc StartConversation(StartConversationRequest) returns (StartConversationResponse);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc StreamSendMessage(SendMessageRequest) returns (stream BrainResponse);
+  rpc GetConversation(GetConversationRequest) returns (GetConversationResponse);
   rpc ListHistories(ListHistoriesRequest) returns (ListHistoriesResponse);
   rpc DeleteHistories(DeleteHistoriesRequest) returns (DeleteHistoriesResponse);
 }
 
-message SearchRequest {
-  string question = 1;
+message StartConversationRequest {
+  string initial_user_message = 1; // 初始用户消息
 }
 
-message SearchResponse {
-  string answer = 1;
+message StartConversationResponse {
+  string conversation_id = 1; // 新会话的ID
 }
 
-message StreamSearchRequest {
-  string question = 1;
+message SendMessageRequest {
+  string conversation_id = 1; // 会话ID
+  string message = 2;        // 发送的消息
 }
 
-message StreamSearchResponse {
-  string answer = 1;
+message SendMessageResponse {
+}
+
+message BrainResponse {
+  string chunk = 1;
+}
+
+message GetConversationRequest {
+  string conversation_id = 1;
+}
+
+message GetConversationResponse {
+  repeated Message messages = 1;
 }
 
 message ListHistoriesRequest {
@@ -40,8 +56,7 @@ message ListHistoriesResponse {
 
 message History {
   string id = 1;
-  string question = 2;
-  string answer = 3;
+  repeated Message messages = 2;
 }
 
 message DeleteHistoriesRequest {
@@ -49,4 +64,10 @@ message DeleteHistoriesRequest {
 }
 
 message DeleteHistoriesResponse {
+}
+
+message Message {
+  bool is_user = 1;
+  string content = 2;
+  google.protobuf.Timestamp created_at = 3;
 }

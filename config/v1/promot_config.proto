@@ -26,10 +26,10 @@ message PromptConfig {
   string description = 3;
   string endpoint = 4;
   string endpoint_ref_id = 5;
-  string prompt_system = 6;
-  string prompt_user = 7;
-  double temperature = 8;
-  double top_p = 9;
+  double temperature = 6;
+  double top_p = 7;
+  string prompt_system = 8;
+  string prompt_user = 9;
 }
 
 message UpdatePromptConfigRequest {
@@ -37,10 +37,10 @@ message UpdatePromptConfigRequest {
   string description = 3;
   string endpoint = 4;
   string endpoint_ref_id = 5;
-  string prompt_system = 6;
-  string prompt_user = 7;
-  double temperature = 8;
-  double top_p = 9;
+  double temperature = 6;
+  double top_p = 7;
+  string prompt_system = 8;
+  string prompt_user = 9;
 }
 
 message UpdatePromptConfigResponse {
