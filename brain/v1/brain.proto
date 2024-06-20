@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 service BrainService {
   rpc StartConversation(StartConversationRequest) returns (StartConversationResponse);
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
-  rpc StreamSendMessage(SendMessageRequest) returns (stream BrainResponse);
+  rpc StreamSendMessage(StreamSendMessageRequest) returns (stream StreamSendMessageResponse);
   rpc GetConversation(GetConversationRequest) returns (GetConversationResponse);
   rpc ListHistories(ListHistoriesRequest) returns (ListHistoriesResponse);
   rpc DeleteHistories(DeleteHistoriesRequest) returns (DeleteHistoriesResponse);
@@ -26,10 +26,15 @@ message SendMessageRequest {
   string message = 2;        // 发送的消息
 }
 
+message StreamSendMessageRequest {
+  string conversation_id = 1; // 会话ID
+  string message = 2;        // 发送的消息
+}
+
 message SendMessageResponse {
 }
 
-message BrainResponse {
+message StreamSendMessageResponse {
   string chunk = 1;
 }
 
