@@ -4,6 +4,7 @@ package auth.v1;
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc LoginByMFA(LoginByMFARequest) returns (LoginByMFAResponse) {}
 }
 
 message LoginRequest {
@@ -12,5 +13,16 @@ message LoginRequest {
 }
 
 message LoginResponse {
+  string token = 1;
+  bool mfa_enabled = 2;
+}
+
+message LoginByMFARequest {
+  string username = 1;
+  string password = 2;
+  string mfa_code = 3;
+}
+
+message LoginByMFAResponse {
   string token = 1;
 }

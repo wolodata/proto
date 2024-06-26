@@ -62,6 +62,7 @@ message ListHistoriesResponse {
 message History {
   string id = 1;
   repeated Message messages = 2;
+  google.protobuf.Timestamp updated_at = 3;
 }
 
 message DeleteHistoriesRequest {
