@@ -4,7 +4,8 @@ package auth.v1;
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {}
-  rpc LoginByMFA(LoginByMFARequest) returns (LoginByMFAResponse) {}
+  rpc SendSmsCode(SendSmsCodeRequest) returns (SendSmsCodeResponse) {}
+  rpc LoginBySmsCode(LoginBySmsCodeRequest) returns (LoginBySmsCodeResponse) {}
 }
 
 message LoginRequest {
@@ -14,15 +15,23 @@ message LoginRequest {
 
 message LoginResponse {
   string token = 1;
-  bool mfa_enabled = 2;
+  bool sms_code_required = 2;
 }
 
-message LoginByMFARequest {
+message SendSmsCodeRequest {
   string username = 1;
   string password = 2;
-  string mfa_code = 3;
 }
 
-message LoginByMFAResponse {
+message SendSmsCodeResponse {
+}
+
+message LoginBySmsCodeRequest {
+  string username = 1;
+  string password = 2;
+  string sms_code = 3;
+}
+
+message LoginBySmsCodeResponse {
   string token = 1;
 }

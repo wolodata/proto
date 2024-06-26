@@ -9,6 +9,10 @@ service UserService {
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {};
   rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {};
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {};
+  rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {};
+  rpc ConfirmBindMobile(ConfirmBindMobileRequest) returns (ConfirmBindMobileResponse) {};
+  rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {};
+  rpc ConfirmUnbindMobile(ConfirmUnbindMobileRequest) returns (ConfirmUnbindMobileResponse) {};
 
   // admin
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.permission) = "admin";};
@@ -17,6 +21,7 @@ service UserService {
   rpc UpdateUserLevel(UpdateUserLevelRequest) returns (UpdateUserLevelResponse) {option (permission.v1.permission) = "admin";};
   rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {option (permission.v1.permission) = "admin";};
   rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {option (permission.v1.permission) = "admin";};
+  rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {option (permission.v1.permission) = "admin";};
 }
 
 enum Level {
@@ -36,6 +41,7 @@ message GetUserInfoResponse {
   Level level = 4;
   string nickname = 5;
   google.protobuf.Timestamp created_at = 6;
+  string mobile = 7;
 }
 
 message ChangeNicknameRequest {
@@ -50,6 +56,33 @@ message ChangePasswordRequest {
 }
 
 message ChangePasswordResponse {
+}
+
+message BindMobileRequest {
+  string mobile = 1;
+}
+
+message BindMobileResponse {
+}
+
+message ConfirmBindMobileRequest {
+  string code = 1;
+}
+
+message ConfirmBindMobileResponse {
+}
+
+message UnbindMobileRequest {
+}
+
+message UnbindMobileResponse {
+}
+
+message ConfirmUnbindMobileRequest {
+  string code = 1;
+}
+
+message ConfirmUnbindMobileResponse {
 }
 
 message ListUsersRequest {
@@ -119,4 +152,12 @@ message AdminUpdateUserNicknameAndDescriptionRequest {
 }
 
 message AdminUpdateUserNicknameAndDescriptionResponse {
+}
+
+message AdminUpdateUserMobileRequest {
+  string user_id = 1;
+  string mobile = 2;
+}
+
+message AdminUpdateUserMobileResponse {
 }
