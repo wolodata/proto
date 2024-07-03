@@ -107,6 +107,7 @@ message UserWithDescription {
   string nickname = 6;
   string description = 7;
   google.protobuf.Timestamp created_at = 8;
+  string mobile = 9;
 }
 
 message CreateUserRequest {
