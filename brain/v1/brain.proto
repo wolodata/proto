@@ -14,7 +14,6 @@ service BrainService {
 }
 
 message StartConversationRequest {
-  string initial_user_message = 1; // 初始用户消息
 }
 
 message StartConversationResponse {
