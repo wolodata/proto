@@ -32,6 +32,7 @@ message StreamSendMessageRequest {
 }
 
 message SendMessageResponse {
+  string message = 1;
 }
 
 message StreamSendMessageResponse {
