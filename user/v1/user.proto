@@ -10,9 +10,7 @@ service UserService {
   rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {};
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {};
   rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {};
-  rpc ConfirmBindMobile(ConfirmBindMobileRequest) returns (ConfirmBindMobileResponse) {};
   rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {};
-  rpc ConfirmUnbindMobile(ConfirmUnbindMobileRequest) returns (ConfirmUnbindMobileResponse) {};
 
   // admin
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.permission) = "admin";};
@@ -65,24 +63,10 @@ message BindMobileRequest {
 message BindMobileResponse {
 }
 
-message ConfirmBindMobileRequest {
-  string code = 1;
-}
-
-message ConfirmBindMobileResponse {
-}
-
 message UnbindMobileRequest {
 }
 
 message UnbindMobileResponse {
-}
-
-message ConfirmUnbindMobileRequest {
-  string code = 1;
-}
-
-message ConfirmUnbindMobileResponse {
 }
 
 message ListUsersRequest {

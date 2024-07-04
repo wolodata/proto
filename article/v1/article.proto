@@ -86,6 +86,7 @@ message Source {
 
 message GetArticleRequest {
   string id = 1;
+  bool replace_image = 2;
 }
 
 message GetArticleResponse {
