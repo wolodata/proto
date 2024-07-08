@@ -2,15 +2,17 @@ syntax = "proto3";
 
 package topic.v1;
 
+import "permission/v1/permission.proto";
+
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
-  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse);
-  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse);
-  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse);
+  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.permission) = "admin";};
+  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {option (permission.v1.permission) = "admin";};
   rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
-  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse);
-  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse);
-  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse);
+  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {option (permission.v1.permission) = "admin";};
+  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListDomainsRequest {
