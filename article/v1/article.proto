@@ -42,12 +42,7 @@ message ListArticlesResponse {
   repeated ArticleListItem items = 5;
 }
 
-message WeakKeyword {
-  string word = 1;
-  uint64 category = 2;
-}
-
-message StrongKeyword {
+message HitKeyword {
   string main = 1;
   uint32 main_count = 2;
   string sub = 3;
@@ -64,7 +59,7 @@ message ArticleListItem {
   google.protobuf.Timestamp published_at = 7;
   repeated string images = 8;
   bool is_weak_related = 9;
-  repeated WeakKeyword weak_keywords = 10;
+  HitKeyword weak_keyword = 10;
   string strong_related_category = 11;
   string strong_related_summary_chinese = 12;
 }
@@ -108,10 +103,10 @@ message Article {
   bool image_uploaded = 13;
   bool weak_keyword_processed = 14;
   bool weak_keyword_related = 15;
-  repeated WeakKeyword weak_keywords = 16;
+  HitKeyword weak_keyword = 16;
   bool strong_keyword_processed = 17;
   bool strong_keyword_related = 18;
-  StrongKeyword strong_keyword = 19;
+  HitKeyword strong_keyword = 19;
   bool strong_related_processed = 20;
   bool strong_related = 21;
   bool strong_related_category_processed = 22;
@@ -162,12 +157,15 @@ message UpdateArticleRequest {
   string text_english = 11;
   repeated string images = 12;
   bool image_uploaded = 13;
+  // 弱关键词处理过
   bool weak_keyword_processed = 14;
   bool weak_keyword_related = 15;
-  repeated WeakKeyword weak_keywords = 16;
+  HitKeyword weak_keyword = 16;
+  // 强关键词处理过
   bool strong_keyword_processed = 17;
   bool strong_keyword_related = 18;
-  StrongKeyword strong_keyword = 19;
+  HitKeyword strong_keyword = 19;
+  // 强相关处理过
   bool strong_related_processed = 20;
   bool strong_related = 21;
   bool strong_related_category_processed = 22;
