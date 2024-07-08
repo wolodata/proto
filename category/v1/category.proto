@@ -2,8 +2,15 @@ syntax = "proto3";
 
 package category.v1;
 
+import "permission/v1/permission.proto";
+
 service CategoryService {
   rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+
+  // admin
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {option (permission.v1.permission) = "admin";};
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {option (permission.v1.permission) = "admin";};
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListCategoriesRequest {
@@ -15,5 +22,37 @@ message ListCategoriesResponse {
 
 message Category {
   string id = 1;
-  string color = 2;
+  string name = 2;
+  string color = 3;
+  string description = 4;
+  uint64 order = 5;
+}
+
+message CreateCategoryRequest {
+  string name = 2;
+  string color = 3;
+  string description = 4;
+  uint64 order = 5;
+}
+
+message CreateCategoryResponse {
+  string id = 1;
+}
+
+message DeleteCategoryRequest {
+  string id = 1;
+}
+
+message DeleteCategoryResponse {
+}
+
+message UpdateCategoryRequest {
+  string id = 1;
+  string name = 2;
+  string color = 3;
+  string description = 4;
+  uint64 order = 5;
+}
+
+message UpdateCategoryResponse {
 }
