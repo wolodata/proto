@@ -5,96 +5,52 @@ package keyword.v1;
 import "google/protobuf/timestamp.proto";
 
 service KeywordService {
-  rpc ListWeakKeywords(ListWeakKeywordsRequest) returns (ListWeakKeywordsResponse);
-  rpc CreateWeakKeyword(CreateWeakKeywordRequest) returns (CreateWeakKeywordResponse);
-  rpc UpdateWeakKeyword(UpdateWeakKeywordRequest) returns (UpdateWeakKeywordResponse);
-  rpc DeleteWeakKeywords(DeleteWeakKeywordsRequest) returns (DeleteWeakKeywordsResponse);
-  rpc ReindexWeak(ReindexWeakRequest) returns (ReindexWeakResponse);
-
-  rpc ListStrongKeywords(ListStrongKeywordsRequest) returns (ListStrongKeywordsResponse);
-  rpc CreateStrongKeyword(CreateStrongKeywordRequest) returns (CreateStrongKeywordResponse);
-  rpc UpdateStrongKeyword(UpdateStrongKeywordRequest) returns (UpdateStrongKeywordResponse);
-  rpc DeleteStrongKeywords(DeleteStrongKeywordsRequest) returns (DeleteStrongKeywordsResponse);
-  rpc ReindexStrong(ReindexStrongRequest) returns (ReindexStrongResponse);
+  rpc ListKeywords(ListKeywordsRequest) returns (ListKeywordsResponse);
+  rpc CreateKeyword(CreateKeywordRequest) returns (CreateKeywordResponse);
+  rpc UpdateKeyword(UpdateKeywordRequest) returns (UpdateKeywordResponse);
+  rpc DeleteKeywords(DeleteKeywordsRequest) returns (DeleteKeywordsResponse);
+  rpc Reindex(ReindexRequest) returns (ReindexResponse);
 }
 
-message ListWeakKeywordsRequest {
+enum KeywordType {
+  KEYWORD_TYPE_UNSPECIFIED = 0;
+  KEYWORD_TYPE_STRONG = 1;
+  KEYWORD_TYPE_WEAK = 2;
+}
+
+message ListKeywordsRequest {
   uint64 category = 1;
+  KeywordType keyword_type = 2;
 }
 
-message ListWeakKeywordsResponse {
-  repeated WeakKeywordItem items = 1;
+message ListKeywordsResponse {
+  repeated KeywordItem items = 1;
 }
 
-message WeakKeywordItem {
-  string id = 1;
-  uint64 category = 2;
-  string word = 3;
-}
-
-message CreateWeakKeywordRequest {
-  uint64 category = 1;
-  string word = 2;
-}
-
-message CreateWeakKeywordResponse {
-  string id = 1;
-}
-
-message UpdateWeakKeywordRequest {
-  string id = 1;
-  uint64 category = 2;
-  string word = 3;
-}
-
-message UpdateWeakKeywordResponse {
-}
-
-message DeleteWeakKeywordsRequest {
-  repeated string ids = 1;
-}
-
-message DeleteWeakKeywordsResponse {
-}
-
-message ReindexWeakRequest {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
-}
-
-message ReindexWeakResponse {
-}
-
-message ListStrongKeywordsRequest {
-  uint64 category = 1;
-}
-
-message ListStrongKeywordsResponse {
-  repeated StrongKeywordItem items = 1;
-}
-
-message StrongKeywordItem {
+message KeywordItem {
   string id = 1;
   uint64 category = 2;
   string main = 3;
   uint64 main_count = 4;
   string sub = 5;
   uint64 sub_count = 6;
+  KeywordType keyword_type = 7;
 }
 
-message CreateStrongKeywordRequest {
+message CreateKeywordRequest {
   uint64 category = 1;
   string main = 2;
   uint64 main_count = 3;
   string sub = 4;
   uint64 sub_count = 5;
+  KeywordType keyword_type = 6;
 }
 
-message CreateStrongKeywordResponse {
+message CreateKeywordResponse {
   string id = 1;
 }
 
-message UpdateStrongKeywordRequest {
+message UpdateKeywordRequest {
   string id = 1;
   uint64 category = 2;
   string main = 3;
@@ -103,20 +59,21 @@ message UpdateStrongKeywordRequest {
   uint64 sub_count = 6;
 }
 
-message UpdateStrongKeywordResponse {
+message UpdateKeywordResponse {
 }
 
-message DeleteStrongKeywordsRequest {
+message DeleteKeywordsRequest {
   repeated string ids = 1;
 }
 
-message DeleteStrongKeywordsResponse {
+message DeleteKeywordsResponse {
 }
 
-message ReindexStrongRequest {
+message ReindexRequest {
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Timestamp end_time = 2;
+  KeywordType keyword_type = 3;
 }
 
-message ReindexStrongResponse {
+message ReindexResponse {
 }
