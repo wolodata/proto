@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package follow.v1;
+
+service FollowService {
+  rpc ListFollowTopics(ListFollowTopicsRequest) returns (ListFollowTopicsResponse) {}
+  rpc CreateFollowTopic(CreateFollowTopicRequest) returns (CreateFollowTopicResponse) {}
+  rpc UpdateFollowTopic(UpdateFollowTopicRequest) returns (UpdateFollowTopicResponse) {}
+  rpc DeleteFollowTopic(DeleteFollowTopicRequest) returns (DeleteFollowTopicResponse) {}
+}
+
+message ListFollowTopicsRequest {
+}
+
+message ListFollowTopicsResponse {
+  repeated FollowTopic follow_topics = 1;
+}
+
+message FollowTopic {
+  string topic_id = 1;
+  string keyword = 2;
+  bool follow_title = 3;
+  bool follow_content = 4;
+}
+
+message CreateFollowTopicRequest {
+  string keyword = 1;
+  bool follow_title = 2;
+  bool follow_content = 3;
+}
+
+message CreateFollowTopicResponse {
+}
+
+message UpdateFollowTopicRequest {
+  string topic_id = 1;
+  string keyword = 2;
+  bool follow_title = 3;
+  bool follow_content = 4;
+}
+
+message UpdateFollowTopicResponse {
+}
+
+message DeleteFollowTopicRequest {
+  string topic_id = 1;
+}
+
+message DeleteFollowTopicResponse {
+}

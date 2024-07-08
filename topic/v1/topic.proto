@@ -3,48 +3,100 @@ syntax = "proto3";
 package topic.v1;
 
 service TopicService {
-  rpc ListFollowTopics(ListFollowTopicsRequest) returns (ListFollowTopicsResponse) {}
-  rpc CreateFollowTopic(CreateFollowTopicRequest) returns (CreateFollowTopicResponse) {}
-  rpc UpdateFollowTopic(UpdateFollowTopicRequest) returns (UpdateFollowTopicResponse) {}
-  rpc DeleteFollowTopic(DeleteFollowTopicRequest) returns (DeleteFollowTopicResponse) {}
+  rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
+  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse);
+  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse);
+  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse);
+  rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
+  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse);
+  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse);
+  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse);
 }
 
-message ListFollowTopicsRequest {
+message ListDomainsRequest {
 }
 
-message ListFollowTopicsResponse {
-  repeated FollowTopic follow_topics = 1;
+message Domain {
+  string id = 1;
+  string name = 2;
+  uint64 order = 3;
 }
 
-message FollowTopic {
-  string topic_id = 1;
-  string keyword = 2;
-  bool follow_title = 3;
-  bool follow_content = 4;
+message ListDomainsResponse {
+  repeated Domain items = 1;
 }
 
-message CreateFollowTopicRequest {
-  string keyword = 1;
-  bool follow_title = 2;
-  bool follow_content = 3;
+message CreateDomainRequest {
+  string name = 2;
+  uint64 order = 3;
 }
 
-message CreateFollowTopicResponse {
+message CreateDomainResponse {
+  string id = 1;
 }
 
-message UpdateFollowTopicRequest {
-  string topic_id = 1;
-  string keyword = 2;
-  bool follow_title = 3;
-  bool follow_content = 4;
+message DeleteDomainRequest {
+  string id = 1;
 }
 
-message UpdateFollowTopicResponse {
+message DeleteDomainResponse {
 }
 
-message DeleteFollowTopicRequest {
-  string topic_id = 1;
+message UpdateDomainRequest {
+  string id = 1;
+  string name = 2;
+  uint64 order = 3;
 }
 
-message DeleteFollowTopicResponse {
+message UpdateDomainResponse {
+}
+
+message ListTopicsRequest {
+}
+
+message Topic {
+  string id = 1;
+  Domain domain = 2;
+  string topic = 3;
+  string main = 4;
+  uint64 main_count = 5;
+  string sub = 6;
+  uint64 sub_count = 7;
+}
+
+message ListTopicsResponse {
+  repeated Topic items = 1;
+}
+
+message CreateTopicRequest {
+  string domain_id = 2;
+  string topic = 3;
+  string main = 4;
+  uint64 main_count = 5;
+  string sub = 6;
+  uint64 sub_count = 7;
+}
+
+message CreateTopicResponse {
+  string id = 1;
+}
+
+message DeleteTopicRequest {
+  string id = 1;
+}
+
+message DeleteTopicResponse {
+}
+
+message UpdateTopicRequest {
+  string id = 1;
+  string domain_id = 2;
+  string topic = 3;
+  string main = 4;
+  uint64 main_count = 5;
+  string sub = 6;
+  uint64 sub_count = 7;
+}
+
+message UpdateTopicResponse {
 }
