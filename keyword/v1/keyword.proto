@@ -12,15 +12,9 @@ service KeywordService {
   rpc Reindex(ReindexRequest) returns (ReindexResponse);
 }
 
-enum KeywordType {
-  KEYWORD_TYPE_UNSPECIFIED = 0;
-  KEYWORD_TYPE_STRONG = 1;
-  KEYWORD_TYPE_WEAK = 2;
-}
-
 message ListKeywordsRequest {
   uint64 category = 1;
-  KeywordType keyword_type = 2;
+  bool is_strong = 2;
 }
 
 message ListKeywordsResponse {
@@ -34,7 +28,7 @@ message KeywordItem {
   uint64 main_count = 4;
   string sub = 5;
   uint64 sub_count = 6;
-  KeywordType keyword_type = 7;
+  bool is_strong = 7;
 }
 
 message CreateKeywordRequest {
@@ -43,7 +37,7 @@ message CreateKeywordRequest {
   uint64 main_count = 3;
   string sub = 4;
   uint64 sub_count = 5;
-  KeywordType keyword_type = 6;
+  bool is_strong = 6;
 }
 
 message CreateKeywordResponse {
@@ -72,7 +66,7 @@ message DeleteKeywordsResponse {
 message ReindexRequest {
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Timestamp end_time = 2;
-  KeywordType keyword_type = 3;
+  bool is_strong = 3;
 }
 
 message ReindexResponse {
