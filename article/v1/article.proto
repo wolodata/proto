@@ -59,7 +59,7 @@ message ArticleListItem {
   google.protobuf.Timestamp published_at = 7;
   repeated string images = 8;
   bool is_weak_related = 9;
-  HitKeyword weak_keyword = 10;
+  repeated HitKeyword weak_keywords = 10;
   string strong_related_category = 11;
   string strong_related_summary_chinese = 12;
 }
@@ -103,7 +103,7 @@ message Article {
   bool image_uploaded = 13;
   bool weak_keyword_processed = 14;
   bool weak_keyword_related = 15;
-  HitKeyword weak_keyword = 16;
+  repeated HitKeyword weak_keywords = 16;
   bool strong_keyword_processed = 17;
   bool strong_keyword_related = 18;
   HitKeyword strong_keyword = 19;
@@ -160,7 +160,7 @@ message UpdateArticleRequest {
   // 弱关键词处理过
   bool weak_keyword_processed = 14;
   bool weak_keyword_related = 15;
-  HitKeyword weak_keyword = 16;
+  repeated HitKeyword weak_keywords = 16;
   // 强关键词处理过
   bool strong_keyword_processed = 17;
   bool strong_keyword_related = 18;
