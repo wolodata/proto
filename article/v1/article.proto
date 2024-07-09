@@ -50,7 +50,7 @@ message HitKeyword {
   string sub = 5;
   uint64 sub_count = 6;
   bool is_strong = 7;
-}m
+}
 
 message ArticleListItem {
   string id = 1;
