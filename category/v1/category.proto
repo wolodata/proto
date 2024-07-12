@@ -27,6 +27,12 @@ message Category {
   string color = 3;
   string description = 4;
   uint64 order = 5;
+  string endpoint = 6;
+  string endpoint_ref_id = 7;
+  double temperature = 8;
+  double top_p = 9;
+  string prompt_system = 10;
+  string prompt_user = 11;
 }
 
 message CreateCategoryRequest {
@@ -34,6 +40,12 @@ message CreateCategoryRequest {
   string color = 3;
   string description = 4;
   uint64 order = 5;
+  string endpoint = 6;
+  string endpoint_ref_id = 7;
+  double temperature = 8;
+  double top_p = 9;
+  string prompt_system = 10;
+  string prompt_user = 11;
 }
 
 message CreateCategoryResponse {
@@ -53,6 +65,12 @@ message UpdateCategoryRequest {
   string color = 3;
   string description = 4;
   uint64 order = 5;
+  string endpoint = 6;
+  string endpoint_ref_id = 7;
+  double temperature = 8;
+  double top_p = 9;
+  string prompt_system = 10;
+  string prompt_user = 11;
 }
 
 message UpdateCategoryResponse {
