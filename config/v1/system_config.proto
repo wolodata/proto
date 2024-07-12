@@ -11,6 +11,7 @@ service SystemConfigService {
 }
 
 message ListSystemConfigsRequest {
+  repeated string ids = 1;
 }
 
 message ListSystemConfigsResponse {
