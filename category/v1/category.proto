@@ -23,33 +23,31 @@ message ListCategoriesResponse {
 
 message Category {
   string id = 1;
-  string name = 2;
-  string color = 3;
-  string description = 4;
-  uint64 order = 5;
-  string endpoint = 6;
-  string endpoint_ref_id = 7;
-  double temperature = 8;
-  double top_p = 9;
-  string prompt_system = 10;
-  string prompt_user = 11;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
+  string endpoint_ref_id = 6;
+  double temperature = 7;
+  double top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
 message CreateCategoryRequest {
-  string name = 2;
-  string color = 3;
-  string description = 4;
-  uint64 order = 5;
-  string endpoint = 6;
-  string endpoint_ref_id = 7;
-  double temperature = 8;
-  double top_p = 9;
-  string prompt_system = 10;
-  string prompt_user = 11;
+  string id = 1;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
+  string endpoint_ref_id = 6;
+  double temperature = 7;
+  double top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
 message CreateCategoryResponse {
-  string id = 1;
 }
 
 message DeleteCategoryRequest {
@@ -61,16 +59,15 @@ message DeleteCategoryResponse {
 
 message UpdateCategoryRequest {
   string id = 1;
-  string name = 2;
-  string color = 3;
-  string description = 4;
-  uint64 order = 5;
-  string endpoint = 6;
-  string endpoint_ref_id = 7;
-  double temperature = 8;
-  double top_p = 9;
-  string prompt_system = 10;
-  string prompt_user = 11;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
+  string endpoint_ref_id = 6;
+  double temperature = 7;
+  double top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
 message UpdateCategoryResponse {
