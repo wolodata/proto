@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package follow.v1;
 
+import "google/protobuf/timestamp.proto";
+
 service FollowService {
   rpc ListFollowTopics(ListFollowTopicsRequest) returns (ListFollowTopicsResponse) {}
   rpc CreateFollowTopic(CreateFollowTopicRequest) returns (CreateFollowTopicResponse) {}
@@ -21,6 +23,7 @@ message FollowTopic {
   string keyword = 2;
   bool follow_title = 3;
   bool follow_content = 4;
+  google.protobuf.Timestamp created_at = 5;
 }
 
 message CreateFollowTopicRequest {
