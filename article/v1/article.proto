@@ -17,7 +17,7 @@ service ArticleService {
   // admin
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.permission) = "admin";};
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.permission) = "admin";};
-  rpc ExportArticles(ExportArticlesRequest) returns (ExportArticlesResponse) {option (permission.v1.permission) = "admin";};
+  rpc DownloadArticles(DownloadArticlesRequest) returns (stream DownloadArticlesResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.permission) = "admin";};
 }
 
@@ -194,13 +194,21 @@ message CreateArticleResponse {
   string id = 1;
 }
 
-message ExportArticlesRequest {
-  repeated string ids = 1;
-  bool desc = 2;
+message DownloadArticlesRequest {
+  bool desc = 1; // 排序
+  repeated string ids = 2; // 文章id列表，传了就只看排序
+  repeated string source_ids = 3; // 信源id，不传就是查所有信源
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+  string search_keyword = 6;
+  SearchRange search_range = 7;
+  bool is_weak_keyword_related = 8;
+  bool is_strong_related = 9;
+  repeated string strong_related_categories = 10;
 }
 
-message ExportArticlesResponse {
-  repeated Article items = 1;
+message DownloadArticlesResponse {
+  bytes chunk = 1;
 }
 
 message DeleteArticlesRequest {
