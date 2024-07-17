@@ -17,7 +17,7 @@ service ArticleService {
   // admin
   rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.permission) = "admin";};
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.permission) = "admin";};
-  rpc DownloadArticles(DownloadArticlesRequest) returns (stream DownloadArticlesResponse) {option (permission.v1.permission) = "admin";};
+  rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.permission) = "admin";};
 }
 
@@ -208,7 +208,7 @@ message DownloadArticlesRequest {
 }
 
 message DownloadArticlesResponse {
-  bytes chunk = 1;
+  bytes response = 1;
 }
 
 message DeleteArticlesRequest {
