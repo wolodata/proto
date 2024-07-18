@@ -33,7 +33,7 @@ message ListArticlesRequest {
   bool is_strong_related = 9;
   repeated string strong_related_categories = 10;
   repeated string domain_ids = 11; // 领域id，不传会查所有文章（包含没有被判断到现有领域的文章）
-  repeated string topic_ids = 12; // 主题id，不传会查所有文章（包含没有被判断到现有主题的文章）
+  repeated string topic_names = 12; // 主题名字，不传会查所有文章（包含没有被判断到现有主题的文章）
 }
 
 message ListArticlesResponse {
