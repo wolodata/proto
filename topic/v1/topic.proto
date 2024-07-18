@@ -7,10 +7,12 @@ import "permission/v1/permission.proto";
 
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
+  rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
+
+  // admin
   rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {option (permission.v1.permission) = "admin";};
   rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {option (permission.v1.permission) = "admin";};
-  rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
   rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {option (permission.v1.permission) = "admin";};
   rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {option (permission.v1.permission) = "admin";};
@@ -28,6 +30,24 @@ message Domain {
 
 message ListDomainsResponse {
   repeated Domain items = 1;
+}
+
+message ListTopicsRequest {
+  string domain_id = 1;
+}
+
+message Topic {
+  string id = 1;
+  Domain domain = 2;
+  string topic = 3;
+  string main = 4;
+  uint64 main_count = 5;
+  string sub = 6;
+  uint64 sub_count = 7;
+}
+
+message ListTopicsResponse {
+  repeated Topic items = 1;
 }
 
 message CreateDomainRequest {
@@ -53,24 +73,6 @@ message UpdateDomainRequest {
 }
 
 message UpdateDomainResponse {
-}
-
-message ListTopicsRequest {
-  string domain_id = 1;
-}
-
-message Topic {
-  string id = 1;
-  Domain domain = 2;
-  string topic = 3;
-  string main = 4;
-  uint64 main_count = 5;
-  string sub = 6;
-  uint64 sub_count = 7;
-}
-
-message ListTopicsResponse {
-  repeated Topic items = 1;
 }
 
 message CreateTopicRequest {
