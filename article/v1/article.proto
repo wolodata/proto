@@ -19,6 +19,8 @@ service ArticleService {
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.permission) = "admin";};
   rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.permission) = "admin";};
+  rpc BatchSummaryArticlesSummaryChinese(BatchSummaryArticlesSummaryChineseRequest) returns (BatchSummaryArticlesSummaryChineseResponse) {option (permission.v1.permission) = "admin";};
+  rpc BatchSummaryArticlesStrongRelatedSummaryChinese(BatchSummaryArticlesStrongRelatedSummaryChineseRequest) returns (BatchSummaryArticlesStrongRelatedSummaryChineseResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListArticlesRequest {
@@ -218,4 +220,18 @@ message DeleteArticlesRequest {
 }
 
 message DeleteArticlesResponse {
+}
+
+message BatchSummaryArticlesSummaryChineseRequest {
+  repeated string ids = 1;
+}
+
+message BatchSummaryArticlesSummaryChineseResponse {
+}
+
+message BatchSummaryArticlesStrongRelatedSummaryChineseRequest {
+  repeated string ids = 1;
+}
+
+message BatchSummaryArticlesStrongRelatedSummaryChineseResponse {
 }
