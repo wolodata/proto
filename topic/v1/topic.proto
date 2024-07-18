@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package topic.v1;
 
+import "google/protobuf/timestamp.proto";
 import "permission/v1/permission.proto";
 
 service TopicService {
@@ -13,6 +14,7 @@ service TopicService {
   rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {option (permission.v1.permission) = "admin";};
   rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {option (permission.v1.permission) = "admin";};
   rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {option (permission.v1.permission) = "admin";};
+  rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse) {option (permission.v1.permission) = "admin";};
 }
 
 message ListDomainsRequest {
@@ -102,4 +104,13 @@ message UpdateTopicRequest {
 }
 
 message UpdateTopicResponse {
+}
+
+message RedeployTopicRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  string id = 3;
+}
+
+message RedeployTopicResponse {
 }
