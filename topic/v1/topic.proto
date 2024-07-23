@@ -55,8 +55,8 @@ message ListTopicsResponse {
 }
 
 message ListDomainHitRequest {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
+  google.type.Date start_date = 1;
+  google.type.Date end_date = 2;
   repeated string domain_ids = 3;
 }
 
@@ -71,8 +71,8 @@ message DomainHit {
 }
 
 message ListTopicHitRequest {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
+  google.type.Date start_date = 1;
+  google.type.Date end_date = 2;
   repeated string topic_ids = 3;
 }
 
