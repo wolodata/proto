@@ -47,7 +47,6 @@ message Topic {
   uint64 main_count = 5;
   string sub = 6;
   uint64 sub_count = 7;
-  uint64 related_article_count = 8;
 }
 
 message ListTopicsResponse {
