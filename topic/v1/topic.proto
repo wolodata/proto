@@ -3,11 +3,14 @@ syntax = "proto3";
 package topic.v1;
 
 import "google/protobuf/timestamp.proto";
+import "google/type/date.proto";
 import "permission/v1/permission.proto";
 
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
   rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
+  rpc ListDomainHit(ListDomainHitRequest) returns (ListDomainHitResponse);
+  rpc ListTopicHit(ListTopicHitRequest) returns (ListTopicHitResponse);
 
   // admin
   rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.permission) = "admin";};
@@ -49,6 +52,39 @@ message Topic {
 
 message ListTopicsResponse {
   repeated Topic items = 1;
+}
+
+message ListDomainHitRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  repeated string domain_ids = 3;
+}
+
+message ListDomainHitResponse {
+  repeated DomainHit items = 1;
+}
+
+message DomainHit {
+  google.type.Date date = 1;
+  string domain_id = 2;
+  uint64 hit = 3;
+}
+
+message ListTopicHitRequest {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+  repeated string topic_ids = 3;
+}
+
+message ListTopicHitResponse {
+  repeated TopicHit items = 1;
+}
+
+message TopicHit {
+  google.type.Date date = 1;
+  string domain_id = 2;
+  string topic_id = 3;
+  uint64 hit = 4;
 }
 
 message CreateDomainRequest {
