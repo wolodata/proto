@@ -66,13 +66,14 @@ message ListDomainHitResponse {
 message DomainHit {
   google.type.Date date = 1;
   string domain_id = 2;
-  uint64 hit = 3;
+  string domain_name = 3;
+  uint64 hit = 4;
 }
 
 message ListTopicHitRequest {
   google.type.Date start_date = 1;
   google.type.Date end_date = 2;
-  repeated string topic_ids = 3;
+  repeated string topic_ids = 3; // 不传就是查所有
 }
 
 message ListTopicHitResponse {
@@ -82,8 +83,10 @@ message ListTopicHitResponse {
 message TopicHit {
   google.type.Date date = 1;
   string domain_id = 2;
-  string topic_id = 3;
-  uint64 hit = 4;
+  string domain_name = 3;
+  string topic_id = 4;
+  string topic_name = 5;
+  uint64 hit = 6;
 }
 
 message CreateDomainRequest {
