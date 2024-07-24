@@ -147,7 +147,8 @@ message UpdateTopicResponse {
 message RedeployTopicRequest {
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Timestamp end_time = 2;
-  string id = 3;
+  repeated string domain_ids = 3; // 填了才会部署 二选一
+  repeated string topic_ids = 4; // 填了才会部署 二选一
 }
 
 message RedeployTopicResponse {
