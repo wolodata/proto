@@ -9,7 +9,6 @@ import "permission/v1/permission.proto";
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
   rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
-  rpc ListDomainHit(ListDomainHitRequest) returns (ListDomainHitResponse);
   rpc ListTopicHit(ListTopicHitRequest) returns (ListTopicHitResponse);
 
   // admin
@@ -53,27 +52,10 @@ message ListTopicsResponse {
   repeated Topic items = 1;
 }
 
-message ListDomainHitRequest {
-  google.type.Date start_date = 1;
-  google.type.Date end_date = 2;
-  repeated string domain_ids = 3;
-}
-
-message ListDomainHitResponse {
-  repeated DomainHit items = 1;
-}
-
-message DomainHit {
-  google.type.Date date = 1;
-  string domain_id = 2;
-  string domain_name = 3;
-  uint64 hit = 4;
-}
-
 message ListTopicHitRequest {
   google.type.Date start_date = 1;
   google.type.Date end_date = 2;
-  repeated string topic_ids = 3; // 不传就是查所有
+  repeated string topic_names = 3; // 不传就是查所有
 }
 
 message ListTopicHitResponse {
@@ -82,11 +64,8 @@ message ListTopicHitResponse {
 
 message TopicHit {
   google.type.Date date = 1;
-  string domain_id = 2;
-  string domain_name = 3;
-  string topic_id = 4;
-  string topic_name = 5;
-  uint64 hit = 6;
+  string topic_name = 2;
+  uint64 hit = 3;
 }
 
 message CreateDomainRequest {
