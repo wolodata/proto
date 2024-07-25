@@ -8,7 +8,8 @@ import "permission/v1/permission.proto";
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
   rpc ListTopics(ListTopicsRequest) returns (ListTopicsResponse);
-  rpc ListTopicHit(ListTopicHitRequest) returns (ListTopicHitResponse);
+  rpc ListHitByTopic(ListHitByTopicRequest) returns (ListHitByTopicResponse);
+  rpc ListHitByDate(ListHitByDateRequest) returns (ListHitByDateResponse);
 
   // admin
   rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.permission) = "admin";};
@@ -51,12 +52,21 @@ message ListTopicsResponse {
   repeated Topic items = 1;
 }
 
-message ListTopicHitRequest {
+message ListHitByTopicRequest {
   google.type.Date start_date = 1;
   google.type.Date end_date = 2;
 }
 
-message ListTopicHitResponse {
+message ListHitByTopicResponse {
+  map<string, uint64> hits = 1;
+}
+
+message ListHitByDateRequest {
+  google.type.Date start_date = 1;
+  google.type.Date end_date = 2;
+}
+
+message ListHitByDateResponse {
   map<string, uint64> hits = 1;
 }
 
