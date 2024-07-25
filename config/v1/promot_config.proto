@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package config.v1;
 
-import "google/protobuf/timestamp.proto";
 import "permission/v1/permission.proto";
 
 service PromptConfigService {
@@ -47,8 +46,8 @@ message UpdatePromptConfigResponse {
 }
 
 message RedeployPromptConfigRequest {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
+  uint64 start_time = 1;
+  uint64 end_time = 2;
   string id = 3;
 }
 

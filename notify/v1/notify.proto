@@ -2,13 +2,10 @@ syntax = "proto3";
 
 package notify.v1;
 
-import "google/protobuf/timestamp.proto";
-
 enum NotifyType {
   NOTIFY_TYPE_UNSPECIFIED = 0;
   NOTIFY_TYPE_NEW_ARTICLE = 1;
 }
-
 
 message Notification {
   NotifyType notify_type = 1;
@@ -21,5 +18,5 @@ message PayloadNewArticle {
   string id = 1;
   string title_chinese = 2;
   string title_english = 3;
-  google.protobuf.Timestamp published_at = 4;
+  uint64 published_at = 4;
 }

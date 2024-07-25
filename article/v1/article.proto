@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package article.v1;
 
-import "google/protobuf/timestamp.proto";
 import "permission/v1/permission.proto";
 
 service ArticleService {
@@ -27,8 +26,8 @@ message ListArticlesRequest {
   repeated string source_ids = 1; // 信源id，不传就是查所有信源
   uint32 page_number = 2;
   uint32 limit = 3;
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
+  uint64 start_time = 4;
+  uint64 end_time = 5;
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_weak_keyword_related = 8;
@@ -64,7 +63,7 @@ message ArticleListItem {
   string title_english = 4;
   string preview_chinese = 5;
   string preview_english = 6;
-  google.protobuf.Timestamp published_at = 7;
+  uint64 published_at = 7;
   repeated string images = 8;
   bool is_weak_related = 9;
   repeated HitKeyword weak_keywords = 10;
@@ -102,7 +101,7 @@ message Article {
   string original_url = 3;
   string title_chinese = 4;
   string title_english = 5;
-  google.protobuf.Timestamp published_at = 7;
+  uint64 published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
   string text_chinese = 10;
@@ -158,7 +157,7 @@ message UpdateArticleRequest {
   string id = 1;
   string title_chinese = 4;
   string title_english = 5;
-  google.protobuf.Timestamp published_at = 7;
+  uint64 published_at = 7;
   string html_chinese = 8;
   string html_english = 9;
   string text_chinese = 10;
@@ -190,7 +189,7 @@ message CreateArticleRequest {
   string source_id = 1;
   string url = 2;
   string title = 3;
-  google.protobuf.Timestamp published_at = 5;
+  uint64 published_at = 5;
   string html = 6;
   repeated string images = 7;
 }
@@ -203,8 +202,8 @@ message DownloadArticlesRequest {
   bool desc = 1; // 排序
   repeated string ids = 2; // 文章id列表，传了就只看排序
   repeated string source_ids = 3; // 信源id，不传就是查所有信源
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
+  uint64 start_time = 4;
+  uint64 end_time = 5;
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_weak_keyword_related = 8;
@@ -227,8 +226,8 @@ message BatchOperateArticlesRequest {
   string operation = 1;
   repeated string ids = 2; // 文章id列表
   repeated string source_ids = 3; // 信源id，不传就是查所有信源
-  google.protobuf.Timestamp start_time = 4;
-  google.protobuf.Timestamp end_time = 5;
+  uint64 start_time = 4;
+  uint64 end_time = 5;
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_weak_keyword_related = 8;

@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package user.v1;
 
-import "google/protobuf/timestamp.proto";
 import "permission/v1/permission.proto";
 
 service UserService {
@@ -38,7 +37,7 @@ message GetUserInfoResponse {
   bool is_admin = 3;
   Level level = 4;
   string nickname = 5;
-  google.protobuf.Timestamp created_at = 6;
+  uint64 created_at = 6;
   string mobile = 7;
 }
 
@@ -90,7 +89,7 @@ message UserWithDescription {
   bool enabled = 5;
   string nickname = 6;
   string description = 7;
-  google.protobuf.Timestamp created_at = 8;
+  uint64 created_at = 8;
   string mobile = 9;
 }
 

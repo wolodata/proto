@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package task.v1;
 
-import "google/protobuf/timestamp.proto";
 import "permission/v1/permission.proto";
 
 service TaskService {
@@ -37,8 +36,8 @@ message TaskListItem {
   string task_type = 4;
   uint32 status = 5;
   string err = 6;
-  google.protobuf.Timestamp created_at = 7;
-  google.protobuf.Timestamp updated_at = 8;
+  uint64 created_at = 7;
+  uint64 updated_at = 8;
 }
 
 message UpdateTaskPriorityRequest {

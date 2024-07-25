@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package topic.v1;
 
-import "google/protobuf/timestamp.proto";
 import "google/type/date.proto";
 import "permission/v1/permission.proto";
 
@@ -120,8 +119,8 @@ message UpdateTopicResponse {
 }
 
 message RedeployTopicRequest {
-  google.protobuf.Timestamp start_time = 1;
-  google.protobuf.Timestamp end_time = 2;
+  uint64 start_time = 1;
+  uint64 end_time = 2;
   repeated string domain_ids = 3; // 填了才会部署 二选一
   repeated string topic_ids = 4; // 填了才会部署 二选一
 }
