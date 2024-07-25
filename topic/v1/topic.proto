@@ -55,17 +55,10 @@ message ListTopicsResponse {
 message ListTopicHitRequest {
   google.type.Date start_date = 1;
   google.type.Date end_date = 2;
-  repeated string topic_names = 3; // 不传就是查所有
 }
 
 message ListTopicHitResponse {
-  repeated TopicHit items = 1;
-}
-
-message TopicHit {
-  google.type.Date date = 1;
-  string topic_name = 2;
-  uint64 hit = 3;
+  map<string, uint64> hits = 1;
 }
 
 message CreateDomainRequest {
