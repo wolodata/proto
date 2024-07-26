@@ -70,7 +70,7 @@ enum ListHitByDateRange {
 
 
 message ListHitByDateRequest {
-  ListHitByDateRange range = 1;
+  ListHitByDateRange range = 1; // 范围和开始时间结束时间二选一
   google.type.Date start_date = 2;
   google.type.Date end_date = 3;
   string topic_name = 4;
