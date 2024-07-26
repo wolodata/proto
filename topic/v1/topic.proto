@@ -61,10 +61,19 @@ message ListHitByTopicResponse {
   map<string, uint64> hits = 1;
 }
 
+enum ListHitByDateRange {
+  LIST_HIT_BY_DATE_RANGE_UNSPECIFIED = 0;
+  LIST_HIT_BY_DATE_RANGE_LAST_WEEK = 1;
+  LIST_HIT_BY_DATE_RANGE_LAST_MONTH = 2;
+  LIST_HIT_BY_DATE_RANGE_LAST_YEAR = 3;
+}
+
+
 message ListHitByDateRequest {
-  google.type.Date start_date = 1;
-  google.type.Date end_date = 2;
-  string topic_name = 3;
+  ListHitByDateRange range = 1;
+  google.type.Date start_date = 2;
+  google.type.Date end_date = 3;
+  string topic_name = 4;
 }
 
 message ListHitByDateResponse {
