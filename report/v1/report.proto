@@ -29,6 +29,7 @@ message ListReportsRequest {
   uint32 limit = 3;
   uint64 start_time = 4;
   uint64 end_time = 5;
+  bool show_all_for_admin = 6; // 用于admin后台，展示所有报告（包括还没到展示时间的）
 }
 
 message ListReportsResponse {
@@ -51,6 +52,7 @@ message Report  {
   repeated string source_ids = 9;
   string category = 10;
   repeated string article_ids = 11;
+  uint64 visible_at = 12;
 }
 
 message GetReportRequest {
@@ -76,6 +78,7 @@ message CreateReportRequest {
   uint64 end_time = 5;
   string content = 6;
   uint64 generated_at = 7;
+  uint64 visible_at = 8;
 }
 
 message CreateReportResponse {
@@ -86,6 +89,7 @@ message UpdateReportRequest {
   string id = 1;
   string content = 2;
   uint64 generated_at = 3;
+  uint64 visible_at = 4;
 }
 
 message UpdateReportResponse {
