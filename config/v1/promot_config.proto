@@ -5,11 +5,10 @@ package config.v1;
 import "permission/v1/permission.proto";
 
 service PromptConfigService {
-  rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse);
-
-  // admin
-  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {option (permission.v1.permission) = "admin";};
-  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {option (permission.v1.is_backend) = true;};
+  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message ListPromptConfigsRequest {

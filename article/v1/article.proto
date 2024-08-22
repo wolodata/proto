@@ -10,16 +10,14 @@ service ArticleService {
   rpc TranslateArticle(TranslateArticleRequest) returns (TranslateArticleResponse);
   rpc SummaryArticle(SummaryArticleRequest) returns (SummaryArticleResponse);
   rpc StreamSummaryArticle(StreamSummaryArticleRequest) returns (stream StreamSummaryArticleResponse);
-  // 猜测我感兴趣的问题
   rpc GuessMyInterestedQuestion(GuessMyInterestedQuestionRequest) returns (stream GuessMyInterestedQuestionResponse);
 
-  // admin
-  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.permission) = "admin";};
-  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.permission) = "admin";};
-  rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {option (permission.v1.permission) = "admin";};
-  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.permission) = "admin";};
-  // 批量操作文章
-  rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.is_backend) = true;};
+  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.is_backend) = true;};
+  rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {option (permission.v1.is_backend) = true;};
+  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.is_backend) = true;};
+  rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message ListArticlesRequest {

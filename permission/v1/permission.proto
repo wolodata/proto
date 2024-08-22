@@ -6,5 +6,5 @@ import "google/protobuf/descriptor.proto";
 
 // 定义一个扩展字段用于权限
 extend google.protobuf.MethodOptions {
-  string permission = 50001;
+  bool is_backend = 50001;
 }

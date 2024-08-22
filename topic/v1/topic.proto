@@ -11,14 +11,14 @@ service TopicService {
   rpc ListHitByTopic(ListHitByTopicRequest) returns (ListHitByTopicResponse);
   rpc ListHitByDate(ListHitByDateRequest) returns (ListHitByDateResponse);
 
-  // admin
-  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.permission) = "admin";};
-  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {option (permission.v1.permission) = "admin";};
-  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {option (permission.v1.permission) = "admin";};
-  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {option (permission.v1.permission) = "admin";};
-  rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {option (permission.v1.is_backend) = true;};
+  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {option (permission.v1.is_backend) = true;};
+  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {option (permission.v1.is_backend) = true;};
+  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {option (permission.v1.is_backend) = true;};
+  rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message ListDomainsRequest {

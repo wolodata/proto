@@ -7,8 +7,8 @@ import "permission/v1/permission.proto";
 service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
 
-  // admin
-  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message StreamChatRequest {

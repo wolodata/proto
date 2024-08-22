@@ -5,9 +5,9 @@ package config.v1;
 import "permission/v1/permission.proto";
 
 service SystemConfigService {
-  // admin
-  rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message ListSystemConfigsRequest {

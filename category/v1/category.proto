@@ -7,10 +7,10 @@ import "permission/v1/permission.proto";
 service CategoryService {
   rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
 
-  // admin
-  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {option (permission.v1.permission) = "admin";};
-  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {option (permission.v1.is_backend) = true;};
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {option (permission.v1.is_backend) = true;};
 }
 
 message ListCategoriesRequest {

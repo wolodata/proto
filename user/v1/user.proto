@@ -11,21 +11,22 @@ service UserService {
   rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {};
   rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {};
 
-  // admin
-  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.permission) = "admin";};
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {option (permission.v1.permission) = "admin";};
-  rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateUserLevel(UpdateUserLevelRequest) returns (UpdateUserLevelResponse) {option (permission.v1.permission) = "admin";};
-  rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {option (permission.v1.permission) = "admin";};
-  rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {option (permission.v1.permission) = "admin";};
-  rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {option (permission.v1.permission) = "admin";};
+  // 后台
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.is_backend) = true;};
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {option (permission.v1.is_backend) = true;};
+  rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateUserLevel(UpdateUserLevelRequest) returns (UpdateUserLevelResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {option (permission.v1.is_backend) = true;};
+  rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {option (permission.v1.is_backend) = true;};
+  rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {option (permission.v1.is_backend) = true;};
 }
 
-enum Level {
-  LEVEL_UNSPECIFIED = 0;
-  LEVEL_AIR = 1;
-  LEVEL_PRO = 2;
-  LEVEL_MAX = 3;
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_SUPER_ADMIN = 1;
+  ROLE_ADMIN = 2;
+  ROLE_OPERATOR = 3;
+  ROLE_EXPLORER = 4;
 }
 
 message GetUserInfoRequest {
@@ -35,7 +36,7 @@ message GetUserInfoResponse {
   string user_id = 1;
   string username = 2;
   bool is_admin = 3;
-  Level level = 4;
+  Role role = 4;
   string nickname = 5;
   uint64 created_at = 6;
   string mobile = 7;
@@ -85,7 +86,7 @@ message UserWithDescription {
   string user_id = 1;
   string username = 2;
   bool is_admin = 3;
-  Level level = 4;
+  Role role = 4;
   bool enabled = 5;
   string nickname = 6;
   string description = 7;
@@ -96,7 +97,7 @@ message UserWithDescription {
 message CreateUserRequest {
   string username = 1;
   string password = 2;
-  Level level = 3;
+  Role role = 3;
   string nickname = 4;
   string description = 5;
 }
@@ -115,7 +116,7 @@ message AdminUpdateUserPasswordResponse {
 
 message UpdateUserLevelRequest {
   string user_id = 1;
-  Level level = 2;
+  Role role = 2;
 }
 
 message UpdateUserLevelResponse {
