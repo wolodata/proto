@@ -15,7 +15,7 @@ service UserService {
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {option (permission.v1.is_backend) = true;};
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {option (permission.v1.is_backend) = true;};
   rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {option (permission.v1.is_backend) = true;};
-  rpc UpdateUserLevel(UpdateUserLevelRequest) returns (UpdateUserLevelResponse) {option (permission.v1.is_backend) = true;};
+  rpc UpdateUserRole(UpdateUserRoleRequest) returns (UpdateUserRoleResponse) {option (permission.v1.is_backend) = true;};
   rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {option (permission.v1.is_backend) = true;};
   rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {option (permission.v1.is_backend) = true;};
   rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {option (permission.v1.is_backend) = true;};
@@ -114,12 +114,12 @@ message AdminUpdateUserPasswordRequest {
 message AdminUpdateUserPasswordResponse {
 }
 
-message UpdateUserLevelRequest {
+message UpdateUserRoleRequest {
   string user_id = 1;
   Role role = 2;
 }
 
-message UpdateUserLevelResponse {
+message UpdateUserRoleResponse {
 }
 
 message UpdateUserStatusRequest {
