@@ -35,11 +35,10 @@ message GetUserInfoRequest {
 message GetUserInfoResponse {
   string user_id = 1;
   string username = 2;
-  bool is_admin = 3;
-  Role role = 4;
-  string nickname = 5;
-  uint64 created_at = 6;
-  string mobile = 7;
+  Role role = 3;
+  string nickname = 4;
+  uint64 created_at = 5;
+  string mobile = 6;
 }
 
 message ChangeNicknameRequest {
@@ -85,13 +84,12 @@ message ListUsersResponse {
 message UserWithDescription {
   string user_id = 1;
   string username = 2;
-  bool is_admin = 3;
-  Role role = 4;
-  bool enabled = 5;
-  string nickname = 6;
-  string description = 7;
-  uint64 created_at = 8;
-  string mobile = 9;
+  Role role = 3;
+  bool enabled = 4;
+  string nickname = 5;
+  string description = 6;
+  uint64 created_at = 7;
+  string mobile = 8;
 }
 
 message CreateUserRequest {
