@@ -6,9 +6,18 @@ import "permission/v1/permission.proto";
 
 service PromptConfigService {
   // 后台
-  rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse) {option (permission.v1.is_backend) = true;};
-  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {option (permission.v1.is_backend) = true;};
-  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {option (permission.v1.is_backend) = true;};
+  rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
 }
 
 message ListPromptConfigsRequest {

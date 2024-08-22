@@ -8,9 +8,18 @@ service CategoryService {
   rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
 
   // 后台
-  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {option (permission.v1.is_backend) = true;};
-  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {option (permission.v1.is_backend) = true;};
-  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {option (permission.v1.is_backend) = true;};
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
 }
 
 message ListCategoriesRequest {

@@ -10,7 +10,10 @@ service ReportService {
   rpc CreateCustomReportTask(CreateCustomReportTaskRequest) returns (CreateCustomReportTaskResponse);
 
   // 后台
-  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {option (permission.v1.is_backend) = true;};
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
   rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse) {option (permission.v1.is_backend) = true;};
   rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse) {option (permission.v1.is_backend) = true;};
 }
