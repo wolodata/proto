@@ -8,7 +8,6 @@ service SystemConfigService {
   // 后台
   rpc ListSystemConfigs(ListSystemConfigsRequest) returns (ListSystemConfigsResponse) {
     option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse) {
     option (permission.v1.is_backend) = true;
