@@ -13,10 +13,7 @@ service ArticleService {
   rpc GuessMyInterestedQuestion(GuessMyInterestedQuestionRequest) returns (stream GuessMyInterestedQuestionResponse);
 
   // 后台
-  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {option (permission.v1.is_backend) = true;}
   rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {option (permission.v1.is_backend) = true;};
   rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {option (permission.v1.is_backend) = true;};
   rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {option (permission.v1.is_backend) = true;};
