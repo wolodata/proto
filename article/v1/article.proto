@@ -44,14 +44,18 @@ message ListArticlesResponse {
   repeated ArticleListItem items = 5;
 }
 
+message SubKeyword {
+  string sub_keyword = 1;
+  uint64 sub_keyword_count = 2;
+}
+
 message HitKeyword {
   string id = 1;
   uint64 category = 2;
   string main = 3;
   uint64 main_count = 4;
-  string sub = 5;
-  uint64 sub_count = 6;
-  bool is_strong = 7;
+  repeated SubKeyword sub_keywords = 5;
+  bool is_strong = 6;
 }
 
 message ArticleListItem {
