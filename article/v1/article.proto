@@ -109,20 +109,19 @@ message Article {
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  bool image_uploaded = 13;
-  bool weak_keyword_processed = 14;
-  bool weak_keyword_related = 15;
-  repeated HitKeyword weak_keywords = 16;
-  bool strong_keyword_processed = 17;
-  bool strong_keyword_related = 18;
-  HitKeyword strong_keyword = 19;
-  bool strong_related_processed = 20;
-  bool strong_related = 21;
-  bool strong_related_category_processed = 22;
-  string strong_related_category = 23;
-  string summary_chinese = 24;
-  bool strong_related_summary_chinese_processed = 25;
-  string strong_related_summary_chinese = 26;
+  bool weak_keyword_processed = 13;
+  bool weak_keyword_related = 14;
+  repeated HitKeyword weak_keywords = 15;
+  bool strong_keyword_processed = 16;
+  bool strong_keyword_related = 17;
+  HitKeyword strong_keyword = 18;
+  bool strong_related_processed = 19;
+  bool strong_related = 20;
+  bool strong_related_category_processed = 21;
+  string strong_related_category = 22;
+  string summary_chinese = 23;
+  bool strong_related_summary_chinese_processed = 24;
+  string strong_related_summary_chinese = 25;
 }
 
 message TranslateArticleRequest {
@@ -165,23 +164,22 @@ message UpdateArticleRequest {
   string text_chinese = 10;
   string text_english = 11;
   repeated string images = 12;
-  bool image_uploaded = 13;
   // 弱关键词处理过
-  bool weak_keyword_processed = 14;
-  bool weak_keyword_related = 15;
-  repeated HitKeyword weak_keywords = 16;
+  bool weak_keyword_processed = 13;
+  bool weak_keyword_related = 14;
+  repeated HitKeyword weak_keywords = 15;
   // 强关键词处理过
-  bool strong_keyword_processed = 17;
-  bool strong_keyword_related = 18;
-  HitKeyword strong_keyword = 19;
+  bool strong_keyword_processed = 16;
+  bool strong_keyword_related = 17;
+  HitKeyword strong_keyword = 18;
   // 强相关处理过
-  bool strong_related_processed = 20;
-  bool strong_related = 21;
-  bool strong_related_category_processed = 22;
-  string strong_related_category = 23;
-  string summary_chinese = 24;
-  bool strong_related_summary_chinese_processed = 25;
-  string strong_related_summary_chinese = 26;
+  bool strong_related_processed = 19;
+  bool strong_related = 20;
+  bool strong_related_category_processed = 21;
+  string strong_related_category = 22;
+  string summary_chinese = 23;
+  bool strong_related_summary_chinese_processed = 24;
+  string strong_related_summary_chinese = 25;
 }
 
 message UpdateArticleResponse {
