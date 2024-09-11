@@ -68,8 +68,9 @@ message ListSourceCategoriesResponse {
 }
 
 message SourceCategory {
-  string name = 1;
-  uint64 position = 2;
+  string source_type = 1;
+  string name = 2;
+  uint64 position = 3;
 }
 
 message ListSourcesRequest {}
@@ -81,11 +82,10 @@ message ListSourcesResponse {
 message Source {
   string id = 1;
   string name_chinese = 2;
-  string name_english = 3;
-  uint64 position = 4;
-  string source_type = 5;
-  string source_category = 6;
-  bool allow_image = 7;
+  uint64 position = 3;
+  string source_type = 4;
+  string source_category = 5;
+  bool allow_image = 6;
 }
 
 message CreateSourceTypeRequest {
@@ -140,11 +140,10 @@ message UpdateSourceCategoryPositionResponse {
 message CreateSourceRequest {
   string id = 1;
   string name_chinese = 2;
-  string name_english = 3;
-  uint64 position = 4;
-  string source_type = 5;
-  string source_category = 6;
-  bool allow_image = 7;
+  uint64 position = 3;
+  string source_type = 4;
+  string source_category = 5;
+  bool allow_image = 6;
 }
 
 message CreateSourceResponse {
