@@ -92,10 +92,11 @@ message ListSourcesResponse {
 message Source {
   string id = 1;
   string name_chinese = 2;
-  uint64 position = 3;
-  string source_type = 4;
-  string source_category = 5;
-  bool allow_image = 6;
+  bool is_chinese = 3;
+  uint64 position = 4;
+  string source_type = 5;
+  string source_category = 6;
+  bool allow_image = 7;
 }
 
 message CreateSourceTypeRequest {
@@ -148,10 +149,11 @@ message UpdateSourceCategoryPositionResponse {
 message CreateSourceRequest {
   string id = 1;
   string name_chinese = 2;
-  uint64 position = 3;
-  string source_type = 4;
-  string source_category = 5;
-  bool allow_image = 6;
+  bool is_chinese = 3;
+  uint64 position = 4;
+  string source_type = 5;
+  string source_category = 6;
+  bool allow_image = 7;
 }
 
 message CreateSourceResponse {
