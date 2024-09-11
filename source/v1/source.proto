@@ -48,6 +48,11 @@ service SourceService {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
+
+  rpc ListSourcesUpdatedAt(ListSourcesUpdatedAtRequest) returns (ListSourcesUpdatedAtResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
 }
 
 message ListSourceTypesRequest {}
@@ -166,4 +171,21 @@ message UpdateSourceRequest {
 }
 
 message UpdateSourceResponse {
+}
+
+message ListSourcesUpdatedAtRequest {
+
+}
+
+message ListSourcesUpdatedAtResponse {
+  repeated Source sources = 1;
+}
+
+
+message SourceUpdatedAt {
+  Source source = 1;
+  uint64 updated_at = 2;
+  string link = 3;
+  string title = 4;
+  uint64 published_at = 5;
 }
