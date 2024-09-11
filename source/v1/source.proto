@@ -18,7 +18,7 @@ service SourceService {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
-  rpc UpdateSourceTypePosition(UpdateSourceTypePositionRequest) returns (UpdateSourceTypePositionResponse) {
+  rpc UpdateSourceType(UpdateSourceTypeRequest) returns (UpdateSourceTypeResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
@@ -31,7 +31,7 @@ service SourceService {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
-  rpc UpdateSourceCategoryPosition(UpdateSourceCategoryPositionRequest) returns (UpdateSourceCategoryPositionResponse) {
+  rpc UpdateSourceCategory(UpdateSourceCategoryRequest) returns (UpdateSourceCategoryResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
@@ -62,8 +62,9 @@ message ListSourceTypesResponse {
 }
 
 message SourceType {
-  string name = 1;
-  uint64 position = 2;
+  string id = 1;
+  string name = 2;
+  uint64 position = 3;
 }
 
 message ListSourceCategoriesRequest {
@@ -75,14 +76,15 @@ message ListSourceCategoriesResponse {
 }
 
 message SourceCategory {
-  string source_type = 1;
+  string id = 1;
   string name = 2;
   uint64 position = 3;
+  SourceType source_type = 4;
 }
 
 message ListSourcesRequest {
-  string source_type = 1;
-  string source_category = 2;
+  string source_type_id = 1;
+  string source_category_id = 2;
 }
 
 message ListSourcesResponse {
@@ -114,12 +116,13 @@ message DeleteSourceTypeRequest {
 message DeleteSourceTypeResponse {
 }
 
-message UpdateSourceTypePositionRequest {
-  string name = 1;
-  uint64 position = 2;
+message UpdateSourceTypeRequest {
+  string id = 1;
+  string name = 2;
+  uint64 position = 3;
 }
 
-message UpdateSourceTypePositionResponse {
+message UpdateSourceTypeResponse {
 }
 
 message CreateSourceCategoryRequest {
@@ -138,12 +141,12 @@ message DeleteSourceCategoryRequest {
 message DeleteSourceCategoryResponse {
 }
 
-message UpdateSourceCategoryPositionRequest {
+message UpdateSourceCategoryRequest {
   string name = 1;
   uint64 position = 2;
 }
 
-message UpdateSourceCategoryPositionResponse {
+message UpdateSourceCategoryResponse {
 }
 
 message CreateSourceRequest {
@@ -168,8 +171,12 @@ message DeleteSourceResponse {
 
 message UpdateSourceRequest {
   string id = 1;
-  uint64 position = 2;
-  bool allow_image = 3;
+  string name_chinese = 2;
+  bool is_chinese = 3;
+  uint64 position = 4;
+  string source_type = 5;
+  string source_category = 6;
+  bool allow_image = 7;
 }
 
 message UpdateSourceResponse {
