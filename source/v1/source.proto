@@ -178,7 +178,7 @@ message ListSourcesUpdatedAtRequest {
 }
 
 message ListSourcesUpdatedAtResponse {
-  repeated Source sources = 1;
+  repeated SourceUpdatedAt items = 1;
 }
 
 
