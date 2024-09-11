@@ -68,7 +68,7 @@ message SourceType {
 }
 
 message ListSourceCategoriesRequest {
-  string source_type = 1;
+  string source_type_id = 1;
 }
 
 message ListSourceCategoriesResponse {
@@ -96,8 +96,8 @@ message Source {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  string source_type = 5;
-  string source_category = 6;
+  SourceType source_type = 5;
+  SourceCategory source_category = 6;
   bool allow_image = 7;
 }
 
@@ -126,7 +126,7 @@ message UpdateSourceTypeResponse {
 }
 
 message CreateSourceCategoryRequest {
-  string source_type = 1;
+  string source_type_id = 1;
   string name = 2;
   uint64 position = 3;
 }
@@ -154,8 +154,8 @@ message CreateSourceRequest {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  string source_type = 5;
-  string source_category = 6;
+  string source_type_id = 5;
+  string source_category_id = 6;
   bool allow_image = 7;
 }
 
@@ -174,8 +174,8 @@ message UpdateSourceRequest {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  string source_type = 5;
-  string source_category = 6;
+  string source_type_id = 5;
+  string source_category_id = 6;
   bool allow_image = 7;
 }
 
