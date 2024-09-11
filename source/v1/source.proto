@@ -2,5 +2,163 @@ syntax = "proto3";
 
 package source.v1;
 
+import "permission/v1/permission.proto";
+
 service SourceService {
+  rpc ListSourceTypes(ListSourceTypesRequest) returns (ListSourceTypesResponse);
+  rpc ListSourceCategories(ListSourceCategoriesRequest) returns (ListSourceCategoriesResponse);
+  rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
+
+  // 后台
+  rpc CreateSourceType(CreateSourceTypeRequest) returns (CreateSourceTypeResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc DeleteSourceType(DeleteSourceTypeRequest) returns (DeleteSourceTypeResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc UpdateSourceTypePosition(UpdateSourceTypePositionRequest) returns (UpdateSourceTypePositionResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+
+  rpc CreateSourceCategory(CreateSourceCategoryRequest) returns (CreateSourceCategoryResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc DeleteSourceCategory(DeleteSourceCategoryRequest) returns (DeleteSourceCategoryResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc UpdateSourceCategoryPosition(UpdateSourceCategoryPositionRequest) returns (UpdateSourceCategoryPositionResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+
+  rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc DeleteSource(DeleteSourceRequest) returns (DeleteSourceResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+  rpc UpdateSourcePosition(UpdateSourcePositionRequest) returns (UpdateSourcePositionResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  };
+}
+
+message ListSourceTypesRequest {}
+
+message ListSourceTypesResponse {
+  repeated SourceType source_types = 1;
+}
+
+message SourceType {
+  string name = 1;
+  uint64 position = 2;
+}
+
+message ListSourceCategoriesRequest {}
+
+message ListSourceCategoriesResponse {
+  repeated SourceCategory source_categories = 1;
+}
+
+message SourceCategory {
+  string name = 1;
+  uint64 position = 2;
+}
+
+message ListSourcesRequest {}
+
+message ListSourcesResponse {
+  repeated Source sources = 1;
+}
+
+message Source {
+  string id = 1;
+  string name_chinese = 2;
+  string name_english = 3;
+  uint64 position = 4;
+  string source_type = 5;
+  string source_category = 6;
+}
+
+message CreateSourceTypeRequest {
+  string name = 1;
+  uint64 position = 2;
+}
+
+message CreateSourceTypeResponse {
+}
+
+message DeleteSourceTypeRequest {
+  string name = 1;
+}
+
+message DeleteSourceTypeResponse {
+}
+
+message UpdateSourceTypePositionRequest {
+  string name = 1;
+  uint64 position = 2;
+}
+
+message UpdateSourceTypePositionResponse {
+}
+
+message CreateSourceCategoryRequest {
+  string source_type = 1;
+  string name = 2;
+  uint64 position = 3;
+}
+
+message CreateSourceCategoryResponse {
+}
+
+message DeleteSourceCategoryRequest {
+  string source_type = 1;
+  string name = 2;
+}
+
+message DeleteSourceCategoryResponse {
+}
+
+message UpdateSourceCategoryPositionRequest {
+  string source_type = 1;
+  string name = 2;
+  uint64 position = 3;
+}
+
+message UpdateSourceCategoryPositionResponse {
+}
+
+message CreateSourceRequest {
+  string id = 1;
+  string name_chinese = 2;
+  string name_english = 3;
+  uint64 position = 4;
+  string source_type = 5;
+  string source_category = 6;
+}
+
+message CreateSourceResponse {
+}
+
+message DeleteSourceRequest {
+  string id = 1;
+}
+
+message DeleteSourceResponse {
+}
+
+message UpdateSourcePositionRequest {
+  string id = 1;
+  uint64 position = 2;
+}
+
+message UpdateSourcePositionResponse {
 }
