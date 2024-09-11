@@ -126,8 +126,7 @@ message CreateSourceCategoryResponse {
 }
 
 message DeleteSourceCategoryRequest {
-  string source_type = 1;
-  string name = 2;
+  string name = 1;
 }
 
 message DeleteSourceCategoryResponse {
