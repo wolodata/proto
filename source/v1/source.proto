@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package source.v1;
+
+service SourceService {
+}
