@@ -44,7 +44,7 @@ service SourceService {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
-  rpc UpdateSourcePosition(UpdateSourcePositionRequest) returns (UpdateSourcePositionResponse) {
+  rpc UpdateSource(UpdateSourceRequest) returns (UpdateSourceResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
@@ -85,6 +85,7 @@ message Source {
   uint64 position = 4;
   string source_type = 5;
   string source_category = 6;
+  bool allow_image = 7;
 }
 
 message CreateSourceTypeRequest {
@@ -143,6 +144,7 @@ message CreateSourceRequest {
   uint64 position = 4;
   string source_type = 5;
   string source_category = 6;
+  bool allow_image = 7;
 }
 
 message CreateSourceResponse {
@@ -155,10 +157,11 @@ message DeleteSourceRequest {
 message DeleteSourceResponse {
 }
 
-message UpdateSourcePositionRequest {
+message UpdateSourceRequest {
   string id = 1;
   uint64 position = 2;
+  bool allow_image = 3;
 }
 
-message UpdateSourcePositionResponse {
+message UpdateSourceResponse {
 }
