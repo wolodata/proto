@@ -142,8 +142,10 @@ message DeleteSourceCategoryResponse {
 }
 
 message UpdateSourceCategoryRequest {
-  string name = 1;
-  uint64 position = 2;
+  string id = 1;
+  string source_type_id = 2;
+  string name = 3;
+  uint64 position = 4;
 }
 
 message UpdateSourceCategoryResponse {
