@@ -96,9 +96,9 @@ message Source {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  SourceType source_type = 5;
-  SourceCategory source_category = 6;
-  bool allow_image = 7;
+  bool allow_image = 5;
+  SourceType source_type = 6;
+  SourceCategory source_category = 7;
 }
 
 message CreateSourceTypeRequest {
@@ -156,9 +156,9 @@ message CreateSourceRequest {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  string source_type_id = 5;
-  string source_category_id = 6;
-  bool allow_image = 7;
+  bool allow_image = 5;
+  string source_type_id = 6;
+  string source_category_id = 7;
 }
 
 message CreateSourceResponse {
@@ -176,9 +176,9 @@ message UpdateSourceRequest {
   string name_chinese = 2;
   bool is_chinese = 3;
   uint64 position = 4;
-  string source_type_id = 5;
-  string source_category_id = 6;
-  bool allow_image = 7;
+  bool allow_image = 5;
+  string source_type_id = 6;
+  string source_category_id = 7;
 }
 
 message UpdateSourceResponse {
