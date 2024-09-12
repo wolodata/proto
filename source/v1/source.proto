@@ -110,7 +110,7 @@ message CreateSourceTypeResponse {
 }
 
 message DeleteSourceTypeRequest {
-  string name = 1;
+  string id = 1;
 }
 
 message DeleteSourceTypeResponse {
@@ -135,7 +135,7 @@ message CreateSourceCategoryResponse {
 }
 
 message DeleteSourceCategoryRequest {
-  string name = 1;
+  string id = 1;
 }
 
 message DeleteSourceCategoryResponse {
