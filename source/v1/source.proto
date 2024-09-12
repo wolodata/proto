@@ -157,8 +157,7 @@ message CreateSourceRequest {
   bool is_chinese = 3;
   uint64 position = 4;
   bool allow_image = 5;
-  string source_type_id = 6;
-  string source_category_id = 7;
+  string source_category_id = 6;
 }
 
 message CreateSourceResponse {
@@ -177,8 +176,7 @@ message UpdateSourceRequest {
   bool is_chinese = 3;
   uint64 position = 4;
   bool allow_image = 5;
-  string source_type_id = 6;
-  string source_category_id = 7;
+  string source_category_id = 6;
 }
 
 message UpdateSourceResponse {
