@@ -83,8 +83,7 @@ enum SearchRange {
 message Source {
   string short_id = 1;
   string name_chinese = 2;
-  string name_english = 3;
-  bool is_chinese = 4;
+  bool is_chinese = 3;
 }
 
 message GetArticleRequest {
