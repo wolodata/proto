@@ -8,6 +8,7 @@ service SourceService {
   rpc ListSourceTypes(ListSourceTypesRequest) returns (ListSourceTypesResponse);
   rpc ListSourceCategories(ListSourceCategoriesRequest) returns (ListSourceCategoriesResponse);
   rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
+  rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
 
   // 后台
   rpc CreateSourceType(CreateSourceTypeRequest) returns (CreateSourceTypeResponse) {
@@ -89,6 +90,14 @@ message ListSourcesRequest {
 
 message ListSourcesResponse {
   repeated Source sources = 1;
+}
+
+message GetSourceRequest {
+  string id = 1;
+}
+
+message GetSourceResponse {
+  Source source = 1;
 }
 
 message Source {
