@@ -9,7 +9,6 @@ service CrawlerService {
   rpc UpdateCrawler(UpdateCrawlerRequest) returns (UpdateCrawlerResponse);
   rpc DeleteCrawler(DeleteCrawlerRequest) returns (DeleteCrawlerResponse);
 
-  rpc PreviewGetInitialLinksFromCode(PreviewGetInitialLinksFromCodeRequest) returns (PreviewGetInitialLinksFromCodeResponse);
   rpc PreviewListPage(PreviewListPageRequest) returns (PreviewListPageResponse);
   rpc PreviewExtractDetailPageLinksFromListPage(PreviewExtractDetailPageLinksFromListPageRequest) returns (PreviewExtractDetailPageLinksFromListPageResponse);
 
@@ -53,7 +52,6 @@ message Crawler {
   string id = 1;
   Source source = 2;
   uint64 crawl_interval_seconds = 3;
-  bool get_initial_links_from_code = 4;
   repeated string links = 5;
   uint64 initial_page_number = 6;
   string detail_page_link_selector = 7;
@@ -75,7 +73,6 @@ message GetCrawlerResponse {
 message CreateCrawlerRequest {
   string source_id = 2;
   uint64 crawl_interval_seconds = 3;
-  bool get_initial_links_from_code = 4;
   repeated string links = 5;
   uint64 initial_page_number = 6;
   string detail_page_link_selector = 7;
@@ -92,7 +89,6 @@ message CreateCrawlerResponse {
 message UpdateCrawlerRequest {
   string id = 1;
   uint64 crawl_interval_seconds = 3;
-  bool get_initial_links_from_code = 4;
   repeated string links = 5;
   uint64 initial_page_number = 6;
   string detail_page_link_selector = 7;
@@ -111,15 +107,6 @@ message DeleteCrawlerRequest {
 }
 
 message DeleteCrawlerResponse {
-}
-
-message PreviewGetInitialLinksFromCodeRequest {
-  string crawler_id = 1;
-}
-
-
-message PreviewGetInitialLinksFromCodeResponse {
-  repeated SourceLinks items = 1;
 }
 
 message SourceLinks {
