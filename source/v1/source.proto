@@ -108,6 +108,7 @@ message Source {
   bool allow_image = 5;
   SourceType source_type = 6;
   SourceCategory source_category = 7;
+  bool is_show = 8;
 }
 
 message CreateSourceTypeRequest {
@@ -186,6 +187,7 @@ message UpdateSourceRequest {
   uint64 position = 4;
   bool allow_image = 5;
   string source_category_id = 6;
+  bool is_show = 7;
 }
 
 message UpdateSourceResponse {
