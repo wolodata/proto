@@ -20,6 +20,12 @@ service ArticleService {
   rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse) {option (permission.v1.is_backend) = true;};
 }
 
+enum StrongRelatedFilter {
+  STRONG_RELATED_FILTER_UNSPECIFIED = 0; // 不管有没有范畴
+  STRONG_RELATED_FILTER_HAS_CATEGORY = 1; // 有范畴
+  STRONG_RELATED_FILTER_NOT_HAS_CATEGORY = 2; // 没有范畴
+}
+
 message ListArticlesRequest {
   repeated string source_ids = 1; // 信源id，不传就是查所有信源
   uint32 page_number = 2;
@@ -29,12 +35,12 @@ message ListArticlesRequest {
   string search_keyword = 6;
   SearchRange search_range = 7;
   bool is_weak_keyword_related = 8;
-  bool is_strong_related = 9;
+  bool is_strong_related = 9; // 是否强相关（不区分有没有范畴）
   repeated string strong_related_categories = 10;
   repeated string domain_ids = 11; // 领域id，不传会查所有文章（包含没有被判断到现有领域的文章）
   repeated string topic_names = 12; // 主题名字，不传会查所有文章（包含没有被判断到现有主题的文章）
-  bool strong_related_summary_chinese_not_empty = 13;
-  bool strong_related_category_not_empty = 14;
+  bool strong_related_summary_chinese_not_empty = 13; // 强相关中文总结不为空
+  StrongRelatedFilter strong_related_filter = 14; // 强相关过滤条件
 }
 
 message ListArticlesResponse {
