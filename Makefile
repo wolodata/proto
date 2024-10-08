@@ -14,3 +14,7 @@ lint:
 .PHONY: init
 init:
 	go install github.com/bufbuild/buf/cmd/buf@latest
+
+.PHONY: update
+update:
+	buf dep update

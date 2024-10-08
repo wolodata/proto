@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package article.v1;
 
+import "google/protobuf/wrappers.proto";
+
 import "permission/v1/permission.proto";
 
 service ArticleService {
@@ -20,12 +22,6 @@ service ArticleService {
   rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse) {option (permission.v1.is_backend) = true;};
 }
 
-enum StrongRelatedFilter {
-  STRONG_RELATED_FILTER_UNSPECIFIED = 0; // 不管有没有范畴
-  STRONG_RELATED_FILTER_HAS_CATEGORY = 1; // 有范畴
-  STRONG_RELATED_FILTER_NOT_HAS_CATEGORY = 2; // 没有范畴
-}
-
 message ListArticlesRequest {
   repeated string source_ids = 1; // 信源id，不传就是查所有信源
   uint32 page_number = 2;
@@ -40,7 +36,7 @@ message ListArticlesRequest {
   repeated string domain_ids = 11; // 领域id，不传会查所有文章（包含没有被判断到现有领域的文章）
   repeated string topic_names = 12; // 主题名字，不传会查所有文章（包含没有被判断到现有主题的文章）
   bool strong_related_summary_chinese_not_empty = 13; // 强相关中文总结不为空
-  StrongRelatedFilter strong_related_filter = 14; // 强相关过滤条件
+  google.protobuf.BoolValue strong_related_category_not_empty = 14; // 强相关范畴是否为空
 }
 
 message ListArticlesResponse {
