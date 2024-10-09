@@ -9,14 +9,14 @@ enum NotifyType {
 
 message Notification {
   NotifyType notify_type = 1;
-  oneof payload {
+  oneof      payload {
     PayloadNewArticle payload_new_article = 2;
   }
 }
 
 message PayloadNewArticle {
-  string id = 1;
+  string id            = 1;
   string title_chinese = 2;
   string title_english = 3;
-  uint64 published_at = 4;
+  uint64 published_at  = 4;
 }

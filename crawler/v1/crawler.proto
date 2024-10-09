@@ -31,35 +31,35 @@ service CrawlerService {
 
 message ListCrawlersRequest {
   uint32 page_number = 1;
-  uint32 limit = 2;
+  uint32 limit       = 2;
 }
 
 message ListCrawlersResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated Crawler items = 5;
+  uint32           total_count  = 1;
+  uint32           page_size    = 2;
+  uint32           total_page   = 3;
+  uint32           current_page = 4;
+  repeated Crawler items        = 5;
 }
 
 message Source {
-  string short_id = 1;
+  string short_id     = 1;
   string name_chinese = 2;
-  bool is_chinese = 4;
+  bool   is_chinese   = 4;
 }
 
 message Crawler {
-  string id = 1;
-  Source source = 2;
-  uint64 crawl_interval_seconds = 3;
-  repeated string links = 5;
-  uint64 initial_page_number = 6;
-  string detail_page_link_selector = 7;
-  string result_title_selector = 8;
-  string result_published_time_selector = 9;
-  string result_published_time_attr = 10;
-  string result_published_time_format = 11;
-  string result_content_selector = 12;
+  string          id                             = 1;
+  Source          source                         = 2;
+  uint64          crawl_interval_seconds         = 3;
+  repeated string links                          = 5;
+  uint64          initial_page_number            = 6;
+  string          detail_page_link_selector      = 7;
+  string          result_title_selector          = 8;
+  string          result_published_time_selector = 9;
+  string          result_published_time_attr     = 10;
+  string          result_published_time_format   = 11;
+  string          result_content_selector        = 12;
 }
 
 message GetCrawlerRequest {
@@ -71,32 +71,32 @@ message GetCrawlerResponse {
 }
 
 message CreateCrawlerRequest {
-  string source_id = 2;
-  uint64 crawl_interval_seconds = 3;
-  repeated string links = 5;
-  uint64 initial_page_number = 6;
-  string detail_page_link_selector = 7;
-  string result_title_selector = 8;
-  string result_published_time_selector = 9;
-  string result_published_time_attr = 10;
-  string result_published_time_format = 11;
-  string result_content_selector = 12;
+  string          source_id                      = 2;
+  uint64          crawl_interval_seconds         = 3;
+  repeated string links                          = 5;
+  uint64          initial_page_number            = 6;
+  string          detail_page_link_selector      = 7;
+  string          result_title_selector          = 8;
+  string          result_published_time_selector = 9;
+  string          result_published_time_attr     = 10;
+  string          result_published_time_format   = 11;
+  string          result_content_selector        = 12;
 }
 
 message CreateCrawlerResponse {
 }
 
 message UpdateCrawlerRequest {
-  string id = 1;
-  uint64 crawl_interval_seconds = 3;
-  repeated string links = 5;
-  uint64 initial_page_number = 6;
-  string detail_page_link_selector = 7;
-  string result_title_selector = 8;
-  string result_published_time_selector = 9;
-  string result_published_time_attr = 10;
-  string result_published_time_format = 11;
-  string result_content_selector = 12;
+  string          id                             = 1;
+  uint64          crawl_interval_seconds         = 3;
+  repeated string links                          = 5;
+  uint64          initial_page_number            = 6;
+  string          detail_page_link_selector      = 7;
+  string          result_title_selector          = 8;
+  string          result_published_time_selector = 9;
+  string          result_published_time_attr     = 10;
+  string          result_published_time_format   = 11;
+  string          result_content_selector        = 12;
 }
 
 message UpdateCrawlerResponse {
@@ -110,14 +110,14 @@ message DeleteCrawlerResponse {
 }
 
 message SourceLinks {
-  string source_id = 1;
-  repeated string list_page_links = 2;
+  string          source_id         = 1;
+  repeated string list_page_links   = 2;
   repeated string detail_page_links = 3;
 }
 
 message PreviewListPageRequest {
   string crawler_id = 1;
-  string link = 2; // 必填 指定请求哪个列表页
+  string link       = 2;  // 必填 指定请求哪个列表页
 }
 
 message PreviewListPageResponse {
@@ -125,36 +125,36 @@ message PreviewListPageResponse {
 }
 
 message PreviewExtractDetailPageLinksFromListPageRequest {
-  string crawler_id = 1;
-  string link = 2; // 必填 指定请求哪个列表页
-  string detail_page_link_selector = 3; // 可选，默认使用爬虫现在配置的detail_page_link_selector
+  string crawler_id                = 1;
+  string link                      = 2;  // 必填 指定请求哪个列表页
+  string detail_page_link_selector = 3;  // 可选，默认使用爬虫现在配置的detail_page_link_selector
 }
 
 message PreviewExtractDetailPageLinksFromListPageResponse {
-  string raw = 1;
+  string          raw   = 1;
   repeated string links = 2;
 }
 
 message ListProxiesRequest {
   uint32 page_number = 1;
-  uint32 limit = 2;
+  uint32 limit       = 2;
 }
 
 message ListProxiesResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated Proxy items = 5;
+  uint32         total_count  = 1;
+  uint32         page_size    = 2;
+  uint32         total_page   = 3;
+  uint32         current_page = 4;
+  repeated Proxy items        = 5;
 }
 
 message Proxy {
-  string id = 1;
-  string region = 2;
-  string name = 3;
-  string type = 4;
-  string host = 5;
-  uint64 port = 6;
+  string id       = 1;
+  string region   = 2;
+  string name     = 3;
+  string type     = 4;
+  string host     = 5;
+  uint64 port     = 6;
   string username = 7;
   string password = 8;
 }
@@ -168,11 +168,11 @@ message GetProxyResponse {
 }
 
 message CreateProxyRequest {
-  string region = 2;
-  string name = 3;
-  string type = 4;
-  string host = 5;
-  uint64 port = 6;
+  string region   = 2;
+  string name     = 3;
+  string type     = 4;
+  string host     = 5;
+  uint64 port     = 6;
   string username = 7;
   string password = 8;
 }
@@ -181,12 +181,12 @@ message CreateProxyResponse {
 }
 
 message UpdateProxyRequest {
-  string id = 1;
-  string region = 2;
-  string name = 3;
-  string type = 4;
-  string host = 5;
-  uint64 port = 6;
+  string id       = 1;
+  string region   = 2;
+  string name     = 3;
+  string type     = 4;
+  string host     = 5;
+  uint64 port     = 6;
   string username = 7;
   string password = 8;
 }
@@ -201,39 +201,38 @@ message DeleteProxyRequest {
 message DeleteProxyResponse {
 }
 
-
 message GetIPInfoRequest {
   string ip = 1;
 }
 
 message GetIPInfoResponse {
-  string ip = 1;
+  string ip      = 1;
   string country = 2;
-  string city = 3;
-  string region = 4;
-  string org = 5;
+  string city    = 3;
+  string region  = 4;
+  string org     = 5;
 }
 
 message ListTasksRequest {
   uint32 page_number = 1;
-  uint32 limit = 2;
+  uint32 limit       = 2;
 }
 
 message ListTasksResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated Task items = 5;
+  uint32        total_count  = 1;
+  uint32        page_size    = 2;
+  uint32        total_page   = 3;
+  uint32        current_page = 4;
+  repeated Task items        = 5;
 }
 
 message Task {
-  string id = 1;
-  string crawler_id = 2;
-  bool force_crawl_all = 3;
-  uint64 created_at = 4;
-  uint64 end_at = 5;
-  string error = 6;
+  string id              = 1;
+  string crawler_id      = 2;
+  bool   force_crawl_all = 3;
+  uint64 created_at      = 4;
+  uint64 end_at          = 5;
+  string error           = 6;
 }
 
 message GetTaskRequest {
@@ -246,62 +245,62 @@ message GetTaskResponse {
 
 message ListTaskListPagesRequest {
   uint32 page_number = 1;
-  uint32 limit = 2;
-  string task_id = 3;
-  string crawler_id = 4;
+  uint32 limit       = 2;
+  string task_id     = 3;
+  string crawler_id  = 4;
 }
 
 message ListTaskListPagesResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated TaskListPage items = 5;
+  uint32                total_count  = 1;
+  uint32                page_size    = 2;
+  uint32                total_page   = 3;
+  uint32                current_page = 4;
+  repeated TaskListPage items        = 5;
 }
 
 message TaskListPage {
-  string id = 1;
-  string task_id = 2;
-  string crawler_id = 3;
-  string link = 4;
-  uint64 created_at = 5;
-  string raw = 6;
+  string          id                = 1;
+  string          task_id           = 2;
+  string          crawler_id        = 3;
+  string          link              = 4;
+  uint64          created_at        = 5;
+  string          raw               = 6;
   repeated string detail_page_links = 7;
-  string error = 8;
+  string          error             = 8;
 }
 
 message ListTaskDetailPagesRequest {
   uint32 page_number = 1;
-  uint32 limit = 2;
-  string task_id = 3;
-  string crawler_id = 4;
+  uint32 limit       = 2;
+  string task_id     = 3;
+  string crawler_id  = 4;
 }
 
 message ListTaskDetailPagesResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated TaskDetailPage items = 5;
+  uint32                  total_count  = 1;
+  uint32                  page_size    = 2;
+  uint32                  total_page   = 3;
+  uint32                  current_page = 4;
+  repeated TaskDetailPage items        = 5;
 }
 
 message TaskDetailPage {
-  string id = 1;
-  string task_id = 2;
-  string crawler_id = 3;
-  string link = 4;
-  uint64 created_at = 5;
-  string raw = 6;
-  uint64 request_at = 7;
-  string title = 8;
+  string id           = 1;
+  string task_id      = 2;
+  string crawler_id   = 3;
+  string link         = 4;
+  uint64 created_at   = 5;
+  string raw          = 6;
+  uint64 request_at   = 7;
+  string title        = 8;
   uint64 published_at = 9;
   string content_html = 10;
   string content_text = 11;
 }
 
 message CreateTaskRequest {
-  string crawler_id = 1;
-  bool force_crawl_all = 2;
+  string crawler_id      = 1;
+  bool   force_crawl_all = 2;
 }
 
 message CreateTaskResponse {

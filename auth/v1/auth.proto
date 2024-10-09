@@ -14,8 +14,8 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;
-  bool sms_code_required = 2;
+  string token             = 1;
+  bool   sms_code_required = 2;
 }
 
 message SendSmsCodeRequest {

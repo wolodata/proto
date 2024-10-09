@@ -7,15 +7,15 @@ import "permission/v1/permission.proto";
 service PromptConfigService {
   // 后台
   rpc ListPromptConfigs(ListPromptConfigsRequest) returns (ListPromptConfigsResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc UpdatePromptConfig(UpdatePromptConfigRequest) returns (UpdatePromptConfigResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc RedeployPromptConfig(RedeployPromptConfigRequest) returns (RedeployPromptConfigResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 }
@@ -28,26 +28,26 @@ message ListPromptConfigsResponse {
 }
 
 message PromptConfig {
-  string id = 1;
-  string name = 2;
-  string description = 3;
-  string endpoint = 4;
+  string id              = 1;
+  string name            = 2;
+  string description     = 3;
+  string endpoint        = 4;
   string endpoint_ref_id = 5;
-  double temperature = 6;
-  double top_p = 7;
-  string prompt_system = 8;
-  string prompt_user = 9;
+  double temperature     = 6;
+  double top_p           = 7;
+  string prompt_system   = 8;
+  string prompt_user     = 9;
 }
 
 message UpdatePromptConfigRequest {
-  string id = 1;
-  string description = 3;
-  string endpoint = 4;
+  string id              = 1;
+  string description     = 3;
+  string endpoint        = 4;
   string endpoint_ref_id = 5;
-  double temperature = 6;
-  double top_p = 7;
-  string prompt_system = 8;
-  string prompt_user = 9;
+  double temperature     = 6;
+  double top_p           = 7;
+  string prompt_system   = 8;
+  string prompt_user     = 9;
 }
 
 message UpdatePromptConfigResponse {
@@ -55,8 +55,8 @@ message UpdatePromptConfigResponse {
 
 message RedeployPromptConfigRequest {
   uint64 start_time = 1;
-  uint64 end_time = 2;
-  string id = 3;
+  uint64 end_time   = 2;
+  string id         = 3;
 }
 
 message RedeployPromptConfigResponse {

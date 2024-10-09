@@ -5,7 +5,7 @@ package role.v1;
 enum Role {
   ROLE_UNSPECIFIED = 0;
   ROLE_SUPER_ADMIN = 1;
-  ROLE_ADMIN = 2;
-  ROLE_OPERATOR = 3;
-  ROLE_EXPLORER = 4;
+  ROLE_ADMIN       = 2;
+  ROLE_OPERATOR    = 3;
+  ROLE_EXPLORER    = 4;
 }

@@ -10,7 +10,7 @@ service SystemConfigService {
     option (permission.v1.is_backend) = true;
   };
   rpc UpdateSystemConfig(UpdateSystemConfigRequest) returns (UpdateSystemConfigResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 }
@@ -24,16 +24,16 @@ message ListSystemConfigsResponse {
 }
 
 message SystemConfig {
-  string id = 1;
-  string name = 2;
+  string id          = 1;
+  string name        = 2;
   string description = 3;
-  string value = 4;
+  string value       = 4;
 }
 
 message UpdateSystemConfigRequest {
-  string id = 1;
+  string id          = 1;
   string description = 3;
-  string value = 4;
+  string value       = 4;
 }
 
 message UpdateSystemConfigResponse {

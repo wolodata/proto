@@ -11,51 +11,55 @@ service ReportService {
 
   // 后台
   rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
-  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse) {option (permission.v1.is_backend) = true;};
-  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse) {option (permission.v1.is_backend) = true;};
+  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse) {
+    option (permission.v1.is_backend) = true;
+  };
+  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse) {
+    option (permission.v1.is_backend) = true;
+  };
 }
 
 enum ReportType {
   REPORT_TYPE_UNSPECIFIED = 0;
-  REPORT_TYPE_CUSTOM = 1;
-  REPORT_TYPE_DAILY = 2;
-  REPORT_TYPE_WEEKLY = 3;
-  REPORT_TYPE_MONTHLY = 4;
+  REPORT_TYPE_CUSTOM      = 1;
+  REPORT_TYPE_DAILY       = 2;
+  REPORT_TYPE_WEEKLY      = 3;
+  REPORT_TYPE_MONTHLY     = 4;
 }
 
 message ListReportsRequest {
-  ReportType report_type = 1;
-  uint32 page_number = 2;
-  uint32 limit = 3;
-  uint64 start_time = 4;
-  uint64 end_time = 5;
-  bool show_all_for_admin = 6; // 用于admin后台，展示所有报告（包括还没到展示时间的）
+  ReportType report_type        = 1;
+  uint32     page_number        = 2;
+  uint32     limit              = 3;
+  uint64     start_time         = 4;
+  uint64     end_time           = 5;
+  bool       show_all_for_admin = 6;  // 用于admin后台，展示所有报告（包括还没到展示时间的）
 }
 
 message ListReportsResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated Report items = 5;
+  uint32          total_count  = 1;
+  uint32          page_size    = 2;
+  uint32          total_page   = 3;
+  uint32          current_page = 4;
+  repeated Report items        = 5;
 }
 
-message Report  {
-  string id = 1;
-  ReportType report_type = 2;
-  string trigger_user_id = 3;
-  uint64 trigger_at = 4;
-  uint64 start_time = 5;
-  uint64 end_time = 6;
-  string content = 7;
-  uint64 generated_at = 8;
-  repeated string source_ids = 9;
-  string category = 10;
-  repeated string article_ids = 11;
-  uint64 visible_at = 12;
+message Report {
+  string          id              = 1;
+  ReportType      report_type     = 2;
+  string          trigger_user_id = 3;
+  uint64          trigger_at      = 4;
+  uint64          start_time      = 5;
+  uint64          end_time        = 6;
+  string          content         = 7;
+  uint64          generated_at    = 8;
+  repeated string source_ids      = 9;
+  string          category        = 10;
+  repeated string article_ids     = 11;
+  uint64          visible_at      = 12;
 }
 
 message GetReportRequest {
@@ -74,14 +78,14 @@ message DeleteReportsResponse {
 }
 
 message CreateReportRequest {
-  ReportType report_type = 1;
-  string trigger_user_id = 2;
-  uint64 trigger_at = 3;
-  uint64 start_time = 4;
-  uint64 end_time = 5;
-  string content = 6;
-  uint64 generated_at = 7;
-  uint64 visible_at = 8;
+  ReportType report_type     = 1;
+  string     trigger_user_id = 2;
+  uint64     trigger_at      = 3;
+  uint64     start_time      = 4;
+  uint64     end_time        = 5;
+  string     content         = 6;
+  uint64     generated_at    = 7;
+  uint64     visible_at      = 8;
 }
 
 message CreateReportResponse {
@@ -89,20 +93,20 @@ message CreateReportResponse {
 }
 
 message UpdateReportRequest {
-  string id = 1;
-  string content = 2;
+  string id           = 1;
+  string content      = 2;
   uint64 generated_at = 3;
-  uint64 visible_at = 4;
+  uint64 visible_at   = 4;
 }
 
 message UpdateReportResponse {
 }
 
 message CreateCustomReportTaskRequest {
-  uint64 start_time = 1;
-  uint64 end_time = 2;
+  uint64          start_time = 1;
+  uint64          end_time   = 2;
   repeated string source_ids = 3;
-  string category = 4;
+  string          category   = 4;
 }
 
 message CreateCustomReportTaskResponse {

@@ -8,24 +8,26 @@ service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
 
   // 后台
-  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {option (permission.v1.is_backend) = true;};
+  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {
+    option (permission.v1.is_backend) = true;
+  };
 }
 
 message StreamChatRequest {
-  string article_id = 1;
-  repeated ChatCompletionMessage prompts = 2;
+  string                         article_id = 1;
+  repeated ChatCompletionMessage prompts    = 2;
 }
 
 enum ChatCompletionMessageRole {
   CHAT_COMPLETION_MESSAGE_ROLE_UNSPECIFIED = 0;
-  CHAT_COMPLETION_MESSAGE_ROLE_SYSTEM = 1;
-  CHAT_COMPLETION_MESSAGE_ROLE_USER = 2;
-  CHAT_COMPLETION_MESSAGE_ROLE_ASSISTANT = 3;
+  CHAT_COMPLETION_MESSAGE_ROLE_SYSTEM      = 1;
+  CHAT_COMPLETION_MESSAGE_ROLE_USER        = 2;
+  CHAT_COMPLETION_MESSAGE_ROLE_ASSISTANT   = 3;
 }
 
 message ChatCompletionMessage {
-  ChatCompletionMessageRole role = 1;
-  string content = 2;
+  ChatCompletionMessageRole role    = 1;
+  string                    content = 2;
 }
 
 message StreamChatResponse {
@@ -33,10 +35,10 @@ message StreamChatResponse {
 }
 
 message FreeAskRequest {
-  string endpoint = 1;
-  repeated ChatCompletionMessage prompts = 2;
-  double temperature = 3;
-  double top_p = 4;
+  string                         endpoint    = 1;
+  repeated ChatCompletionMessage prompts     = 2;
+  double                         temperature = 3;
+  double                         top_p       = 4;
 }
 
 message FreeAskResponse {

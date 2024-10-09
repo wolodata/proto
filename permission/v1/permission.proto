@@ -7,6 +7,6 @@ import "role/v1/role.proto";
 
 // 定义一个扩展字段用于权限
 extend google.protobuf.MethodOptions {
-  bool is_backend = 50001;
+  bool         is_backend   = 50001;
   role.v1.Role minimum_role = 50002;
 }

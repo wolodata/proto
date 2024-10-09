@@ -12,46 +12,46 @@ service SourceService {
 
   // 后台
   rpc CreateSourceType(CreateSourceTypeRequest) returns (CreateSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc DeleteSourceType(DeleteSourceTypeRequest) returns (DeleteSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc UpdateSourceType(UpdateSourceTypeRequest) returns (UpdateSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 
   rpc CreateSourceCategory(CreateSourceCategoryRequest) returns (CreateSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc DeleteSourceCategory(DeleteSourceCategoryRequest) returns (DeleteSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc UpdateSourceCategory(UpdateSourceCategoryRequest) returns (UpdateSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 
   rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc DeleteSource(DeleteSourceRequest) returns (DeleteSourceResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
   rpc UpdateSource(UpdateSourceRequest) returns (UpdateSourceResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 
   rpc ListSourcesUpdatedAt(ListSourcesUpdatedAtRequest) returns (ListSourcesUpdatedAtResponse) {
-    option (permission.v1.is_backend) = true;
+    option (permission.v1.is_backend)   = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   };
 }
@@ -63,8 +63,8 @@ message ListSourceTypesResponse {
 }
 
 message SourceType {
-  string id = 1;
-  string name = 2;
+  string id       = 1;
+  string name     = 2;
   uint64 position = 3;
 }
 
@@ -77,16 +77,16 @@ message ListSourceCategoriesResponse {
 }
 
 message SourceCategory {
-  string id = 1;
-  string name = 2;
-  uint64 position = 3;
+  string     id          = 1;
+  string     name        = 2;
+  uint64     position    = 3;
   SourceType source_type = 4;
 }
 
 message ListSourcesRequest {
-  string source_type_id = 1;
+  string source_type_id     = 1;
   string source_category_id = 2;
-  bool include_not_show = 3;
+  bool   include_not_show   = 3;
 }
 
 message ListSourcesResponse {
@@ -102,18 +102,18 @@ message GetSourceResponse {
 }
 
 message Source {
-  string id = 1;
-  string name_chinese = 2;
-  bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
-  SourceType source_type = 6;
+  string         id              = 1;
+  string         name_chinese    = 2;
+  bool           is_chinese      = 3;
+  uint64         position        = 4;
+  bool           allow_image     = 5;
+  SourceType     source_type     = 6;
   SourceCategory source_category = 7;
-  bool is_show = 8;
+  bool           is_show         = 8;
 }
 
 message CreateSourceTypeRequest {
-  string name = 1;
+  string name     = 1;
   uint64 position = 2;
 }
 
@@ -128,8 +128,8 @@ message DeleteSourceTypeResponse {
 }
 
 message UpdateSourceTypeRequest {
-  string id = 1;
-  string name = 2;
+  string id       = 1;
+  string name     = 2;
   uint64 position = 3;
 }
 
@@ -138,8 +138,8 @@ message UpdateSourceTypeResponse {
 
 message CreateSourceCategoryRequest {
   string source_type_id = 1;
-  string name = 2;
-  uint64 position = 3;
+  string name           = 2;
+  uint64 position       = 3;
 }
 
 message CreateSourceCategoryResponse {
@@ -153,21 +153,21 @@ message DeleteSourceCategoryResponse {
 }
 
 message UpdateSourceCategoryRequest {
-  string id = 1;
+  string id             = 1;
   string source_type_id = 2;
-  string name = 3;
-  uint64 position = 4;
+  string name           = 3;
+  uint64 position       = 4;
 }
 
 message UpdateSourceCategoryResponse {
 }
 
 message CreateSourceRequest {
-  string id = 1;
-  string name_chinese = 2;
-  bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
+  string id                 = 1;
+  string name_chinese       = 2;
+  bool   is_chinese         = 3;
+  uint64 position           = 4;
+  bool   allow_image        = 5;
   string source_category_id = 6;
 }
 
@@ -182,31 +182,29 @@ message DeleteSourceResponse {
 }
 
 message UpdateSourceRequest {
-  string id = 1;
-  string name_chinese = 2;
-  bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
+  string id                 = 1;
+  string name_chinese       = 2;
+  bool   is_chinese         = 3;
+  uint64 position           = 4;
+  bool   allow_image        = 5;
   string source_category_id = 6;
-  bool is_show = 7;
+  bool   is_show            = 7;
 }
 
 message UpdateSourceResponse {
 }
 
 message ListSourcesUpdatedAtRequest {
-
 }
 
 message ListSourcesUpdatedAtResponse {
   repeated SourceUpdatedAt items = 1;
 }
 
-
 message SourceUpdatedAt {
-  Source source = 1;
-  uint64 updated_at = 2;
-  string link = 3;
-  string title = 4;
+  Source source       = 1;
+  uint64 updated_at   = 2;
+  string link         = 3;
+  string title        = 4;
   uint64 published_at = 5;
 }

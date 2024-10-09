@@ -6,42 +6,48 @@ import "permission/v1/permission.proto";
 
 service TaskService {
   // 后台
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {option (permission.v1.is_backend) = true;};
-  rpc UpdateTaskPriority(UpdateTaskPriorityRequest) returns (UpdateTaskPriorityResponse) {option (permission.v1.is_backend) = true;};
-  rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse) {option (permission.v1.is_backend) = true;};
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option (permission.v1.is_backend) = true;
+  };
+  rpc UpdateTaskPriority(UpdateTaskPriorityRequest) returns (UpdateTaskPriorityResponse) {
+    option (permission.v1.is_backend) = true;
+  };
+  rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse) {
+    option (permission.v1.is_backend) = true;
+  };
 }
 
 message ListTasksRequest {
-  repeated string task_types = 1; // 任务类型，不传就是查所有类型的任务
-  repeated uint32 statuses = 2; // 任务状态，不传就是查所有状态的任务
-  repeated string article_ids = 3; // 文章id，不传就是查所有文章的任务
-  string order_by = 4; // 根据 task_priority / updated_at 排序
-  bool desc = 5; // 是否降序
-  uint32 page_number = 6;
-  uint32 limit = 7;
+  repeated string task_types  = 1;  // 任务类型，不传就是查所有类型的任务
+  repeated uint32 statuses    = 2;  // 任务状态，不传就是查所有状态的任务
+  repeated string article_ids = 3;  // 文章id，不传就是查所有文章的任务
+  string          order_by    = 4;  // 根据 task_priority / updated_at 排序
+  bool            desc        = 5;  // 是否降序
+  uint32          page_number = 6;
+  uint32          limit       = 7;
 }
 
 message ListTasksResponse {
-  uint32 total_count = 1;
-  uint32 page_size = 2;
-  uint32 total_page = 3;
-  uint32 current_page = 4;
-  repeated TaskListItem items = 5;
+  uint32                total_count  = 1;
+  uint32                page_size    = 2;
+  uint32                total_page   = 3;
+  uint32                current_page = 4;
+  repeated TaskListItem items        = 5;
 }
 
 message TaskListItem {
-  string id = 1;
-  string article_id = 2;
+  string id            = 1;
+  string article_id    = 2;
   uint32 task_priority = 3;
-  string task_type = 4;
-  uint32 status = 5;
-  string err = 6;
-  uint64 created_at = 7;
-  uint64 updated_at = 8;
+  string task_type     = 4;
+  uint32 status        = 5;
+  string err           = 6;
+  uint64 created_at    = 7;
+  uint64 updated_at    = 8;
 }
 
 message UpdateTaskPriorityRequest {
-  string id = 1;
+  string id            = 1;
   uint32 task_priority = 2;
 }
 
