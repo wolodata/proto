@@ -230,16 +230,17 @@ message DeleteArticlesResponse {
 }
 
 message BatchOperateArticlesRequest {
-  string          operation                 = 1;
-  repeated string ids                       = 2;  // 文章id列表
-  repeated string source_ids                = 3;  // 信源id，不传就是查所有信源
-  uint64          start_time                = 4;
-  uint64          end_time                  = 5;
-  string          search_keyword            = 6;
-  SearchRange     search_range              = 7;
-  bool            is_weak_keyword_related   = 8;
-  bool            is_strong_related         = 9;
-  repeated string strong_related_categories = 10;
+  string                    operation                         = 1;
+  repeated string           ids                               = 2;  // 文章id列表
+  repeated string           source_ids                        = 3;  // 信源id，不传就是查所有信源
+  uint64                    start_time                        = 4;
+  uint64                    end_time                          = 5;
+  string                    search_keyword                    = 6;
+  SearchRange               search_range                      = 7;
+  bool                      is_weak_keyword_related           = 8;
+  bool                      is_strong_related                 = 9;
+  repeated string           strong_related_categories         = 10;
+  google.protobuf.BoolValue strong_related_category_not_empty = 11;  // 强相关范畴是否为空
 }
 
 message BatchOperateArticlesResponse {
