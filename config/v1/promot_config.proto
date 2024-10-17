@@ -33,8 +33,8 @@ message PromptConfig {
   string description     = 3;
   string endpoint        = 4;
   string endpoint_ref_id = 5;
-  double temperature     = 6;
-  double top_p           = 7;
+  float  temperature     = 6;
+  float  top_p           = 7;
   string prompt_system   = 8;
   string prompt_user     = 9;
 }
@@ -44,8 +44,8 @@ message UpdatePromptConfigRequest {
   string description     = 3;
   string endpoint        = 4;
   string endpoint_ref_id = 5;
-  double temperature     = 6;
-  double top_p           = 7;
+  float  temperature     = 6;
+  float  top_p           = 7;
   string prompt_system   = 8;
   string prompt_user     = 9;
 }

@@ -37,8 +37,8 @@ message StreamChatResponse {
 message FreeAskRequest {
   string                         endpoint    = 1;
   repeated ChatCompletionMessage prompts     = 2;
-  double                         temperature = 3;
-  double                         top_p       = 4;
+  float                          temperature = 3;
+  float                          top_p       = 4;
 }
 
 message FreeAskResponse {
