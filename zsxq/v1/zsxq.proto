@@ -6,7 +6,14 @@ service ZsxqService {
   rpc GetCookieInfo(GetCookieInfoRequest) returns (GetCookieInfoResponse);
   rpc UpdateCookieInfo(UpdateCookieInfoRequest) returns (UpdateCookieInfoResponse);
 
+  // 从平台侧同步所有群组到本地数据库
+  rpc SyncGroups(SyncGroupsRequest) returns (SyncGroupsResponse);
+  // 从平台侧同步指定群组的帖子到本地数据库
+  rpc SyncGroupTopics(SyncGroupTopicsRequest) returns (SyncGroupTopicsResponse);
+
+  // 从本地数据库获取所有群组
   rpc ListAllGroups(ListAllGroupsRequest) returns (ListAllGroupsResponse);
+  // 从本地数据库获取帖子
   rpc ListGroupTopics(ListGroupTopicsRequest) returns (ListGroupTopicsResponse);
 }
 
@@ -25,6 +32,9 @@ message GetCookieInfoRequest {
 message GetCookieInfoResponse {
   string cookie     = 1;
   uint64 expires_at = 2;
+  uint64 updated_at = 3;
+  bool   valid      = 4;
+  uint64 synced_at  = 5;
 }
 
 message UpdateCookieInfoRequest {
@@ -33,6 +43,19 @@ message UpdateCookieInfoRequest {
 }
 
 message UpdateCookieInfoResponse {
+}
+
+message SyncGroupsRequest {
+}
+
+message SyncGroupsResponse {
+}
+
+message SyncGroupTopicsRequest {
+  uint64 group_id = 1;
+}
+
+message SyncGroupTopicsResponse {
 }
 
 message ListAllGroupsRequest {
