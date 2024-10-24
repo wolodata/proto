@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package zsxq.v1;
+
+service ZsxqService {
+  rpc GetCookieInfo(GetCookieInfoRequest) returns (GetCookieInfoResponse);
+  rpc UpdateCookieInfo(UpdateCookieInfoRequest) returns (UpdateCookieInfoResponse);
+
+  rpc ListAllGroups(ListAllGroupsRequest) returns (ListAllGroupsResponse);
+  rpc ListGroupTopics(ListGroupTopicsRequest) returns (ListGroupTopicsResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+message GetCookieInfoRequest {
+}
+
+message GetCookieInfoResponse {
+  string cookie     = 1;
+  uint64 expires_at = 2;
+}
+
+message UpdateCookieInfoRequest {
+  string cookie     = 1;
+  uint64 expires_at = 2;
+}
+
+message UpdateCookieInfoResponse {
+}
+
+message ListAllGroupsRequest {
+}
+
+message ListAllGroupsResponse {
+  repeated Group groups = 1;
+}
+
+message Group {
+  uint64 id         = 1;
+  string name       = 2;
+  string image_url  = 3;
+  uint64 created_at = 4;
+}
+
+message ListGroupTopicsRequest {
+  uint64 group_id    = 1;
+  uint32 page_number = 2;
+  uint32 limit       = 3;
+}
+
+message ListGroupTopicsResponse {
+  uint32         total_count  = 1;
+  uint32         page_size    = 2;
+  uint32         total_page   = 3;
+  uint32         current_page = 4;
+  repeated Topic topics       = 5;
+}
+
+message Topic {
+  uint64          id         = 1;
+  string          content    = 2;
+  repeated uint64 file_ids   = 3;
+  uint64          created_at = 4;
+}
