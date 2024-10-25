@@ -15,6 +15,12 @@ service ZsxqService {
   rpc ListAllGroups(ListAllGroupsRequest) returns (ListAllGroupsResponse);
   // 从本地数据库获取帖子
   rpc ListGroupTopics(ListGroupTopicsRequest) returns (ListGroupTopicsResponse);
+
+  // 删除帖子（知识星球+本地）
+  rpc DeleteGroupTopic(DeleteGroupTopicRequest) returns (DeleteGroupTopicResponse);
+
+  // 更新是否是精华帖（知识星球+本地）
+  rpc UpdateGroupTopicStar(UpdateGroupTopicStarRequest) returns (UpdateGroupTopicStarResponse);
 }
 
 message LoginRequest {
@@ -30,16 +36,19 @@ message GetCookieInfoRequest {
 }
 
 message GetCookieInfoResponse {
-  string cookie     = 1;
-  uint64 expires_at = 2;
-  uint64 updated_at = 3;
-  bool   valid      = 4;
-  uint64 synced_at  = 5;
+  uint64 user_id    = 1;
+  string cookie     = 2;
+  uint64 expires_at = 3;
+  uint64 updated_at = 4;
+  bool   valid      = 5;
+  uint64 synced_at  = 6;
+  string err_reason = 7;
 }
 
 message UpdateCookieInfoRequest {
-  string cookie     = 1;
-  uint64 expires_at = 2;
+  uint64 user_id    = 1;
+  string cookie     = 2;
+  uint64 expires_at = 3;
 }
 
 message UpdateCookieInfoResponse {
@@ -87,8 +96,34 @@ message ListGroupTopicsResponse {
 }
 
 message Topic {
-  uint64          id         = 1;
-  string          content    = 2;
-  repeated uint64 file_ids   = 3;
-  uint64          created_at = 4;
+  uint64        id         = 1;
+  string        content    = 2;
+  repeated File files      = 3;
+  uint64        created_at = 4;
+  bool          is_star    = 5;
+}
+
+message File {
+  uint64 id         = 1;
+  string name       = 2;
+  string hash       = 3;
+  uint64 size       = 4;
+  uint64 created_at = 5;
+}
+
+message DeleteGroupTopicRequest {
+  uint64 group_id = 1;
+  uint64 topic_id = 2;
+}
+
+message DeleteGroupTopicResponse {
+}
+
+message UpdateGroupTopicStarRequest {
+  uint64 group_id = 1;
+  uint64 topic_id = 2;
+  bool   is_star  = 3;
+}
+
+message UpdateGroupTopicStarResponse {
 }
