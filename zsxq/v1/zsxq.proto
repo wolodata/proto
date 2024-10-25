@@ -112,15 +112,13 @@ message File {
 }
 
 message DeleteGroupTopicRequest {
-  uint64 group_id = 1;
-  uint64 topic_id = 2;
+  uint64 topic_id = 1;
 }
 
 message DeleteGroupTopicResponse {
 }
 
 message UpdateGroupTopicStarRequest {
-  uint64 group_id = 1;
   uint64 topic_id = 2;
   bool   is_star  = 3;
 }
