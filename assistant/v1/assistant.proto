@@ -38,7 +38,8 @@ message Assistant {
   string id           = 1;
   string name         = 2;
   string description  = 3;
-  string welcome_text = 4;
+  string image_url    = 4;
+  string welcome_text = 5;
 }
 
 message GetAssistantRequest {
@@ -67,9 +68,10 @@ message AssistantForBackend {
 message CreateAssistantRequest {
   string name         = 1;
   string description  = 2;
-  string welcome_text = 3;
-  string prompt       = 4;
-  uint64 position     = 5;
+  string image_url    = 3;
+  string welcome_text = 4;
+  string prompt       = 5;
+  uint64 position     = 6;
 }
 
 message CreateAssistantResponse {
@@ -79,9 +81,10 @@ message UpdateAssistantRequest {
   string id           = 1;
   string name         = 2;
   string description  = 3;
-  string welcome_text = 4;
-  string prompt       = 5;
-  uint64 position     = 6;
+  string image_url    = 4;
+  string welcome_text = 5;
+  string prompt       = 6;
+  uint64 position     = 7;
 }
 
 message UpdateAssistantResponse {
