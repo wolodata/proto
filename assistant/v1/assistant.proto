@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package assistant.v1;
+
+import "permission/v1/permission.proto";
+
+service AssistantService {
+  rpc ListAssistants(ListAssistantsRequest) returns (ListAssistantsResponse);
+
+  rpc GetAssistant(GetAssistantRequest) returns (GetAssistantResponse);
+
+  // 后台
+  rpc ListAssistantsForBackend(ListAssistantsForBackendRequest) returns (ListAssistantsForBackendResponse) {
+    option (permission.v1.is_backend) = true;
+  }
+
+  rpc CreateAssistant(CreateAssistantRequest) returns (CreateAssistantResponse) {
+    option (permission.v1.is_backend) = true;
+  }
+
+  rpc UpdateAssistant(UpdateAssistantRequest) returns (UpdateAssistantResponse) {
+    option (permission.v1.is_backend) = true;
+  }
+
+  rpc DeleteAssistant(DeleteAssistantRequest) returns (DeleteAssistantResponse) {
+    option (permission.v1.is_backend) = true;
+  }
+}
+
+message ListAssistantsRequest {
+}
+
+message ListAssistantsResponse {
+  repeated Assistant assistants = 1;
+}
+
+message Assistant {
+  string id           = 1;
+  string name         = 2;
+  string description  = 3;
+  string welcome_text = 4;
+}
+
+message GetAssistantRequest {
+  string id = 1;
+}
+
+message GetAssistantResponse {
+  Assistant assistant = 1;
+}
+
+message ListAssistantsForBackendRequest {
+}
+
+message ListAssistantsForBackendResponse {
+  repeated AssistantForBackend assistants = 1;
+}
+
+message AssistantForBackend {
+  Assistant assistant  = 1;
+  string    prompt     = 2;
+  uint64    position   = 3;
+  uint64    created_at = 4;
+  uint64    updated_at = 5;
+}
+
+message CreateAssistantRequest {
+  string name         = 1;
+  string description  = 2;
+  string welcome_text = 3;
+  string prompt       = 4;
+  uint64 position     = 5;
+}
+
+message CreateAssistantResponse {
+}
+
+message UpdateAssistantRequest {
+  string id           = 1;
+  string name         = 2;
+  string description  = 3;
+  string welcome_text = 4;
+  string prompt       = 5;
+  uint64 position     = 6;
+}
+
+message UpdateAssistantResponse {
+}
+
+message DeleteAssistantRequest {
+  string id = 1;
+}
+
+message DeleteAssistantResponse {
+}
