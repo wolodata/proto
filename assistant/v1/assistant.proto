@@ -58,11 +58,9 @@ message ListAssistantsForBackendResponse {
 }
 
 message AssistantForBackend {
-  Assistant assistant  = 1;
-  string    prompt     = 2;
-  uint64    position   = 3;
-  uint64    created_at = 4;
-  uint64    updated_at = 5;
+  Assistant assistant = 1;
+  string    prompt    = 2;
+  uint64    position  = 3;
 }
 
 message CreateAssistantRequest {
