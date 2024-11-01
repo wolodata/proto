@@ -6,8 +6,13 @@ import "permission/v1/permission.proto";
 
 service AssistantService {
   rpc ListAssistants(ListAssistantsRequest) returns (ListAssistantsResponse);
-
   rpc GetAssistant(GetAssistantRequest) returns (GetAssistantResponse);
+  rpc StartConversation(StartConversationRequest) returns (StartConversationResponse);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc StreamSendMessage(StreamSendMessageRequest) returns (stream StreamSendMessageResponse);
+  rpc GetConversation(GetConversationRequest) returns (GetConversationResponse);
+  rpc ListHistories(ListHistoriesRequest) returns (ListHistoriesResponse);
+  rpc DeleteHistories(DeleteHistoriesRequest) returns (DeleteHistoriesResponse);
 
   // 后台
   rpc ListAssistantsForBackend(ListAssistantsForBackendRequest) returns (ListAssistantsForBackendResponse) {
@@ -48,6 +53,74 @@ message GetAssistantRequest {
 
 message GetAssistantResponse {
   Assistant assistant = 1;
+}
+
+message StartConversationRequest {
+  string assistant_id = 1;
+}
+
+message StartConversationResponse {
+  string conversation_id = 1;  // 新会话的ID
+}
+
+message SendMessageRequest {
+  string conversation_id = 1;  // 会话ID
+  string message         = 2;  // 发送的消息
+}
+
+message StreamSendMessageRequest {
+  string conversation_id = 1;  // 会话ID
+  string message         = 2;  // 发送的消息
+}
+
+message SendMessageResponse {
+  string message = 1;
+}
+
+message StreamSendMessageResponse {
+  string chunk = 1;
+}
+
+message GetConversationRequest {
+  string conversation_id = 1;
+}
+
+message GetConversationResponse {
+  repeated Message messages   = 1;
+  uint64           updated_at = 2;
+}
+
+message ListHistoriesRequest {
+  uint32 page_number  = 1;
+  uint32 limit        = 2;
+  string assistant_id = 3;
+}
+
+message ListHistoriesResponse {
+  uint32           total_count  = 1;
+  uint32           page_size    = 2;
+  uint32           total_page   = 3;
+  uint32           current_page = 4;
+  repeated History items        = 5;
+}
+
+message History {
+  string           id         = 1;
+  repeated Message messages   = 2;
+  uint64           updated_at = 3;
+}
+
+message DeleteHistoriesRequest {
+  repeated string ids = 1;
+}
+
+message DeleteHistoriesResponse {
+}
+
+message Message {
+  bool   is_user    = 1;
+  string content    = 2;
+  uint64 created_at = 3;
 }
 
 message ListAssistantsForBackendRequest {
