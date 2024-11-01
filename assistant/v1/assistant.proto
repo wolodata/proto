@@ -58,31 +58,31 @@ message ListAssistantsForBackendResponse {
 }
 
 message AssistantForBackend {
-  Assistant assistant = 1;
-  string    prompt    = 2;
-  uint64    position  = 3;
+  Assistant assistant     = 1;
+  string    prompt_system = 2;
+  uint64    position      = 3;
 }
 
 message CreateAssistantRequest {
-  string name         = 1;
-  string description  = 2;
-  string image_url    = 3;
-  string welcome_text = 4;
-  string prompt       = 5;
-  uint64 position     = 6;
+  string name          = 1;
+  string description   = 2;
+  string image_url     = 3;
+  string welcome_text  = 4;
+  string prompt_system = 5;
+  uint64 position      = 6;
 }
 
 message CreateAssistantResponse {
 }
 
 message UpdateAssistantRequest {
-  string id           = 1;
-  string name         = 2;
-  string description  = 3;
-  string image_url    = 4;
-  string welcome_text = 5;
-  string prompt       = 6;
-  uint64 position     = 7;
+  string id            = 1;
+  string name          = 2;
+  string description   = 3;
+  string image_url     = 4;
+  string welcome_text  = 5;
+  string prompt_system = 6;
+  uint64 position      = 7;
 }
 
 message UpdateAssistantResponse {
