@@ -21,6 +21,12 @@ service ZsxqService {
 
   // 更新是否是精华帖（知识星球+本地）
   rpc UpdateGroupTopicStar(UpdateGroupTopicStarRequest) returns (UpdateGroupTopicStarResponse);
+
+  // PDF上传管理
+  rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
+  rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
+  rpc UpdatePDFName(UpdatePDFNameRequest) returns (UpdatePDFNameResponse);
+  rpc DeletePDF(DeletePDFRequest) returns (DeletePDFResponse);
 }
 
 message LoginRequest {
@@ -126,4 +132,40 @@ message UpdateGroupTopicStarRequest {
 }
 
 message UpdateGroupTopicStarResponse {
+}
+
+message UploadPDFRequest {
+  string name = 1;
+  bytes  file = 2;
+}
+
+message UploadPDFResponse {
+  string hash = 1;
+}
+
+message ListUploadedPDFsRequest {
+}
+
+message ListUploadedPDFsResponse {
+  repeated UploadedPDF pdfs = 1;
+}
+
+message UploadedPDF {
+  string hash = 1;
+  string name = 2;
+}
+
+message UpdatePDFNameRequest {
+  string hash = 1;
+  string name = 2;
+}
+
+message UpdatePDFNameResponse {
+}
+
+message DeletePDFRequest {
+  string hash = 1;
+}
+
+message DeletePDFResponse {
 }
