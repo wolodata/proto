@@ -144,15 +144,22 @@ message UploadPDFResponse {
 }
 
 message ListUploadedPDFsRequest {
+  uint32 page_number = 1;
+  uint32 limit       = 2;
 }
 
 message ListUploadedPDFsResponse {
-  repeated UploadedPDF pdfs = 1;
+  uint32               total_count  = 1;
+  uint32               page_size    = 2;
+  uint32               total_page   = 3;
+  uint32               current_page = 4;
+  repeated UploadedPDF items        = 5;
 }
 
 message UploadedPDF {
   string hash = 1;
   string name = 2;
+  uint64 size = 3;
 }
 
 message UpdatePDFNameRequest {
