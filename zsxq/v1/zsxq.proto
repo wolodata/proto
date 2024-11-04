@@ -157,9 +157,10 @@ message ListUploadedPDFsResponse {
 }
 
 message UploadedPDF {
-  string hash = 1;
-  string name = 2;
-  uint64 size = 3;
+  string hash    = 1;
+  string name    = 2;
+  uint64 size    = 3;
+  string s3_path = 4;
 }
 
 message UpdatePDFNameRequest {
