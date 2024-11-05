@@ -22,6 +22,11 @@ service ZsxqService {
   // 更新是否是精华帖（知识星球+本地）
   rpc UpdateGroupTopicStar(UpdateGroupTopicStarRequest) returns (UpdateGroupTopicStarResponse);
 
+  // 更新星球的配置
+  rpc UpdateGroupConfig(UpdateGroupConfigRequest) returns (UpdateGroupConfigResponse);
+  // 获取星球的文件配置
+  rpc GetGroupConfig(GetGroupConfigRequest) returns (GetGroupConfigResponse);
+
   // PDF上传管理
   rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
   rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
@@ -132,6 +137,28 @@ message UpdateGroupTopicStarRequest {
 }
 
 message UpdateGroupTopicStarResponse {
+}
+
+message GroupConfig {
+  string pdf_cover_file_url           = 1;
+  string article_auto_pdf_name_format = 2;
+}
+
+message UpdateGroupConfigRequest {
+  string      group_id = 1;
+  GroupConfig config   = 2;
+}
+
+message UpdateGroupConfigResponse {
+}
+
+message GetGroupConfigRequest {
+  string group_id = 1;
+}
+
+message GetGroupConfigResponse {
+  string      group_id = 1;
+  GroupConfig config   = 2;
 }
 
 message UploadPDFRequest {
