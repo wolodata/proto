@@ -151,7 +151,7 @@ message GroupConfig {
 }
 
 message UpdateGroupConfigRequest {
-  string      group_id = 1;
+  uint64      group_id = 1;
   GroupConfig config   = 2;
 }
 
@@ -159,11 +159,11 @@ message UpdateGroupConfigResponse {
 }
 
 message GetGroupConfigRequest {
-  string group_id = 1;
+  uint64 group_id = 1;
 }
 
 message GetGroupConfigResponse {
-  string      group_id = 1;
+  uint64      group_id = 1;
   GroupConfig config   = 2;
 }
 
@@ -213,7 +213,7 @@ message DeletePDFResponse {
 }
 
 message PreviewPostPDFToGroupRequest {
-  string group_id = 1;
+  uint64 group_id = 1;
   string pdf_hash = 2;
 }
 
