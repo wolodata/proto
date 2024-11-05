@@ -32,6 +32,12 @@ service ZsxqService {
   rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
   rpc UpdatePDFName(UpdatePDFNameRequest) returns (UpdatePDFNameResponse);
   rpc DeletePDF(DeletePDFRequest) returns (DeletePDFResponse);
+
+  // 预览发送PDF到星球（会提前生成好PDF文件）
+  rpc PreviewPostPDFToGroup(PreviewPostPDFToGroupRequest) returns (PreviewPostPDFToGroupResponse);
+
+  // 确认发送PDF到星球（可以定时或者立即发送）
+  rpc ConfirmPostPDFToGroup(ConfirmPostPDFToGroupRequest) returns (ConfirmPostPDFToGroupResponse);
 }
 
 message LoginRequest {
@@ -204,4 +210,32 @@ message DeletePDFRequest {
 }
 
 message DeletePDFResponse {
+}
+
+message PreviewPostPDFToGroupRequest {
+  string group_id = 1;
+  string pdf_hash = 2;
+}
+
+message PreviewPostPDFToGroupResponse {
+  string           preview_id   = 1;
+  string           content_text = 2;
+  repeated PDFFile pdf_files    = 3;
+}
+
+message PDFFile {
+  string type        = 1;
+  string origin_hash = 2;
+  string hash        = 3;
+  string name        = 4;
+  uint64 size        = 5;
+  string s3_path     = 6;
+}
+
+message ConfirmPostPDFToGroupRequest {
+  string preview_id  = 1;
+  uint64 schedule_at = 2;
+}
+
+message ConfirmPostPDFToGroupResponse {
 }
