@@ -27,6 +27,15 @@ service ZsxqService {
   // 获取星球的文件配置
   rpc GetGroupConfig(GetGroupConfigRequest) returns (GetGroupConfigResponse);
 
+  // 书籍管理
+  rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
+  rpc CreateBook(CreateBookRequest) returns (CreateBookResponse);
+  rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
+  rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
+
+  // 获取用于上传PDF到阿里云oss的token
+  rpc GetUploadTokenForBook(GetUploadTokenForBookRequest) returns (GetUploadTokenForBookResponse);
+
   // PDF上传管理
   rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
   rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
@@ -165,6 +174,81 @@ message GetGroupConfigRequest {
 message GetGroupConfigResponse {
   uint64      group_id = 1;
   GroupConfig config   = 2;
+}
+
+message ListBooksRequest {
+  uint32 page_number = 1;
+  uint32 limit       = 2;
+}
+
+message ListBooksResponse {
+  uint32        total_count  = 1;
+  uint32        page_size    = 2;
+  uint32        total_page   = 3;
+  uint32        current_page = 4;
+  repeated Book items        = 5;
+}
+
+message BookPDFs {
+  string raw_hash                                    = 1;
+  string raw_with_watermark_hash                     = 2;
+  string raw_with_watermark_and_password_hash        = 3;
+  string translated_hash                             = 4;
+  string translated_with_watermark_hash              = 5;
+  string translated_with_watermark_and_password_hash = 6;
+  string summary_hash                                = 7;
+  string summary_with_watermark_hash                 = 8;
+  string summary_with_watermark_and_password_hash    = 9;
+  string all_in_one_hash                             = 10;
+  string all_in_one_with_watermark_hash              = 11;
+  string all_in_one_with_watermark_and_password_hash = 12;
+}
+
+message Book {
+  string   id         = 1;
+  string   name       = 2;
+  bool     is_chinese = 3;
+  BookPDFs book_pdfs  = 4;
+}
+
+message CreateBookRequest {
+  string name       = 1;
+  bool   is_chinese = 2;
+}
+
+message CreateBookResponse {
+}
+
+message UpdateBookRequest {
+  string id         = 1;
+  string name       = 2;
+  bool   is_chinese = 3;
+}
+
+message UpdateBookResponse {
+}
+
+message DeleteBookRequest {
+  string id = 1;
+}
+
+message DeleteBookResponse {
+}
+
+enum UploadFileType {
+  UPLOAD_FILE_TYPE_UNSPECIFIED = 0;
+  UPLOAD_FILE_TYPE_RAW         = 1;
+  UPLOAD_FILE_TYPE_TRANSLATED  = 2;
+  UPLOAD_FILE_TYPE_SUMMARY     = 3;
+}
+
+message GetUploadTokenForBookRequest {
+  string         book_id          = 1;
+  UploadFileType upload_file_type = 2;
+}
+
+message GetUploadTokenForBookResponse {
+  string token = 1;
 }
 
 message UploadPDFRequest {
