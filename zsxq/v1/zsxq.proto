@@ -29,6 +29,7 @@ service ZsxqService {
 
   // 书籍管理
   rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
+  rpc GetBook(GetBookRequest) returns (GetBookResponse);
   rpc CreateBook(CreateBookRequest) returns (CreateBookResponse);
   rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
@@ -187,6 +188,14 @@ message ListBooksResponse {
   uint32        total_page   = 3;
   uint32        current_page = 4;
   repeated Book items        = 5;
+}
+
+message GetBookRequest {
+  string id = 1;
+}
+
+message GetBookResponse {
+  Book book = 1;
 }
 
 message BookPDFs {
