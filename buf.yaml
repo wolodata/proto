@@ -17,4 +17,3 @@ breaking:
     - FIELD_SAME_DEFAULT
 deps:
     - buf.build/googleapis/googleapis
-    - buf.build/protocolbuffers/wellknowntypes

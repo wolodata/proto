@@ -4,6 +4,3 @@ deps:
   - name: buf.build/googleapis/googleapis
     commit: 553fd4b4b3a640be9b69a3fa0c17b383
     digest: b5:9e7cb39758f3487f0751765227dc0b9f0ef7a401ab37fa2e97c363446810f4bd0dca1f46dbb793a12d98c019f4028e48d0831b5cb3f09190f068ec1866c69c1d
-  - name: buf.build/protocolbuffers/wellknowntypes
-    commit: d59b7d45e69d4e129a1b797e2766f067
-    digest: b5:79d98c29b4fadd41adba4396b9c628daf2db955f7a2cbd8dd00fb21911b31463948b1d2ba4ba202fad034eec23dbf9f56ea3c8dcef5f88e5b85111eadae88359
