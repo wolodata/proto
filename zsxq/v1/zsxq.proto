@@ -257,7 +257,13 @@ message GetUploadTokenForBookRequest {
 }
 
 message GetUploadTokenForBookResponse {
-  string token = 1;
+  string access_key_id = 1;
+  string host          = 2;
+  uint64 expired_at    = 3;
+  string signature     = 4;
+  string key           = 5;
+  string policy        = 6;
+  string callback      = 7;
 }
 
 message UploadPDFRequest {
