@@ -226,10 +226,12 @@ message CreateBookResponse {
 }
 
 message UpdateBookRequest {
-  string   id         = 1;
-  string   name       = 2;
-  bool     is_chinese = 3;
-  BookPDFs book_pdfs  = 4;
+  string id              = 1;
+  string name            = 2;
+  bool   is_chinese      = 3;
+  string raw_hash        = 4;
+  string translated_hash = 5;
+  string summary_hash    = 6;
 }
 
 message UpdateBookResponse {
