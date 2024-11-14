@@ -34,9 +34,6 @@ service ZsxqService {
   rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
 
-  // 获取用于上传PDF到阿里云oss的token
-  rpc GetUploadTokenForBook(GetUploadTokenForBookRequest) returns (GetUploadTokenForBookResponse);
-
   // PDF上传管理
   rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
   rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
@@ -229,9 +226,10 @@ message CreateBookResponse {
 }
 
 message UpdateBookRequest {
-  string id         = 1;
-  string name       = 2;
-  bool   is_chinese = 3;
+  string   id         = 1;
+  string   name       = 2;
+  bool     is_chinese = 3;
+  BookPDFs book_pdfs  = 4;
 }
 
 message UpdateBookResponse {
@@ -242,28 +240,6 @@ message DeleteBookRequest {
 }
 
 message DeleteBookResponse {
-}
-
-enum UploadFileType {
-  UPLOAD_FILE_TYPE_UNSPECIFIED = 0;
-  UPLOAD_FILE_TYPE_RAW         = 1;
-  UPLOAD_FILE_TYPE_TRANSLATED  = 2;
-  UPLOAD_FILE_TYPE_SUMMARY     = 3;
-}
-
-message GetUploadTokenForBookRequest {
-  string         book_id          = 1;
-  UploadFileType upload_file_type = 2;
-}
-
-message GetUploadTokenForBookResponse {
-  string access_key_id = 1;
-  string host          = 2;
-  uint64 expired_at    = 3;
-  string signature     = 4;
-  string key           = 5;
-  string policy        = 6;
-  string callback      = 7;
 }
 
 message UploadPDFRequest {
