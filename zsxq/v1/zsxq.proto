@@ -33,6 +33,8 @@ service ZsxqService {
   rpc CreateBook(CreateBookRequest) returns (CreateBookResponse);
   rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
+  rpc DeleteBookPDF(DeleteBookPDFRequest) returns (DeleteBookPDFResponse);
+  rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
 
   // PDF上传管理
   rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
@@ -226,12 +228,9 @@ message CreateBookResponse {
 }
 
 message UpdateBookRequest {
-  string id              = 1;
-  string name            = 2;
-  bool   is_chinese      = 3;
-  string raw_hash        = 4;
-  string translated_hash = 5;
-  string summary_hash    = 6;
+  string id         = 1;
+  string name       = 2;
+  bool   is_chinese = 3;
 }
 
 message UpdateBookResponse {
@@ -242,6 +241,30 @@ message DeleteBookRequest {
 }
 
 message DeleteBookResponse {
+}
+
+enum BookPDFType {
+  BOOK_PDF_TYPE_UNSPECIFIED = 0;
+  BOOK_PDF_TYPE_RAW         = 1;
+  BOOK_PDF_TYPE_TRANSLATED  = 2;
+  BOOK_PDF_TYPE_SUMMARY     = 3;
+  BOOK_PDF_TYPE_ALL_IN_ONE  = 4;
+}
+
+message DeleteBookPDFRequest {
+  string               id             = 1;
+  repeated BookPDFType book_pdf_types = 2;
+}
+
+message DeleteBookPDFResponse {
+}
+
+message ConfirmUploadBookPDFRequest {
+  string      id            = 1;
+  BookPDFType book_pdf_type = 2;
+}
+
+message ConfirmUploadBookPDFResponse {
 }
 
 message UploadPDFRequest {
