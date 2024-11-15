@@ -246,17 +246,19 @@ message Book {
 }
 
 message CreateBookRequest {
-  string name       = 1;
-  bool   is_chinese = 2;
+  string name        = 1;
+  bool   is_chinese  = 2;
+  string category_id = 3;
 }
 
 message CreateBookResponse {
 }
 
 message UpdateBookRequest {
-  string id         = 1;
-  string name       = 2;
-  bool   is_chinese = 3;
+  string id          = 1;
+  string name        = 2;
+  bool   is_chinese  = 3;
+  string category_id = 4;
 }
 
 message UpdateBookResponse {
