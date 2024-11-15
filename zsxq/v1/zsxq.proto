@@ -28,6 +28,10 @@ service ZsxqService {
   rpc GetGroupConfig(GetGroupConfigRequest) returns (GetGroupConfigResponse);
 
   // 书籍管理
+  rpc ListBookCategories(ListBookCategoriesRequest) returns (ListBookCategoriesResponse);
+  rpc CreateBookCategory(CreateBookCategoryRequest) returns (CreateBookCategoryResponse);
+  rpc UpdateBookCategory(UpdateBookCategoryRequest) returns (UpdateBookCategoryResponse);
+
   rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
   rpc GetBook(GetBookRequest) returns (GetBookResponse);
   rpc CreateBook(CreateBookRequest) returns (CreateBookResponse);
@@ -35,18 +39,6 @@ service ZsxqService {
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
   rpc DeleteBookPDF(DeleteBookPDFRequest) returns (DeleteBookPDFResponse);
   rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
-
-  // PDF上传管理
-  rpc UploadPDF(UploadPDFRequest) returns (UploadPDFResponse);
-  rpc ListUploadedPDFs(ListUploadedPDFsRequest) returns (ListUploadedPDFsResponse);
-  rpc UpdatePDFName(UpdatePDFNameRequest) returns (UpdatePDFNameResponse);
-  rpc DeletePDF(DeletePDFRequest) returns (DeletePDFResponse);
-
-  // 预览发送PDF到星球（会提前生成好PDF文件）
-  rpc PreviewPostPDFToGroup(PreviewPostPDFToGroupRequest) returns (PreviewPostPDFToGroupResponse);
-
-  // 确认发送PDF到星球（可以定时或者立即发送）
-  rpc ConfirmPostPDFToGroup(ConfirmPostPDFToGroupRequest) returns (ConfirmPostPDFToGroupResponse);
 }
 
 message LoginRequest {
@@ -176,9 +168,42 @@ message GetGroupConfigResponse {
   GroupConfig config   = 2;
 }
 
+message ListBookCategoriesRequest {
+}
+
+message ListBookCategoriesResponse {
+  repeated BookCategory items = 1;
+}
+
+message BookCategory {
+  string id            = 1;
+  string name          = 2;
+  uint64 position      = 3;
+  string cover_pdf_url = 4;
+}
+
+message CreateBookCategoryRequest {
+  string name          = 1;
+  string cover_pdf_url = 2;
+}
+
+message CreateBookCategoryResponse {
+}
+
+message UpdateBookCategoryRequest {
+  string id            = 1;
+  string name          = 2;
+  uint64 position      = 3;
+  string cover_pdf_url = 4;
+}
+
+message UpdateBookCategoryResponse {
+}
+
 message ListBooksRequest {
   uint32 page_number = 1;
   uint32 limit       = 2;
+  string category_id = 3;
 }
 
 message ListBooksResponse {
@@ -198,25 +223,26 @@ message GetBookResponse {
 }
 
 message BookPDFs {
-  string raw_hash                                    = 1;
-  string raw_with_watermark_hash                     = 2;
-  string raw_with_watermark_and_password_hash        = 3;
-  string translated_hash                             = 4;
-  string translated_with_watermark_hash              = 5;
-  string translated_with_watermark_and_password_hash = 6;
-  string summary_hash                                = 7;
-  string summary_with_watermark_hash                 = 8;
-  string summary_with_watermark_and_password_hash    = 9;
-  string all_in_one_hash                             = 10;
-  string all_in_one_with_watermark_hash              = 11;
-  string all_in_one_with_watermark_and_password_hash = 12;
+  bool raw_hash                                    = 1;
+  bool raw_with_watermark_hash                     = 2;
+  bool raw_with_watermark_and_password_hash        = 3;
+  bool translated_hash                             = 4;
+  bool translated_with_watermark_hash              = 5;
+  bool translated_with_watermark_and_password_hash = 6;
+  bool summary_hash                                = 7;
+  bool summary_with_watermark_hash                 = 8;
+  bool summary_with_watermark_and_password_hash    = 9;
+  bool all_in_one_hash                             = 10;
+  bool all_in_one_with_watermark_hash              = 11;
+  bool all_in_one_with_watermark_and_password_hash = 12;
 }
 
 message Book {
-  string   id         = 1;
-  string   name       = 2;
-  bool     is_chinese = 3;
-  BookPDFs book_pdfs  = 4;
+  string   id          = 1;
+  string   name        = 2;
+  bool     is_chinese  = 3;
+  string   category_id = 4;
+  BookPDFs book_pdfs   = 5;
 }
 
 message CreateBookRequest {
@@ -265,77 +291,4 @@ message ConfirmUploadBookPDFRequest {
 }
 
 message ConfirmUploadBookPDFResponse {
-}
-
-message UploadPDFRequest {
-  string name = 1;
-  bytes  file = 2;
-}
-
-message UploadPDFResponse {
-  string hash = 1;
-}
-
-message ListUploadedPDFsRequest {
-  uint32 page_number = 1;
-  uint32 limit       = 2;
-}
-
-message ListUploadedPDFsResponse {
-  uint32               total_count  = 1;
-  uint32               page_size    = 2;
-  uint32               total_page   = 3;
-  uint32               current_page = 4;
-  repeated UploadedPDF items        = 5;
-}
-
-message UploadedPDF {
-  string hash        = 1;
-  string name        = 2;
-  uint64 size        = 3;
-  string s3_path     = 4;
-  uint64 uploaded_at = 5;
-}
-
-message UpdatePDFNameRequest {
-  string hash = 1;
-  string name = 2;
-}
-
-message UpdatePDFNameResponse {
-}
-
-message DeletePDFRequest {
-  string hash = 1;
-}
-
-message DeletePDFResponse {
-}
-
-message PreviewPostPDFToGroupRequest {
-  uint64 group_id = 1;
-  string pdf_hash = 2;
-}
-
-message PreviewPostPDFToGroupResponse {
-  string           preview_id   = 1;
-  string           content_text = 2;
-  repeated PDFFile pdf_files    = 3;
-}
-
-message PDFFile {
-  string type        = 1;
-  string origin_hash = 2;
-  string hash        = 3;
-  string name        = 4;
-  uint64 size        = 5;
-  string s3_path     = 6;
-}
-
-message ConfirmPostPDFToGroupRequest {
-  string preview_id  = 1;
-  uint64 schedule_at = 2;
-}
-
-message ConfirmPostPDFToGroupResponse {
 }
