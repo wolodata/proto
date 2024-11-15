@@ -223,18 +223,14 @@ message GetBookResponse {
 }
 
 message BookPDFs {
-  bool raw_hash                                    = 1;
-  bool raw_with_watermark_hash                     = 2;
-  bool raw_with_watermark_and_password_hash        = 3;
-  bool translated_hash                             = 4;
-  bool translated_with_watermark_hash              = 5;
-  bool translated_with_watermark_and_password_hash = 6;
-  bool summary_hash                                = 7;
-  bool summary_with_watermark_hash                 = 8;
-  bool summary_with_watermark_and_password_hash    = 9;
-  bool all_in_one_hash                             = 10;
-  bool all_in_one_with_watermark_hash              = 11;
-  bool all_in_one_with_watermark_and_password_hash = 12;
+  bool   raw_uploaded         = 1;
+  bool   raw_processed        = 2;
+  bool   translated_uploaded  = 3;
+  bool   translated_processed = 4;
+  bool   summary_uploaded     = 5;
+  bool   summary_processed    = 6;
+  bool   all_in_one_processed = 7;
+  string error_reason         = 8;
 }
 
 message Book {
