@@ -39,6 +39,11 @@ service ZsxqService {
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
   rpc DeleteBookPDF(DeleteBookPDFRequest) returns (DeleteBookPDFResponse);
   rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
+
+  // 为文章生成全套PDF 会覆盖过去的
+  rpc GeneratePDFTaskForArticles(GeneratePDFTaskForArticlesRequest) returns (GeneratePDFTaskForArticlesResponse);
+  rpc ListArticlePDFTasks(ListArticlePDFTasksRequest) returns (ListArticlePDFTasksResponse);
+  rpc GetArticlePDFTask(GetArticlePDFTaskRequest) returns (GetArticlePDFTaskResponse);
 }
 
 message LoginRequest {
@@ -289,4 +294,41 @@ message ConfirmUploadBookPDFRequest {
 }
 
 message ConfirmUploadBookPDFResponse {
+}
+
+message GeneratePDFTaskForArticlesRequest {
+  repeated string ids = 1;  // 文章id列表
+}
+
+message GeneratePDFTaskForArticlesResponse {
+}
+
+message ListArticlePDFTasksRequest {
+  uint32 page_number = 1;
+  uint32 limit       = 2;
+}
+
+message ListArticlePDFTasksResponse {
+  uint32                  total_count  = 1;
+  uint32                  page_size    = 2;
+  uint32                  total_page   = 3;
+  uint32                  current_page = 4;
+  repeated ArticlePDFTask items        = 5;
+}
+
+message GetArticlePDFTaskRequest {
+  string id = 1;
+}
+
+message GetArticlePDFTaskResponse {
+  ArticlePDFTask item = 1;
+}
+
+message ArticlePDFTask {
+  string id                   = 1;
+  bool   raw_processed        = 2;
+  bool   translated_processed = 3;
+  bool   summary_processed    = 4;
+  bool   all_in_one_processed = 5;
+  string error_reason         = 6;
 }
