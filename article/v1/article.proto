@@ -131,6 +131,7 @@ message Article {
   string              summary_chinese                          = 22;
   bool                strong_related_summary_chinese_processed = 23;
   string              strong_related_summary_chinese           = 24;
+  string              deep_analysis                            = 25;
 }
 
 message TranslateArticleRequest {
@@ -188,6 +189,7 @@ message UpdateArticleRequest {
   string summary_chinese                          = 22;
   bool   strong_related_summary_chinese_processed = 23;
   string strong_related_summary_chinese           = 24;
+  string deep_analysis                            = 25;
 }
 
 message UpdateArticleResponse {
