@@ -257,9 +257,7 @@ message CreateBookResponse {
 
 message UpdateBookRequest {
   string id          = 1;
-  string name        = 2;
-  bool   is_chinese  = 3;
-  string category_id = 4;
+  string category_id = 2;
 }
 
 message UpdateBookResponse {
