@@ -3,30 +3,6 @@ syntax = "proto3";
 package zsxq.v1;
 
 service ZsxqService {
-  rpc GetCookieInfo(GetCookieInfoRequest) returns (GetCookieInfoResponse);
-  rpc UpdateCookieInfo(UpdateCookieInfoRequest) returns (UpdateCookieInfoResponse);
-
-  // 从平台侧同步所有群组到本地数据库
-  rpc SyncGroups(SyncGroupsRequest) returns (SyncGroupsResponse);
-  // 从平台侧同步指定群组的帖子到本地数据库
-  rpc SyncGroupTopics(SyncGroupTopicsRequest) returns (SyncGroupTopicsResponse);
-
-  // 从本地数据库获取所有群组
-  rpc ListAllGroups(ListAllGroupsRequest) returns (ListAllGroupsResponse);
-  // 从本地数据库获取帖子
-  rpc ListGroupTopics(ListGroupTopicsRequest) returns (ListGroupTopicsResponse);
-
-  // 删除帖子（知识星球+本地）
-  rpc DeleteGroupTopic(DeleteGroupTopicRequest) returns (DeleteGroupTopicResponse);
-
-  // 更新是否是精华帖（知识星球+本地）
-  rpc UpdateGroupTopicStar(UpdateGroupTopicStarRequest) returns (UpdateGroupTopicStarResponse);
-
-  // 更新星球的配置
-  rpc UpdateGroupConfig(UpdateGroupConfigRequest) returns (UpdateGroupConfigResponse);
-  // 获取星球的文件配置
-  rpc GetGroupConfig(GetGroupConfigRequest) returns (GetGroupConfigResponse);
-
   // 书籍管理
   rpc ListBookCategories(ListBookCategoriesRequest) returns (ListBookCategoriesResponse);
   rpc CreateBookCategory(CreateBookCategoryRequest) returns (CreateBookCategoryResponse);
@@ -43,133 +19,6 @@ service ZsxqService {
   rpc GeneratePDFTaskForArticles(GeneratePDFTaskForArticlesRequest) returns (GeneratePDFTaskForArticlesResponse);
   rpc ListArticlePDFTasks(ListArticlePDFTasksRequest) returns (ListArticlePDFTasksResponse);
   rpc GetArticlePDFTask(GetArticlePDFTaskRequest) returns (GetArticlePDFTaskResponse);
-}
-
-message LoginRequest {
-  string username = 1;
-  string password = 2;
-}
-
-message LoginResponse {
-  string token = 1;
-}
-
-message GetCookieInfoRequest {
-}
-
-message GetCookieInfoResponse {
-  uint64 user_id    = 1;
-  string cookie     = 2;
-  uint64 expires_at = 3;
-  uint64 updated_at = 4;
-  bool   valid      = 5;
-  uint64 synced_at  = 6;
-  string err_reason = 7;
-}
-
-message UpdateCookieInfoRequest {
-  uint64 user_id    = 1;
-  string cookie     = 2;
-  uint64 expires_at = 3;
-}
-
-message UpdateCookieInfoResponse {
-}
-
-message SyncGroupsRequest {
-}
-
-message SyncGroupsResponse {
-}
-
-message SyncGroupTopicsRequest {
-  uint64 group_id = 1;
-}
-
-message SyncGroupTopicsResponse {
-}
-
-message ListAllGroupsRequest {
-}
-
-message ListAllGroupsResponse {
-  repeated Group groups = 1;
-}
-
-message Group {
-  uint64 id         = 1;
-  string name       = 2;
-  string image_url  = 3;
-  uint64 created_at = 4;
-}
-
-message ListGroupTopicsRequest {
-  uint64 group_id    = 1;
-  uint32 page_number = 2;
-  uint32 limit       = 3;
-}
-
-message ListGroupTopicsResponse {
-  uint32         total_count  = 1;
-  uint32         page_size    = 2;
-  uint32         total_page   = 3;
-  uint32         current_page = 4;
-  repeated Topic topics       = 5;
-}
-
-message Topic {
-  uint64        id          = 1;
-  string        content     = 2;
-  repeated File files       = 3;
-  uint64        created_at  = 4;
-  bool          is_star     = 5;
-  uint64        author_id   = 6;
-  string        author_name = 7;
-}
-
-message File {
-  uint64 id         = 1;
-  string name       = 2;
-  string hash       = 3;
-  uint64 size       = 4;
-  uint64 created_at = 5;
-}
-
-message DeleteGroupTopicRequest {
-  uint64 topic_id = 1;
-}
-
-message DeleteGroupTopicResponse {
-}
-
-message UpdateGroupTopicStarRequest {
-  uint64 topic_id = 2;
-  bool   is_star  = 3;
-}
-
-message UpdateGroupTopicStarResponse {
-}
-
-message GroupConfig {
-  string pdf_cover_file_url           = 1;
-  string article_auto_pdf_name_format = 2;
-}
-
-message UpdateGroupConfigRequest {
-  uint64      group_id = 1;
-  GroupConfig config   = 2;
-}
-
-message UpdateGroupConfigResponse {
-}
-
-message GetGroupConfigRequest {
-  uint64 group_id = 1;
-}
-
-message GetGroupConfigResponse {
-  uint64      group_id = 1;
-  GroupConfig config   = 2;
 }
 
 message ListBookCategoriesRequest {
@@ -314,10 +163,7 @@ message GetArticlePDFTaskResponse {
 }
 
 message ArticlePDFTask {
-  string id                   = 1;
-  bool   raw_processed        = 2;
-  bool   translated_processed = 3;
-  bool   summary_processed    = 4;
-  bool   all_in_one_processed = 5;
-  string error_reason         = 6;
+  string id           = 1;
+  bool   processed    = 2;
+  string error_reason = 3;
 }
