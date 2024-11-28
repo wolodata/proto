@@ -35,7 +35,6 @@ service ZsxqService {
   rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
   rpc GetBook(GetBookRequest) returns (GetBookResponse);
   rpc CreateBook(CreateBookRequest) returns (CreateBookResponse);
-  rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse);
   rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
   rpc DeleteBookPDF(DeleteBookPDFRequest) returns (DeleteBookPDFResponse);
   rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
@@ -253,14 +252,6 @@ message CreateBookRequest {
 }
 
 message CreateBookResponse {
-}
-
-message UpdateBookRequest {
-  string id          = 1;
-  string category_id = 2;
-}
-
-message UpdateBookResponse {
 }
 
 message DeleteBookRequest {
