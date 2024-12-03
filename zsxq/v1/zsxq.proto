@@ -164,17 +164,18 @@ message GetArticlePDFTaskResponse {
 
 message ArticlePDFTask {
   string id                              = 1;
-  bool   is_chinese                      = 2;
-  bool   processed                       = 3;
-  string error_reason                    = 4;
-  string oss_raw_html                    = 5;
-  string oss_raw_pdf                     = 6;
-  string oss_raw_pdf_processed           = 7;
-  string oss_translated_html             = 8;
-  string oss_translated_pdf              = 9;
-  string oss_translated_pdf_processed    = 10;
-  string oss_deep_analysis_html          = 11;
-  string oss_deep_analysis_pdf           = 12;
-  string oss_deep_analysis_pdf_processed = 13;
-  string oss_all_in_one_pdf_processed    = 14;
+  uint64 task_created_at                 = 2;
+  bool   is_chinese                      = 3;
+  bool   processed                       = 4;
+  string error_reason                    = 5;
+  string oss_raw_html                    = 6;
+  string oss_raw_pdf                     = 7;
+  string oss_raw_pdf_processed           = 8;
+  string oss_translated_html             = 9;
+  string oss_translated_pdf              = 10;
+  string oss_translated_pdf_processed    = 11;
+  string oss_deep_analysis_html          = 12;
+  string oss_deep_analysis_pdf           = 13;
+  string oss_deep_analysis_pdf_processed = 14;
+  string oss_all_in_one_pdf_processed    = 15;
 }
