@@ -189,11 +189,12 @@ message GetArticlePDFTaskFileListRequest {
 
 message GetArticlePDFTaskFileListResponse {
   bool   is_chinese                      = 1;
-  string title_chinese                   = 2;
-  string title_english                   = 3;
-  uint64 published_at                    = 4;
-  string oss_raw_pdf_processed           = 5;
-  string oss_translated_pdf_processed    = 6;
-  string oss_deep_analysis_pdf_processed = 7;
-  string oss_all_in_one_pdf_processed    = 8;
+  string source_chinese_name             = 2;
+  string title_chinese                   = 3;
+  string title_english                   = 4;
+  uint64 published_at                    = 5;
+  string oss_raw_pdf_processed           = 6;
+  string oss_translated_pdf_processed    = 7;
+  string oss_deep_analysis_pdf_processed = 8;
+  string oss_all_in_one_pdf_processed    = 9;
 }
