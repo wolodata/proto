@@ -19,6 +19,7 @@ service ZsxqService {
   rpc GeneratePDFTaskForArticles(GeneratePDFTaskForArticlesRequest) returns (GeneratePDFTaskForArticlesResponse);
   rpc ListArticlePDFTasks(ListArticlePDFTasksRequest) returns (ListArticlePDFTasksResponse);
   rpc GetArticlePDFTask(GetArticlePDFTaskRequest) returns (GetArticlePDFTaskResponse);
+  rpc GetArticlePDFTaskFileList(GetArticlePDFTaskFileListRequest) returns (GetArticlePDFTaskFileListResponse);
 }
 
 message ListBookCategoriesRequest {
@@ -178,4 +179,19 @@ message ArticlePDFTask {
   string oss_deep_analysis_pdf           = 13;
   string oss_deep_analysis_pdf_processed = 14;
   string oss_all_in_one_pdf_processed    = 15;
+  string file_share_text                 = 16;
+}
+
+message GetArticlePDFTaskFileListRequest {
+  string id       = 1;
+  string password = 2;
+}
+
+message GetArticlePDFTaskFileListResponse {
+  string title                           = 1;
+  bool   is_chinese                      = 2;
+  string oss_raw_pdf_processed           = 3;
+  string oss_translated_pdf_processed    = 4;
+  string oss_deep_analysis_pdf_processed = 5;
+  string oss_all_in_one_pdf_processed    = 6;
 }
