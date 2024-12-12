@@ -15,10 +15,15 @@ service ZsxqService {
   rpc DeleteBookPDF(DeleteBookPDFRequest) returns (DeleteBookPDFResponse);
   rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
 
+  // 书籍网盘 免认证中间件
+  rpc GetBookFileList(GetBookFileListRequest) returns (GetBookFileListResponse);
+
   // 为文章生成全套PDF 会覆盖过去的
   rpc GeneratePDFTaskForArticles(GeneratePDFTaskForArticlesRequest) returns (GeneratePDFTaskForArticlesResponse);
   rpc ListArticlePDFTasks(ListArticlePDFTasksRequest) returns (ListArticlePDFTasksResponse);
   rpc GetArticlePDFTask(GetArticlePDFTaskRequest) returns (GetArticlePDFTaskResponse);
+
+  // 文章网盘 免认证中间件
   rpc GetArticlePDFTaskFileList(GetArticlePDFTaskFileListRequest) returns (GetArticlePDFTaskFileListResponse);
 }
 
@@ -85,6 +90,7 @@ message BookPDFs {
   bool   summary_processed    = 6;
   bool   all_in_one_processed = 7;
   string error_reason         = 8;
+  string file_share_text      = 9;
 }
 
 message Book {
@@ -133,6 +139,14 @@ message ConfirmUploadBookPDFRequest {
 }
 
 message ConfirmUploadBookPDFResponse {
+}
+
+message GetBookFileListRequest {
+  string id       = 1;
+  string password = 2;
+}
+
+message GetBookFileListResponse {
 }
 
 message GeneratePDFTaskForArticlesRequest {
