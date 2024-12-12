@@ -98,7 +98,8 @@ message Book {
   string   name        = 2;
   bool     is_chinese  = 3;
   string   category_id = 4;
-  BookPDFs book_pdfs   = 5;
+  uint64   created_at  = 5;
+  BookPDFs book_pdfs   = 6;
 }
 
 message CreateBookRequest {
@@ -152,6 +153,7 @@ message GetBookFileListResponse {
   bool   is_chinese    = 3;
   string category_id   = 4;
   string category_name = 5;
+  uint64 created_at    = 6;
 }
 
 message GeneratePDFTaskForArticlesRequest {
