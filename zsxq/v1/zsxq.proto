@@ -16,6 +16,7 @@ service ZsxqService {
   rpc ConfirmUploadBookPDF(ConfirmUploadBookPDFRequest) returns (ConfirmUploadBookPDFResponse);
 
   // 书籍网盘 免认证中间件
+  rpc CheckBookExist(CheckBookExistRequest) returns (CheckBookExistResponse);
   rpc GetBookFileList(GetBookFileListRequest) returns (GetBookFileListResponse);
 
   // 为文章生成全套PDF 会覆盖过去的
@@ -24,6 +25,7 @@ service ZsxqService {
   rpc GetArticlePDFTask(GetArticlePDFTaskRequest) returns (GetArticlePDFTaskResponse);
 
   // 文章网盘 免认证中间件
+  rpc CheckArticlePDFTaskExist(CheckArticlePDFTaskExistRequest) returns (CheckArticlePDFTaskExistResponse);
   rpc GetArticlePDFTaskFileList(GetArticlePDFTaskFileListRequest) returns (GetArticlePDFTaskFileListResponse);
 }
 
@@ -142,6 +144,14 @@ message ConfirmUploadBookPDFRequest {
 message ConfirmUploadBookPDFResponse {
 }
 
+message CheckBookExistRequest {
+  string id = 1;
+}
+
+message CheckBookExistResponse {
+  bool exist = 1;
+}
+
 message GetBookFileListRequest {
   string id       = 1;
   string password = 2;
@@ -201,6 +211,14 @@ message ArticlePDFTask {
   string oss_deep_analysis_pdf_processed = 14;
   string oss_all_in_one_pdf_processed    = 15;
   string file_share_text                 = 16;
+}
+
+message CheckArticlePDFTaskExistRequest {
+  string id = 1;
+}
+
+message CheckArticlePDFTaskExistResponse {
+  bool exist = 1;
 }
 
 message GetArticlePDFTaskFileListRequest {
