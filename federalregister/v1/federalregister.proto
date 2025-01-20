@@ -5,8 +5,52 @@ package federalregister.v1;
 import "google/protobuf/wrappers.proto";
 
 service FederalRegisterService {
+  rpc ListTopAgencies(ListTopAgenciesRequest) returns (ListTopAgenciesResponse);
+  rpc ListChildAgencies(ListChildAgenciesRequest) returns (ListChildAgenciesResponse);
+  rpc GetAgency(GetAgencyRequest) returns (GetAgencyResponse);
+
   rpc ListFederalRegisterArticles(ListFederalRegisterArticlesRequest) returns (ListFederalRegisterArticlesResponse);
   rpc GetFederalRegisterArticle(GetFederalRegisterArticleRequest) returns (GetFederalRegisterArticleResponse);
+}
+
+message ListTopAgenciesRequest {
+}
+
+message ListTopAgenciesResponse {
+  repeated TopAgency items = 1;
+}
+
+message TopAgency {
+  string              name_english   = 1;
+  string              name_chinese   = 2;
+  map<string, string> child_agencies = 3;
+}
+
+message ChildAgency {
+  string    name_english  = 1;
+  string    name_chinese  = 2;
+  TopAgency parent_agency = 3;
+}
+
+message ListChildAgenciesRequest {
+  string top_agency_name = 1;
+}
+
+message ListChildAgenciesResponse {
+  TopAgency top_agency = 1;
+}
+
+message GetAgencyRequest {
+  string name = 1;
+}
+
+message GetAgencyResponse {
+  string              name_english               = 1;
+  string              name_chinese               = 2;
+  bool                is_top                     = 3;
+  map<string, string> child_agencies             = 4;
+  string              parent_agency_name_english = 5;
+  string              parent_agency_name_chinese = 6;
 }
 
 message ListFederalRegisterArticlesRequest {
