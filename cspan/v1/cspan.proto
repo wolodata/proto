@@ -47,7 +47,7 @@ message CSPANArticleListItem {
   string              strong_related_summary_chinese = 10;
   // CSPAN 额外
   repeated string organizations = 11;
-  repeated string category      = 12;
+  string          category      = 12;
   string          format        = 13;
   string          location      = 14;
   repeated string tags          = 15;
@@ -109,7 +109,7 @@ message CSPANArticle {
   string              deep_analysis                            = 25;
   // CSPAN 额外
   repeated string organizations = 26;
-  repeated string category      = 27;
+  string          category      = 27;
   string          format        = 28;
   string          location      = 29;
   repeated string tags          = 30;
