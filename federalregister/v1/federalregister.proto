@@ -80,7 +80,7 @@ message ListFederalRegisterArticlesResponse {
 
 message FederalRegisterArticleListItem {
   string              id                             = 1;
-  map<string, string> agency_names                   = 2;
+  repeated AgencyInfo agency_infos                   = 2;
   string              title_chinese                  = 3;
   string              title_english                  = 4;
   string              preview_chinese                = 5;
@@ -128,9 +128,14 @@ message GetFederalRegisterArticleResponse {
   FederalRegisterArticle article = 1;
 }
 
+message AgencyInfo {
+  string name_english = 1;
+  string name_chinese = 2;
+}
+
 message FederalRegisterArticle {
   string              id                                       = 1;
-  map<string, string> agency_names                             = 2;
+  repeated AgencyInfo agency_infos                             = 2;
   string              original_url                             = 3;
   string              title_chinese                            = 4;
   string              title_english                            = 5;
