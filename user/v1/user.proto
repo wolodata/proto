@@ -53,6 +53,7 @@ message GetUserInfoResponse {
   string       nickname   = 4;
   uint64       created_at = 5;
   string       mobile     = 6;
+  uint64       expired_at = 7;
 }
 
 message ChangeNicknameRequest {
