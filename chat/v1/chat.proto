@@ -16,6 +16,7 @@ service ChatService {
 message StreamChatRequest {
   string                         article_id = 1;
   repeated ChatCompletionMessage prompts    = 2;
+  string                         model_id   = 3;
 }
 
 enum ChatCompletionMessageRole {

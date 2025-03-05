@@ -157,7 +157,8 @@ message StreamSummaryArticleResponse {
 }
 
 message GuessMyInterestedQuestionRequest {
-  string id = 1;
+  string id       = 1;
+  string model_id = 2;
 }
 
 message GuessMyInterestedQuestionResponse {
