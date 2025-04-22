@@ -10,73 +10,73 @@ service CSPANService {
 }
 
 message ListCSPANArticlesRequest {
-  repeated string           category_ids                             = 1;  // 类别英文，不传就是查所有
-  uint32                    page_number                              = 2;
-  uint32                    limit                                    = 3;
-  uint64                    start_time                               = 4;
-  uint64                    end_time                                 = 5;
-  string                    search_keyword                           = 6;
-  SearchRange               search_range                             = 7;
-  bool                      is_weak_keyword_related                  = 8;
-  bool                      is_strong_related                        = 9;  // 是否强相关（不区分有没有范畴）
-  repeated string           strong_related_categories                = 10;
-  repeated string           domain_ids                               = 11;  // 领域id，不传会查所有文章（包含没有被判断到现有领域的文章）
-  repeated string           topic_names                              = 12;  // 主题名字，不传会查所有文章（包含没有被判断到现有主题的文章）
-  bool                      strong_related_summary_chinese_not_empty = 13;  // 强相关中文总结不为空
-  google.protobuf.BoolValue strong_related_category_not_empty        = 14;  // 强相关范畴是否为空
+  repeated string category_ids = 1; // 类别英文，不传就是查所有
+  uint32 page_number = 2;
+  uint32 limit = 3;
+  uint64 start_time = 4;
+  uint64 end_time = 5;
+  string search_keyword = 6;
+  SearchRange search_range = 7;
+  bool is_weak_keyword_related = 8;
+  bool is_strong_related = 9; // 是否强相关（不区分有没有范畴）
+  repeated string strong_related_categories = 10;
+  repeated string domain_ids = 11; // 领域id，不传会查所有文章（包含没有被判断到现有领域的文章）
+  repeated string topic_names = 12; // 主题名字，不传会查所有文章（包含没有被判断到现有主题的文章）
+  bool strong_related_summary_chinese_not_empty = 13; // 强相关中文总结不为空
+  google.protobuf.BoolValue strong_related_category_not_empty = 14; // 强相关范畴是否为空
 }
 
 message ListCSPANArticlesResponse {
-  uint32                        total_count  = 1;
-  uint32                        page_size    = 2;
-  uint32                        total_page   = 3;
-  uint32                        current_page = 4;
-  repeated CSPANArticleListItem items        = 5;
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated CSPANArticleListItem items = 5;
 }
 
 message CSPANArticleListItem {
-  string              id                             = 1;
-  string              title_chinese                  = 2;
-  string              title_english                  = 3;
-  string              preview_chinese                = 4;
-  string              preview_english                = 5;
-  uint64              published_at                   = 6;
-  bool                is_weak_related                = 7;
-  repeated HitKeyword weak_keywords                  = 8;
-  string              strong_related_category        = 9;
-  string              strong_related_summary_chinese = 10;
+  string id = 1;
+  string title_chinese = 2;
+  string title_english = 3;
+  string preview_chinese = 4;
+  string preview_english = 5;
+  uint64 published_at = 6;
+  bool is_weak_related = 7;
+  repeated HitKeyword weak_keywords = 8;
+  string strong_related_category = 9;
+  string strong_related_summary_chinese = 10;
   // CSPAN 额外
   repeated string organizations = 11;
-  string          category      = 12;
-  string          format        = 13;
-  string          location      = 14;
-  repeated string tags          = 15;
+  string category = 12;
+  string format = 13;
+  string location = 14;
+  repeated string tags = 15;
 }
 
 message SubKeyword {
-  string sub_keyword       = 1;
+  string sub_keyword = 1;
   uint64 sub_keyword_count = 2;
 }
 
 message HitKeyword {
-  string              id           = 1;
-  uint64              category     = 2;
-  string              main         = 3;
-  uint64              main_count   = 4;
+  string id = 1;
+  uint64 category = 2;
+  string main = 3;
+  uint64 main_count = 4;
   repeated SubKeyword sub_keywords = 5;
-  bool                is_strong    = 6;
+  bool is_strong = 6;
 }
 
 enum SearchRange {
   SEARCH_RANGE_UNSPECIFIED = 0;
-  SEARCH_RANGE_ALL         = 1;
-  SEARCH_RANGE_TITLE       = 2;
-  SEARCH_RANGE_BODY        = 3;
+  SEARCH_RANGE_ALL = 1;
+  SEARCH_RANGE_TITLE = 2;
+  SEARCH_RANGE_BODY = 3;
 }
 
 message GetCSPANArticleRequest {
-  string id            = 1;
-  bool   replace_image = 2;
+  string id = 1;
+  bool replace_image = 2;
 }
 
 message GetCSPANArticleResponse {
@@ -84,33 +84,33 @@ message GetCSPANArticleResponse {
 }
 
 message CSPANArticle {
-  string              id                                       = 1;
-  string              original_url                             = 3;
-  string              title_chinese                            = 4;
-  string              title_english                            = 5;
-  uint64              published_at                             = 7;
-  string              html_chinese                             = 8;
-  string              html_english                             = 9;
-  string              text_chinese                             = 10;
-  string              text_english                             = 11;
-  bool                weak_keyword_processed                   = 12;
-  bool                weak_keyword_related                     = 13;
-  repeated HitKeyword weak_keywords                            = 14;
-  bool                strong_keyword_processed                 = 15;
-  bool                strong_keyword_related                   = 16;
-  HitKeyword          strong_keyword                           = 17;
-  bool                strong_related_processed                 = 18;
-  bool                strong_related                           = 19;
-  bool                strong_related_category_processed        = 20;
-  string              strong_related_category                  = 21;
-  string              summary_chinese                          = 22;
-  bool                strong_related_summary_chinese_processed = 23;
-  string              strong_related_summary_chinese           = 24;
-  string              deep_analysis                            = 25;
+  string id = 1;
+  string original_url = 3;
+  string title_chinese = 4;
+  string title_english = 5;
+  uint64 published_at = 7;
+  string html_chinese = 8;
+  string html_english = 9;
+  string text_chinese = 10;
+  string text_english = 11;
+  bool weak_keyword_processed = 12;
+  bool weak_keyword_related = 13;
+  repeated HitKeyword weak_keywords = 14;
+  bool strong_keyword_processed = 15;
+  bool strong_keyword_related = 16;
+  HitKeyword strong_keyword = 17;
+  bool strong_related_processed = 18;
+  bool strong_related = 19;
+  bool strong_related_category_processed = 20;
+  string strong_related_category = 21;
+  string summary_chinese = 22;
+  bool strong_related_summary_chinese_processed = 23;
+  string strong_related_summary_chinese = 24;
+  string deep_analysis = 25;
   // CSPAN 额外
   repeated string organizations = 26;
-  string          category      = 27;
-  string          format        = 28;
-  string          location      = 29;
-  repeated string tags          = 30;
+  string category = 27;
+  string format = 28;
+  string location = 29;
+  repeated string tags = 30;
 }

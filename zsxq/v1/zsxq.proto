@@ -29,50 +29,47 @@ service ZsxqService {
   rpc GetArticlePDFTaskFileList(GetArticlePDFTaskFileListRequest) returns (GetArticlePDFTaskFileListResponse);
 }
 
-message ListBookCategoriesRequest {
-}
+message ListBookCategoriesRequest {}
 
 message ListBookCategoriesResponse {
   repeated BookCategory items = 1;
 }
 
 message BookCategory {
-  string id            = 1;
-  string name          = 2;
-  uint64 position      = 3;
+  string id = 1;
+  string name = 2;
+  uint64 position = 3;
   string cover_pdf_url = 4;
 }
 
 message CreateBookCategoryRequest {
-  string name          = 1;
+  string name = 1;
   string cover_pdf_url = 2;
 }
 
-message CreateBookCategoryResponse {
-}
+message CreateBookCategoryResponse {}
 
 message UpdateBookCategoryRequest {
-  string id            = 1;
-  string name          = 2;
-  uint64 position      = 3;
+  string id = 1;
+  string name = 2;
+  uint64 position = 3;
   string cover_pdf_url = 4;
 }
 
-message UpdateBookCategoryResponse {
-}
+message UpdateBookCategoryResponse {}
 
 message ListBooksRequest {
   uint32 page_number = 1;
-  uint32 limit       = 2;
+  uint32 limit = 2;
   string category_id = 3;
 }
 
 message ListBooksResponse {
-  uint32        total_count  = 1;
-  uint32        page_size    = 2;
-  uint32        total_page   = 3;
-  uint32        current_page = 4;
-  repeated Book items        = 5;
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated Book items = 5;
 }
 
 message GetBookRequest {
@@ -84,65 +81,61 @@ message GetBookResponse {
 }
 
 message BookPDFs {
-  bool   raw_uploaded         = 1;
-  bool   raw_processed        = 2;
-  bool   translated_uploaded  = 3;
-  bool   translated_processed = 4;
-  bool   summary_uploaded     = 5;
-  bool   summary_processed    = 6;
-  bool   all_in_one_processed = 7;
-  string error_reason         = 8;
-  string file_share_text      = 9;
+  bool raw_uploaded = 1;
+  bool raw_processed = 2;
+  bool translated_uploaded = 3;
+  bool translated_processed = 4;
+  bool summary_uploaded = 5;
+  bool summary_processed = 6;
+  bool all_in_one_processed = 7;
+  string error_reason = 8;
+  string file_share_text = 9;
 }
 
 message Book {
-  string   id          = 1;
-  string   name        = 2;
-  bool     is_chinese  = 3;
-  string   category_id = 4;
-  uint64   created_at  = 5;
-  BookPDFs book_pdfs   = 6;
+  string id = 1;
+  string name = 2;
+  bool is_chinese = 3;
+  string category_id = 4;
+  uint64 created_at = 5;
+  BookPDFs book_pdfs = 6;
 }
 
 message CreateBookRequest {
-  string name        = 1;
-  bool   is_chinese  = 2;
+  string name = 1;
+  bool is_chinese = 2;
   string category_id = 3;
 }
 
-message CreateBookResponse {
-}
+message CreateBookResponse {}
 
 message DeleteBookRequest {
   string id = 1;
 }
 
-message DeleteBookResponse {
-}
+message DeleteBookResponse {}
 
 enum BookPDFType {
   BOOK_PDF_TYPE_UNSPECIFIED = 0;
-  BOOK_PDF_TYPE_RAW         = 1;
-  BOOK_PDF_TYPE_TRANSLATED  = 2;
-  BOOK_PDF_TYPE_SUMMARY     = 3;
-  BOOK_PDF_TYPE_ALL_IN_ONE  = 4;
+  BOOK_PDF_TYPE_RAW = 1;
+  BOOK_PDF_TYPE_TRANSLATED = 2;
+  BOOK_PDF_TYPE_SUMMARY = 3;
+  BOOK_PDF_TYPE_ALL_IN_ONE = 4;
 }
 
 message DeleteBookPDFRequest {
-  string               id             = 1;
+  string id = 1;
   repeated BookPDFType book_pdf_types = 2;
 }
 
-message DeleteBookPDFResponse {
-}
+message DeleteBookPDFResponse {}
 
 message ConfirmUploadBookPDFRequest {
-  string      id            = 1;
+  string id = 1;
   BookPDFType book_pdf_type = 2;
 }
 
-message ConfirmUploadBookPDFResponse {
-}
+message ConfirmUploadBookPDFResponse {}
 
 message CheckBookExistRequest {
   string id = 1;
@@ -153,37 +146,36 @@ message CheckBookExistResponse {
 }
 
 message GetBookFileListRequest {
-  string id       = 1;
+  string id = 1;
   string password = 2;
 }
 
 message GetBookFileListResponse {
-  string id            = 1;
-  string name          = 2;
-  bool   is_chinese    = 3;
-  string category_id   = 4;
+  string id = 1;
+  string name = 2;
+  bool is_chinese = 3;
+  string category_id = 4;
   string category_name = 5;
-  uint64 created_at    = 6;
+  uint64 created_at = 6;
 }
 
 message GeneratePDFTaskForArticlesRequest {
-  repeated string ids = 1;  // 文章id列表
+  repeated string ids = 1; // 文章id列表
 }
 
-message GeneratePDFTaskForArticlesResponse {
-}
+message GeneratePDFTaskForArticlesResponse {}
 
 message ListArticlePDFTasksRequest {
   uint32 page_number = 1;
-  uint32 limit       = 2;
+  uint32 limit = 2;
 }
 
 message ListArticlePDFTasksResponse {
-  uint32                  total_count  = 1;
-  uint32                  page_size    = 2;
-  uint32                  total_page   = 3;
-  uint32                  current_page = 4;
-  repeated ArticlePDFTask items        = 5;
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated ArticlePDFTask items = 5;
 }
 
 message GetArticlePDFTaskRequest {
@@ -195,22 +187,22 @@ message GetArticlePDFTaskResponse {
 }
 
 message ArticlePDFTask {
-  string id                              = 1;
-  uint64 task_created_at                 = 2;
-  bool   is_chinese                      = 3;
-  bool   processed                       = 4;
-  string error_reason                    = 5;
-  string oss_raw_html                    = 6;
-  string oss_raw_pdf                     = 7;
-  string oss_raw_pdf_processed           = 8;
-  string oss_translated_html             = 9;
-  string oss_translated_pdf              = 10;
-  string oss_translated_pdf_processed    = 11;
-  string oss_deep_analysis_html          = 12;
-  string oss_deep_analysis_pdf           = 13;
+  string id = 1;
+  uint64 task_created_at = 2;
+  bool is_chinese = 3;
+  bool processed = 4;
+  string error_reason = 5;
+  string oss_raw_html = 6;
+  string oss_raw_pdf = 7;
+  string oss_raw_pdf_processed = 8;
+  string oss_translated_html = 9;
+  string oss_translated_pdf = 10;
+  string oss_translated_pdf_processed = 11;
+  string oss_deep_analysis_html = 12;
+  string oss_deep_analysis_pdf = 13;
   string oss_deep_analysis_pdf_processed = 14;
-  string oss_all_in_one_pdf_processed    = 15;
-  string file_share_text                 = 16;
+  string oss_all_in_one_pdf_processed = 15;
+  string file_share_text = 16;
 }
 
 message CheckArticlePDFTaskExistRequest {
@@ -222,18 +214,18 @@ message CheckArticlePDFTaskExistResponse {
 }
 
 message GetArticlePDFTaskFileListRequest {
-  string id       = 1;
+  string id = 1;
   string password = 2;
 }
 
 message GetArticlePDFTaskFileListResponse {
-  bool   is_chinese                      = 1;
-  string source_chinese_name             = 2;
-  string title_chinese                   = 3;
-  string title_english                   = 4;
-  uint64 published_at                    = 5;
-  string oss_raw_pdf_processed           = 6;
-  string oss_translated_pdf_processed    = 7;
+  bool is_chinese = 1;
+  string source_chinese_name = 2;
+  string title_chinese = 3;
+  string title_english = 4;
+  uint64 published_at = 5;
+  string oss_raw_pdf_processed = 6;
+  string oss_translated_pdf_processed = 7;
   string oss_deep_analysis_pdf_processed = 8;
-  string oss_all_in_one_pdf_processed    = 9;
+  string oss_all_in_one_pdf_processed = 9;
 }

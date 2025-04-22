@@ -32,18 +32,17 @@ service AssistantService {
   }
 }
 
-message ListAssistantsRequest {
-}
+message ListAssistantsRequest {}
 
 message ListAssistantsResponse {
   repeated Assistant assistants = 1;
 }
 
 message Assistant {
-  string id           = 1;
-  string name         = 2;
-  string description  = 3;
-  string image_url    = 4;
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string image_url = 4;
   string welcome_text = 5;
 }
 
@@ -60,17 +59,17 @@ message StartConversationRequest {
 }
 
 message StartConversationResponse {
-  string conversation_id = 1;  // 新会话的ID
+  string conversation_id = 1; // 新会话的ID
 }
 
 message SendMessageRequest {
-  string conversation_id = 1;  // 会话ID
-  string message         = 2;  // 发送的消息
+  string conversation_id = 1; // 会话ID
+  string message = 2; // 发送的消息
 }
 
 message StreamSendMessageRequest {
-  string conversation_id = 1;  // 会话ID
-  string message         = 2;  // 发送的消息
+  string conversation_id = 1; // 会话ID
+  string message = 2; // 发送的消息
 }
 
 message SendMessageResponse {
@@ -86,85 +85,80 @@ message GetConversationRequest {
 }
 
 message GetConversationResponse {
-  repeated Message messages   = 1;
-  uint64           updated_at = 2;
+  repeated Message messages = 1;
+  uint64 updated_at = 2;
 }
 
 message ListHistoriesRequest {
-  uint32 page_number  = 1;
-  uint32 limit        = 2;
+  uint32 page_number = 1;
+  uint32 limit = 2;
   string assistant_id = 3;
 }
 
 message ListHistoriesResponse {
-  uint32           total_count  = 1;
-  uint32           page_size    = 2;
-  uint32           total_page   = 3;
-  uint32           current_page = 4;
-  repeated History items        = 5;
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated History items = 5;
 }
 
 message History {
-  string           id           = 1;
-  string           assistant_id = 2;
-  repeated Message messages     = 3;
-  uint64           updated_at   = 4;
+  string id = 1;
+  string assistant_id = 2;
+  repeated Message messages = 3;
+  uint64 updated_at = 4;
 }
 
 message DeleteHistoriesRequest {
   repeated string ids = 1;
 }
 
-message DeleteHistoriesResponse {
-}
+message DeleteHistoriesResponse {}
 
 message Message {
-  bool   is_user    = 1;
-  string content    = 2;
+  bool is_user = 1;
+  string content = 2;
   uint64 created_at = 3;
 }
 
-message ListAssistantsForBackendRequest {
-}
+message ListAssistantsForBackendRequest {}
 
 message ListAssistantsForBackendResponse {
   repeated AssistantForBackend assistants = 1;
 }
 
 message AssistantForBackend {
-  Assistant assistant     = 1;
-  string    prompt_system = 2;
-  uint64    position      = 3;
+  Assistant assistant = 1;
+  string prompt_system = 2;
+  uint64 position = 3;
 }
 
 message CreateAssistantRequest {
-  string name          = 1;
-  string description   = 2;
-  string image_url     = 3;
-  string welcome_text  = 4;
+  string name = 1;
+  string description = 2;
+  string image_url = 3;
+  string welcome_text = 4;
   string prompt_system = 5;
-  uint64 position      = 6;
+  uint64 position = 6;
 }
 
-message CreateAssistantResponse {
-}
+message CreateAssistantResponse {}
 
 message UpdateAssistantRequest {
-  string id            = 1;
-  string name          = 2;
-  string description   = 3;
-  string image_url     = 4;
-  string welcome_text  = 5;
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string image_url = 4;
+  string welcome_text = 5;
   string prompt_system = 6;
-  uint64 position      = 7;
+  uint64 position = 7;
 }
 
-message UpdateAssistantResponse {
-}
+message UpdateAssistantResponse {}
 
 message DeleteAssistantRequest {
   string id = 1;
 }
 
-message DeleteAssistantResponse {
-}
+message DeleteAssistantResponse {}

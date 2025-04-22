@@ -13,41 +13,40 @@ service TopicService {
 
   // 后台
   rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
 }
 
-message ListDomainsRequest {
-}
+message ListDomainsRequest {}
 
 message Domain {
-  string id    = 1;
-  string name  = 2;
+  string id = 1;
+  string name = 2;
   uint64 order = 3;
 }
 
@@ -60,13 +59,13 @@ message ListTopicsRequest {
 }
 
 message Topic {
-  string id         = 1;
-  Domain domain     = 2;
-  string topic      = 3;
-  string main       = 4;
+  string id = 1;
+  Domain domain = 2;
+  string topic = 3;
+  string main = 4;
   uint64 main_count = 5;
-  string sub        = 6;
-  uint64 sub_count  = 7;
+  string sub = 6;
+  uint64 sub_count = 7;
 }
 
 message ListTopicsResponse {
@@ -75,7 +74,7 @@ message ListTopicsResponse {
 
 message ListHitByTopicRequest {
   google.type.Date start_date = 1;
-  google.type.Date end_date   = 2;
+  google.type.Date end_date = 2;
 }
 
 message ListHitByTopicResponse {
@@ -84,16 +83,16 @@ message ListHitByTopicResponse {
 
 enum ListHitByDateRange {
   LIST_HIT_BY_DATE_RANGE_UNSPECIFIED = 0;
-  LIST_HIT_BY_DATE_RANGE_LAST_WEEK   = 1;
-  LIST_HIT_BY_DATE_RANGE_LAST_MONTH  = 2;
-  LIST_HIT_BY_DATE_RANGE_LAST_YEAR   = 3;
+  LIST_HIT_BY_DATE_RANGE_LAST_WEEK = 1;
+  LIST_HIT_BY_DATE_RANGE_LAST_MONTH = 2;
+  LIST_HIT_BY_DATE_RANGE_LAST_YEAR = 3;
 }
 
 message ListHitByDateRequest {
-  ListHitByDateRange range      = 1;  // 范围和开始时间结束时间二选一
-  google.type.Date   start_date = 2;
-  google.type.Date   end_date   = 3;
-  string             topic_name = 4;
+  ListHitByDateRange range = 1; // 范围和开始时间结束时间二选一
+  google.type.Date start_date = 2;
+  google.type.Date end_date = 3;
+  string topic_name = 4;
 }
 
 message ListHitByDateResponse {
@@ -101,7 +100,7 @@ message ListHitByDateResponse {
 }
 
 message CreateDomainRequest {
-  string name  = 2;
+  string name = 2;
   uint64 order = 3;
 }
 
@@ -113,25 +112,23 @@ message DeleteDomainRequest {
   string id = 1;
 }
 
-message DeleteDomainResponse {
-}
+message DeleteDomainResponse {}
 
 message UpdateDomainRequest {
-  string id    = 1;
-  string name  = 2;
+  string id = 1;
+  string name = 2;
   uint64 order = 3;
 }
 
-message UpdateDomainResponse {
-}
+message UpdateDomainResponse {}
 
 message CreateTopicRequest {
-  string domain_id  = 2;
-  string topic      = 3;
-  string main       = 4;
+  string domain_id = 2;
+  string topic = 3;
+  string main = 4;
   uint64 main_count = 5;
-  string sub        = 6;
-  uint64 sub_count  = 7;
+  string sub = 6;
+  uint64 sub_count = 7;
 }
 
 message CreateTopicResponse {
@@ -142,28 +139,25 @@ message DeleteTopicRequest {
   string id = 1;
 }
 
-message DeleteTopicResponse {
-}
+message DeleteTopicResponse {}
 
 message UpdateTopicRequest {
-  string id         = 1;
-  string domain_id  = 2;
-  string topic      = 3;
-  string main       = 4;
+  string id = 1;
+  string domain_id = 2;
+  string topic = 3;
+  string main = 4;
   uint64 main_count = 5;
-  string sub        = 6;
-  uint64 sub_count  = 7;
+  string sub = 6;
+  uint64 sub_count = 7;
 }
 
-message UpdateTopicResponse {
-}
+message UpdateTopicResponse {}
 
 message RedeployTopicRequest {
-  uint64          start_time = 1;
-  uint64          end_time   = 2;
-  repeated string domain_ids = 3;  // 填了才会部署 二选一
-  repeated string topic_ids  = 4;  // 填了才会部署 二选一
+  uint64 start_time = 1;
+  uint64 end_time = 2;
+  repeated string domain_ids = 3; // 填了才会部署 二选一
+  repeated string topic_ids = 4; // 填了才会部署 二选一
 }
 
-message RedeployTopicResponse {
-}
+message RedeployTopicResponse {}

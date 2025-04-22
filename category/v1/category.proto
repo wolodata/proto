@@ -9,17 +9,17 @@ service CategoryService {
 
   // 后台
   rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
 }
 
 message ListCategoriesRequest {
@@ -31,53 +31,50 @@ message ListCategoriesResponse {
 }
 
 message Category {
-  string id              = 1;
-  string color           = 2;
-  string description     = 3;
-  uint64 order           = 4;
-  string endpoint        = 5;
+  string id = 1;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
   string endpoint_ref_id = 6;
-  float  temperature     = 7;
-  float  top_p           = 8;
-  string prompt_system   = 9;
-  string prompt_user     = 10;
+  float temperature = 7;
+  float top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
 message CreateCategoryRequest {
-  string id              = 1;
-  string color           = 2;
-  string description     = 3;
-  uint64 order           = 4;
-  string endpoint        = 5;
+  string id = 1;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
   string endpoint_ref_id = 6;
-  float  temperature     = 7;
-  float  top_p           = 8;
-  string prompt_system   = 9;
-  string prompt_user     = 10;
+  float temperature = 7;
+  float top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
-message CreateCategoryResponse {
-}
+message CreateCategoryResponse {}
 
 message DeleteCategoryRequest {
   string id = 1;
 }
 
-message DeleteCategoryResponse {
-}
+message DeleteCategoryResponse {}
 
 message UpdateCategoryRequest {
-  string id              = 1;
-  string color           = 2;
-  string description     = 3;
-  uint64 order           = 4;
-  string endpoint        = 5;
+  string id = 1;
+  string color = 2;
+  string description = 3;
+  uint64 order = 4;
+  string endpoint = 5;
   string endpoint_ref_id = 6;
-  float  temperature     = 7;
-  float  top_p           = 8;
-  string prompt_system   = 9;
-  string prompt_user     = 10;
+  float temperature = 7;
+  float top_p = 8;
+  string prompt_system = 9;
+  string prompt_user = 10;
 }
 
-message UpdateCategoryResponse {
-}
+message UpdateCategoryResponse {}

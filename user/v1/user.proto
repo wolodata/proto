@@ -6,113 +6,107 @@ import "permission/v1/permission.proto";
 import "role/v1/role.proto";
 
 service UserService {
-  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {};
-  rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {};
-  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {};
-  rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {};
-  rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {};
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+  rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {}
+  rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {}
+  rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {}
+  rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {}
 
   // 后台
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc UpdateUserRole(UpdateUserRoleRequest) returns (UpdateUserRoleResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
   rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {
-    option (permission.v1.is_backend)   = true;
+    option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  };
+  }
 }
 
-message GetUserInfoRequest {
-}
+message GetUserInfoRequest {}
 
 message GetUserInfoResponse {
-  string       user_id    = 1;
-  string       username   = 2;
-  role.v1.Role role       = 3;
-  string       nickname   = 4;
-  uint64       created_at = 5;
-  string       mobile     = 6;
-  uint64       expired_at = 7;
+  string user_id = 1;
+  string username = 2;
+  role.v1.Role role = 3;
+  string nickname = 4;
+  uint64 created_at = 5;
+  string mobile = 6;
+  uint64 expired_at = 7;
 }
 
 message ChangeNicknameRequest {
   string nickname = 1;
 }
 
-message ChangeNicknameResponse {
-}
+message ChangeNicknameResponse {}
 
 message ChangePasswordRequest {
   string password = 1;
 }
 
-message ChangePasswordResponse {
-}
+message ChangePasswordResponse {}
 
 message BindMobileRequest {
   string mobile = 1;
 }
 
-message BindMobileResponse {
-}
+message BindMobileResponse {}
 
-message UnbindMobileRequest {
-}
+message UnbindMobileRequest {}
 
-message UnbindMobileResponse {
-}
+message UnbindMobileResponse {}
 
 message ListUsersRequest {
   uint32 page_number = 1;
-  uint32 limit       = 2;
+  uint32 limit = 2;
 }
 
 message ListUsersResponse {
-  uint32                       total_count  = 1;
-  uint32                       page_size    = 2;
-  uint32                       total_page   = 3;
-  uint32                       current_page = 4;
-  repeated UserWithDescription items        = 5;
+  uint32 total_count = 1;
+  uint32 page_size = 2;
+  uint32 total_page = 3;
+  uint32 current_page = 4;
+  repeated UserWithDescription items = 5;
 }
 
 message UserWithDescription {
-  string       user_id     = 1;
-  string       username    = 2;
-  role.v1.Role role        = 3;
-  bool         enabled     = 4;
-  string       nickname    = 5;
-  string       description = 6;
-  uint64       created_at  = 7;
-  string       mobile      = 8;
+  string user_id = 1;
+  string username = 2;
+  role.v1.Role role = 3;
+  bool enabled = 4;
+  string nickname = 5;
+  string description = 6;
+  uint64 created_at = 7;
+  string mobile = 8;
 }
 
 message CreateUserRequest {
-  string       username    = 1;
-  string       password    = 2;
-  role.v1.Role role        = 3;
-  string       nickname    = 4;
-  string       description = 5;
+  string username = 1;
+  string password = 2;
+  role.v1.Role role = 3;
+  string nickname = 4;
+  string description = 5;
 }
 
 message CreateUserResponse {
@@ -120,42 +114,37 @@ message CreateUserResponse {
 }
 
 message AdminUpdateUserPasswordRequest {
-  string user_id  = 1;
+  string user_id = 1;
   string password = 2;
 }
 
-message AdminUpdateUserPasswordResponse {
-}
+message AdminUpdateUserPasswordResponse {}
 
 message UpdateUserRoleRequest {
-  string       user_id = 1;
-  role.v1.Role role    = 2;
+  string user_id = 1;
+  role.v1.Role role = 2;
 }
 
-message UpdateUserRoleResponse {
-}
+message UpdateUserRoleResponse {}
 
 message UpdateUserStatusRequest {
   string user_id = 1;
-  bool   enabled = 2;
+  bool enabled = 2;
 }
 
-message UpdateUserStatusResponse {
-}
+message UpdateUserStatusResponse {}
 
 message AdminUpdateUserNicknameAndDescriptionRequest {
-  string user_id     = 1;
-  string nickname    = 2;
+  string user_id = 1;
+  string nickname = 2;
   string description = 3;
 }
 
-message AdminUpdateUserNicknameAndDescriptionResponse {
-}
+message AdminUpdateUserNicknameAndDescriptionResponse {}
 
 message AdminUpdateUserMobileRequest {
   string user_id = 1;
-  string mobile  = 2;
+  string mobile = 2;
 }
 
-message AdminUpdateUserMobileResponse {
-}
+message AdminUpdateUserMobileResponse {}
