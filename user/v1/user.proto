@@ -11,6 +11,7 @@ service UserService {
   rpc ChangePassword(ChangePasswordRequest) returns (ChangePasswordResponse) {}
   rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {}
   rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {}
+  rpc GetPermissionList(GetPermissionListRequest) returns (GetPermissionListResponse) {}
 
   // 后台
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
@@ -76,6 +77,14 @@ message BindMobileResponse {}
 message UnbindMobileRequest {}
 
 message UnbindMobileResponse {}
+
+message GetPermissionListRequest {}
+
+message GetPermissionListResponse {
+  repeated string function_sets_enabled = 1;
+  repeated string llm_models_enabled = 2;
+  repeated string llm_models_disabled = 3;
+}
 
 message ListUsersRequest {
   uint32 page_number = 1;
