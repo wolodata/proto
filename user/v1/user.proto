@@ -82,8 +82,11 @@ message GetPermissionListRequest {}
 
 message GetPermissionListResponse {
   repeated string function_sets_enabled = 1;
-  repeated string llm_models_enabled = 2;
-  repeated string llm_models_disabled = 3;
+  repeated string llm_models_disabled = 2;
+  uint64 count_limit_daily_llm_talk_right_side = 3;
+  uint64 count_limit_keyword = 4;
+  uint64 count_limit_category = 5;
+  uint64 count_limit_daily_free_ask = 6;
 }
 
 message ListUsersRequest {
