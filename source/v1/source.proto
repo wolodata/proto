@@ -95,8 +95,6 @@ message CreateSourceRequest {
   bool is_chinese = 3;
   bool allow_image = 4;
   bool is_show = 5;
-  string folder_id = 6; // 所属目录ID，默认为"__UNASSIGNED__"
-  uint32 order_index = 7; // 在目录中的排序位置，默认为0
 }
 
 message CreateSourceResponse {}
