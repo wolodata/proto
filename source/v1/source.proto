@@ -52,14 +52,14 @@ service SourceService {
   // 获取完整目录树结构（包含所有目录和信源）
   rpc GetFolderTree(GetFolderTreeRequest) returns (GetFolderTreeResponse) {}
 
-  // 移动项目（目录或信源）到其他目录
-  rpc MoveItemToFolder(MoveItemToFolderRequest) returns (MoveItemToFolderResponse) {
+  // 移动信源到其他目录
+  rpc MoveSourceToFolder(MoveSourceToFolderRequest) returns (MoveSourceToFolderResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
 
   // 批量调整同一目录内项目（目录或信源）的排序
-  rpc UpdateItemsOrderInFolder(UpdateItemsOrderInFolderRequest) returns (UpdateItemsOrderInFolderResponse) {
+  rpc UpdateItemsOrderInSameFolder(UpdateItemsOrderInSameFolderRequest) returns (UpdateItemsOrderInSameFolderResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
@@ -185,18 +185,17 @@ message GetFolderTreeResponse {
   repeated FolderTreeNode nodes = 1; // 树形结构的根节点列表
 }
 
-// 移动项目到其他目录
-message MoveItemToFolderRequest {
-  ItemType type = 1;
-  string item_id = 2; // 要移动的项目ID（目录ID或信源ID）
-  string target_parent_id = 3; // 目标父目录ID：空字符串表示移到根目录，"__UNASSIGNED__"表示移到未分类
+// 移动信源到其他目录
+message MoveSourceToFolderRequest {
+  string source_id = 1; // 要移动的信源ID
+  string target_folder_id = 2; // 目标目录ID：空字符串表示移到根目录，"__UNASSIGNED__"表示移到未分类
   // 注意：移动后默认放在目标目录的最后，如需调整排序请使用 UpdateItemsOrderInFolder
 }
 
-message MoveItemToFolderResponse {}
+message MoveSourceToFolderResponse {}
 
 // 批量调整同一目录内项目的排序
-message UpdateItemsOrderInFolderRequest {
+message UpdateItemsOrderInSameFolderRequest {
   message ItemOrder {
     ItemType type = 1;
     string item_id = 2;
@@ -207,4 +206,4 @@ message UpdateItemsOrderInFolderRequest {
   repeated ItemOrder items = 2; // 新的排序列表
 }
 
-message UpdateItemsOrderInFolderResponse {}
+message UpdateItemsOrderInSameFolderResponse {}
