@@ -5,89 +5,67 @@ package source.v1;
 import "permission/v1/permission.proto";
 
 service SourceService {
-  rpc ListSourceTypes(ListSourceTypesRequest) returns (ListSourceTypesResponse);
-  rpc ListSourceCategories(ListSourceCategoriesRequest) returns (ListSourceCategoriesResponse);
   rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
   rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
 
   // 后台
-  rpc CreateSourceType(CreateSourceTypeRequest) returns (CreateSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteSourceType(DeleteSourceTypeRequest) returns (DeleteSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateSourceType(UpdateSourceTypeRequest) returns (UpdateSourceTypeResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
 
-  rpc CreateSourceCategory(CreateSourceCategoryRequest) returns (CreateSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteSourceCategory(DeleteSourceCategoryRequest) returns (DeleteSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateSourceCategory(UpdateSourceCategoryRequest) returns (UpdateSourceCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-
+  // 创建信源
   rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
+
+  // 删除信源
   rpc DeleteSource(DeleteSourceRequest) returns (DeleteSourceResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
+
+  // 更新信源
   rpc UpdateSource(UpdateSourceRequest) returns (UpdateSourceResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
 
-  rpc ListSourcesUpdatedAt(ListSourcesUpdatedAtRequest) returns (ListSourcesUpdatedAtResponse) {
+  // 创建目录
+  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  }
+
+  // 更新目录
+  rpc UpdateFolder(UpdateFolderRequest) returns (UpdateFolderResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  }
+
+  // 删除目录
+  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  }
+
+  // 获取目录
+  rpc GetFolder(GetFolderRequest) returns (GetFolderResponse) {}
+
+  // 获取完整目录树结构（包含所有目录和信源）
+  rpc GetFolderTree(GetFolderTreeRequest) returns (GetFolderTreeResponse) {}
+
+  // 移动项目（目录或信源）到其他目录
+  rpc MoveItemToFolder(MoveItemToFolderRequest) returns (MoveItemToFolderResponse) {
+    option (permission.v1.is_backend) = true;
+    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
+  }
+
+  // 批量调整同一目录内项目（目录或信源）的排序
+  rpc UpdateItemsOrderInFolder(UpdateItemsOrderInFolderRequest) returns (UpdateItemsOrderInFolderResponse) {
     option (permission.v1.is_backend) = true;
     option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
   }
 }
 
-message ListSourceTypesRequest {}
-
-message ListSourceTypesResponse {
-  repeated SourceType source_types = 1;
-}
-
-message SourceType {
-  string id = 1;
-  string name = 2;
-  uint64 position = 3;
-}
-
-message ListSourceCategoriesRequest {
-  string source_type_id = 1;
-}
-
-message ListSourceCategoriesResponse {
-  repeated SourceCategory source_categories = 1;
-}
-
-message SourceCategory {
-  string id = 1;
-  string name = 2;
-  uint64 position = 3;
-  SourceType source_type = 4;
-}
-
-message ListSourcesRequest {
-  string source_type_id = 1;
-  string source_category_id = 2;
-  bool include_not_show = 3;
-}
+message ListSourcesRequest {}
 
 message ListSourcesResponse {
   repeated Source sources = 1;
@@ -105,64 +83,20 @@ message Source {
   string id = 1;
   string name_chinese = 2;
   bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
-  SourceType source_type = 6;
-  SourceCategory source_category = 7;
-  bool is_show = 8;
+  bool allow_image = 4;
+  bool is_show = 5;
+  string folder_id = 6; // 所属目录ID："__ROOT__"表示根目录，"__UNASSIGNED__"表示未分类
+  int32 order_index = 7; // 在目录中的排序位置
 }
-
-message CreateSourceTypeRequest {
-  string name = 1;
-  uint64 position = 2;
-}
-
-message CreateSourceTypeResponse {}
-
-message DeleteSourceTypeRequest {
-  string id = 1;
-}
-
-message DeleteSourceTypeResponse {}
-
-message UpdateSourceTypeRequest {
-  string id = 1;
-  string name = 2;
-  uint64 position = 3;
-}
-
-message UpdateSourceTypeResponse {}
-
-message CreateSourceCategoryRequest {
-  string source_type_id = 1;
-  string name = 2;
-  uint64 position = 3;
-}
-
-message CreateSourceCategoryResponse {}
-
-message DeleteSourceCategoryRequest {
-  string id = 1;
-}
-
-message DeleteSourceCategoryResponse {}
-
-message UpdateSourceCategoryRequest {
-  string id = 1;
-  string source_type_id = 2;
-  string name = 3;
-  uint64 position = 4;
-}
-
-message UpdateSourceCategoryResponse {}
 
 message CreateSourceRequest {
   string id = 1;
   string name_chinese = 2;
   bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
-  string source_category_id = 6;
+  bool allow_image = 4;
+  bool is_show = 5;
+  string folder_id = 6; // 所属目录ID，默认为"__UNASSIGNED__"
+  int32 order_index = 7; // 在目录中的排序位置，默认为0
 }
 
 message CreateSourceResponse {}
@@ -177,24 +111,109 @@ message UpdateSourceRequest {
   string id = 1;
   string name_chinese = 2;
   bool is_chinese = 3;
-  uint64 position = 4;
-  bool allow_image = 5;
-  string source_category_id = 6;
-  bool is_show = 7;
+  bool allow_image = 4;
+  bool is_show = 5;
+  string folder_id = 6; // 所属目录ID
+  int32 order_index = 7; // 在目录中的排序位置
 }
 
 message UpdateSourceResponse {}
 
-message ListSourcesUpdatedAtRequest {}
+// ========== 目录相关消息定义 ==========
 
-message ListSourcesUpdatedAtResponse {
-  repeated SourceUpdatedAt items = 1;
+// 项目类型枚举（目录或信源）
+enum ItemType {
+  ITEM_TYPE_UNSPECIFIED = 0;
+  ITEM_TYPE_FOLDER = 1; // 目录
+  ITEM_TYPE_SOURCE = 2; // 信源
 }
 
-message SourceUpdatedAt {
-  Source source = 1;
-  uint64 updated_at = 2;
-  string link = 3;
-  string title = 4;
-  uint64 published_at = 5;
+// 目录（文件夹）
+message Folder {
+  string id = 1;
+  string name = 2;
+  string parent_id = 3; // 父目录ID，"__ROOT__"表示根目录
+  int32 order_index = 4; // 在父目录中的排序位置
+  int64 created_at = 5; // 创建时间（Unix时间戳）
+  int64 updated_at = 6; // 更新时间（Unix时间戳）
 }
+
+// 目录树节点（用于返回树结构）
+message FolderTreeNode {
+  ItemType type = 1;
+  oneof item {
+    Folder folder = 2; // type=FOLDER时有值
+    Source source = 3; // type=SOURCE时有值
+  }
+  repeated FolderTreeNode children = 4; // 子节点（仅当type=FOLDER时有值）
+  int32 order_index = 5; // 排序位置
+}
+
+// 创建目录
+message CreateFolderRequest {
+  string name = 1;
+  string parent_id = 2; // 父目录ID，"__ROOT__"表示在根目录创建
+}
+
+message CreateFolderResponse {
+  Folder folder = 1;
+}
+
+// 更新目录
+message UpdateFolderRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message UpdateFolderResponse {
+  Folder folder = 1;
+}
+
+// 删除目录
+message DeleteFolderRequest {
+  string id = 1;
+  bool force = 2; // 是否强制删除（删除包含内容的目录）
+}
+
+message DeleteFolderResponse {}
+
+// 获取目录详情
+message GetFolderRequest {
+  string id = 1;
+}
+
+message GetFolderResponse {
+  Folder folder = 1;
+  repeated FolderTreeNode children = 2; // 该目录下的直接子项（子目录和信源）
+}
+
+// 获取完整目录树
+message GetFolderTreeRequest {}
+
+message GetFolderTreeResponse {
+  repeated FolderTreeNode nodes = 1; // 树形结构的根节点列表
+}
+
+// 移动项目到其他目录
+message MoveItemToFolderRequest {
+  ItemType type = 1;
+  string item_id = 2; // 要移动的项目ID（目录ID或信源ID）
+  string target_parent_id = 3; // 目标父目录ID："__ROOT__"表示移到根目录，"__UNASSIGNED__"表示移到未分类
+  // 注意：移动后默认放在目标目录的最后，如需调整排序请使用 UpdateItemsOrderInFolder
+}
+
+message MoveItemToFolderResponse {}
+
+// 批量调整同一目录内项目的排序
+message UpdateItemsOrderInFolderRequest {
+  message ItemOrder {
+    ItemType type = 1;
+    string item_id = 2;
+    int32 order_index = 3;
+  }
+
+  string parent_id = 1; // 父目录ID（所有项目必须在同一父目录下）
+  repeated ItemOrder items = 2; // 新的排序列表
+}
+
+message UpdateItemsOrderInFolderResponse {}
