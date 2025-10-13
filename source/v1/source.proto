@@ -148,7 +148,7 @@ message FolderTreeNode {
 // 创建目录
 message CreateFolderRequest {
   string name = 1;
-  string parent_id = 2; // 父目录ID，空字符串表示在根目录创建
+  string parent_id = 2; // 父目录ID，空字符串表示创建根目录
 }
 
 message CreateFolderResponse {}
@@ -188,7 +188,7 @@ message GetFolderTreeResponse {
 // 移动信源到其他目录
 message MoveSourceToFolderRequest {
   string source_id = 1; // 要移动的信源ID
-  string target_folder_id = 2; // 目标目录ID：空字符串表示移到根目录，"__UNASSIGNED__"表示移到未分类
+  string target_folder_id = 2; // 目标目录ID："__UNASSIGNED__"表示移到未分类
   // 注意：移动后默认放在目标目录的最后，如需调整排序请使用 UpdateItemsOrderInFolder
 }
 
