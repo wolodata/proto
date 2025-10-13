@@ -85,7 +85,7 @@ message Source {
   bool is_chinese = 3;
   bool allow_image = 4;
   bool is_show = 5;
-  string folder_id = 6; // 所属目录ID："__ROOT__"表示根目录，"__UNASSIGNED__"表示未分类
+  string folder_id = 6; // 所属目录ID："__UNASSIGNED__"表示未分类
   int32 order_index = 7; // 在目录中的排序位置
 }
 
@@ -132,7 +132,7 @@ enum ItemType {
 message Folder {
   string id = 1;
   string name = 2;
-  string parent_id = 3; // 父目录ID，"__ROOT__"表示根目录
+  string parent_id = 3; // 父目录ID，空字符串表示根目录
   int32 order_index = 4; // 在父目录中的排序位置
   int64 created_at = 5; // 创建时间（Unix时间戳）
   int64 updated_at = 6; // 更新时间（Unix时间戳）
@@ -152,7 +152,7 @@ message FolderTreeNode {
 // 创建目录
 message CreateFolderRequest {
   string name = 1;
-  string parent_id = 2; // 父目录ID，"__ROOT__"表示在根目录创建
+  string parent_id = 2; // 父目录ID，空字符串表示在根目录创建
 }
 
 message CreateFolderResponse {}
@@ -193,7 +193,7 @@ message GetFolderTreeResponse {
 message MoveItemToFolderRequest {
   ItemType type = 1;
   string item_id = 2; // 要移动的项目ID（目录ID或信源ID）
-  string target_parent_id = 3; // 目标父目录ID："__ROOT__"表示移到根目录，"__UNASSIGNED__"表示移到未分类
+  string target_parent_id = 3; // 目标父目录ID：空字符串表示移到根目录，"__UNASSIGNED__"表示移到未分类
   // 注意：移动后默认放在目标目录的最后，如需调整排序请使用 UpdateItemsOrderInFolder
 }
 
