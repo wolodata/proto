@@ -86,7 +86,7 @@ message Source {
   bool allow_image = 4;
   bool is_show = 5;
   string folder_id = 6; // 所属目录ID："__UNASSIGNED__"表示未分类
-  int32 order_index = 7; // 在目录中的排序位置
+  uint32 order_index = 7; // 在目录中的排序位置
 }
 
 message CreateSourceRequest {
@@ -96,7 +96,7 @@ message CreateSourceRequest {
   bool allow_image = 4;
   bool is_show = 5;
   string folder_id = 6; // 所属目录ID，默认为"__UNASSIGNED__"
-  int32 order_index = 7; // 在目录中的排序位置，默认为0
+  uint32 order_index = 7; // 在目录中的排序位置，默认为0
 }
 
 message CreateSourceResponse {}
@@ -113,8 +113,6 @@ message UpdateSourceRequest {
   bool is_chinese = 3;
   bool allow_image = 4;
   bool is_show = 5;
-  string folder_id = 6; // 所属目录ID
-  int32 order_index = 7; // 在目录中的排序位置
 }
 
 message UpdateSourceResponse {}
@@ -133,7 +131,7 @@ message Folder {
   string id = 1;
   string name = 2;
   string parent_id = 3; // 父目录ID，空字符串表示根目录
-  int32 order_index = 4; // 在父目录中的排序位置
+  uint32 order_index = 4; // 在父目录中的排序位置
   int64 created_at = 5; // 创建时间（Unix时间戳）
   int64 updated_at = 6; // 更新时间（Unix时间戳）
 }
@@ -146,7 +144,7 @@ message FolderTreeNode {
     Source source = 3; // type=SOURCE时有值
   }
   repeated FolderTreeNode children = 4; // 子节点（仅当type=FOLDER时有值）
-  int32 order_index = 5; // 排序位置
+  uint32 order_index = 5; // 排序位置
 }
 
 // 创建目录
@@ -204,7 +202,7 @@ message UpdateItemsOrderInFolderRequest {
   message ItemOrder {
     ItemType type = 1;
     string item_id = 2;
-    int32 order_index = 3;
+    uint32 order_index = 3;
   }
 
   string parent_id = 1; // 父目录ID（所有项目必须在同一父目录下）
