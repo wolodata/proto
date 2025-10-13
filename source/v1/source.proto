@@ -155,9 +155,7 @@ message CreateFolderRequest {
   string parent_id = 2; // 父目录ID，"__ROOT__"表示在根目录创建
 }
 
-message CreateFolderResponse {
-  Folder folder = 1;
-}
+message CreateFolderResponse {}
 
 // 更新目录
 message UpdateFolderRequest {
@@ -165,14 +163,11 @@ message UpdateFolderRequest {
   string name = 2;
 }
 
-message UpdateFolderResponse {
-  Folder folder = 1;
-}
+message UpdateFolderResponse {}
 
 // 删除目录
 message DeleteFolderRequest {
   string id = 1;
-  bool force = 2; // 是否强制删除（删除包含内容的目录）
 }
 
 message DeleteFolderResponse {}
