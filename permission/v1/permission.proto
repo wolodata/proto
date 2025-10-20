@@ -6,60 +6,62 @@ package permission.v1;
 // 用于管理系统的角色、功能集和方法权限
 //
 // 设计说明：
-// 1. 功能集(FunctionSet)是前端管理的辅助概念，用于快速配置角色权限
-// 2. 角色(Role)直接存储展开后的方法列表(enabled_methods)，用于实际鉴权
-// 3. 创建/更新角色时，前端选择功能集，后端自动展开并存储到角色的 enabled_methods
+// 1. 功能集(FunctionSet)是前端展示的辅助概念，用于帮助管理员查看和选择一组相关方法
+// 2. 角色(Role)直接存储方法列表(enabled_methods)，用于实际鉴权
+// 3. 创建/更新角色时，前端直接传入具体的方法列表(enabled_methods)
+// 4. 功能集只用于前端UI，不参与实际的权限控制逻辑
 service PermissionService {
   // ==================== 角色管理 ====================
-
+  
   // ListRoles 获取角色列表（分页）
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
-
+  
   // GetRole 获取单个角色详情
   rpc GetRole(GetRoleRequest) returns (GetRoleResponse);
-
+  
   // CreateRole 创建新角色
-  // 前端传入 function_set_ids，后端自动展开成 enabled_methods 存储
+  // 前端直接传入 enabled_methods 列表
   rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
-
+  
   // UpdateRole 更新角色信息
-  // 前端传入 function_set_ids，后端自动展开成 enabled_methods 存储
+  // 前端直接传入 enabled_methods 列表
   rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
-
+  
   // DeleteRole 删除角色
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
 
   // ==================== 功能集管理 ====================
-
-  // ListAllFunctionSets 获取所有功能集列表
+  
+  // ListAllFunctionSets 获取所有功能集列表（不分页）
+  // 功能集仅用于前端展示，帮助管理员快速选择一组方法
   rpc ListAllFunctionSets(ListAllFunctionSetsRequest) returns (ListAllFunctionSetsResponse);
-
+  
   // GetFunctionSet 获取单个功能集详情
   rpc GetFunctionSet(GetFunctionSetRequest) returns (GetFunctionSetResponse);
-
+  
   // CreateFunctionSet 创建新功能集
   rpc CreateFunctionSet(CreateFunctionSetRequest) returns (CreateFunctionSetResponse);
-
+  
   // UpdateFunctionSet 更新功能集信息
   rpc UpdateFunctionSet(UpdateFunctionSetRequest) returns (UpdateFunctionSetResponse);
-
+  
   // DeleteFunctionSet 删除功能集
   rpc DeleteFunctionSet(DeleteFunctionSetRequest) returns (DeleteFunctionSetResponse);
 
   // ==================== 方法管理 ====================
-
-  // ListAllMethods 获取所有可用方法列表
+  
+  // ListAllMethods 获取所有可用方法列表（不分页）
   // 方法会在首次被调用时自动注册到数据库
   rpc ListAllMethods(ListAllMethodsRequest) returns (ListAllMethodsResponse);
-
+  
   // GetMethod 获取单个方法详情
   rpc GetMethod(GetMethodRequest) returns (GetMethodResponse);
-
+  
   // UpdateMethodDescription 更新方法描述信息
   rpc UpdateMethodDescription(UpdateMethodDescriptionRequest) returns (UpdateMethodDescriptionResponse);
 
   // ==================== 用户角色分配 ====================
-
+  
   // AssignRoleToUser 为用户分配角色
   rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
 }
@@ -71,7 +73,7 @@ message RoleInfo {
   string role_id = 1; // 角色ID
   string role_name = 2; // 角色名称（唯一）
   string description = 3; // 角色描述
-  repeated string enabled_methods = 4; // 展开后的方法全名列表（实际存储在数据库中用于鉴权）
+  repeated string enabled_methods = 4; // 方法全名列表（实际存储在数据库中用于鉴权）
   repeated string llm_models_disabled = 5; // 禁用的LLM模型列表
   uint64 count_limit_daily_llm_talk_right_side = 6; // 右侧AI对话每日次数限制（0表示不限制）
   uint64 count_limit_keyword = 7; // 关键词数量限制（0表示不限制）
@@ -109,7 +111,7 @@ message GetRoleResponse {
 message CreateRoleRequest {
   string role_name = 1; // 角色名称（必须唯一）
   string description = 2; // 角色描述
-  repeated string function_set_ids = 3; // 功能集ID列表（前端传入，后端会自动展开成方法列表）
+  repeated string enabled_methods = 3; // 方法全名列表，前端直接传入
   repeated string llm_models_disabled = 4; // 禁用的LLM模型列表
   uint64 count_limit_daily_llm_talk_right_side = 5; // 右侧AI对话每日次数限制
   uint64 count_limit_keyword = 6; // 关键词数量限制
@@ -127,7 +129,7 @@ message UpdateRoleRequest {
   string role_id = 1; // 要更新的角色ID
   string role_name = 2; // 角色名称
   string description = 3; // 角色描述
-  repeated string function_set_ids = 4; // 功能集ID列表（前端传入，后端会自动展开成方法列表）
+  repeated string enabled_methods = 4; // 方法全名列表，前端直接传入
   repeated string llm_models_disabled = 5; // 禁用的LLM模型列表
   uint64 count_limit_daily_llm_talk_right_side = 6; // 右侧AI对话每日次数限制
   uint64 count_limit_keyword = 7; // 关键词数量限制
@@ -149,8 +151,8 @@ message DeleteRoleResponse {}
 // ==================== 功能集管理相关消息 ====================
 
 // FunctionSetInfo 功能集信息
-// 功能集是前端管理的辅助概念，是一组方法的集合，用于快速配置角色权限
-// 后端不会在角色表中存储功能集ID，只会展开成方法列表存储
+// 功能集是前端展示的辅助工具，帮助管理员查看和选择一组相关方法
+// 功能集不参与实际的权限控制，只用于UI展示
 message FunctionSetInfo {
   string function_set_id = 1; // 功能集ID
   string set_name = 2; // 功能集名称（唯一）
@@ -158,7 +160,7 @@ message FunctionSetInfo {
   repeated string enabled_methods = 4; // 包含的方法全名列表，格式如: "user.v1.UserService/GetUserInfo"
 }
 
-// ListAllFunctionSetsRequest 获取所有功能集列表请求
+// ListAllFunctionSetsRequest 获取所有功能集列表请求（不分页）
 message ListAllFunctionSetsRequest {}
 
 // ListAllFunctionSetsResponse 获取所有功能集列表响应
@@ -217,8 +219,10 @@ message MethodInfo {
   string description = 3; // 方法描述
 }
 
-// ListAllMethodsRequest 获取所有方法列表请求
-message ListAllMethodsRequest {}
+// ListAllMethodsRequest 获取所有方法列表请求（不分页）
+message ListAllMethodsRequest {
+  string search_keyword = 1; // 搜索关键词（按方法全名模糊搜索），为空则返回全部
+}
 
 // ListAllMethodsResponse 获取所有方法列表响应
 message ListAllMethodsResponse {
