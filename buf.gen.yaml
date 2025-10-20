@@ -16,3 +16,5 @@ plugins:
       - paths=source_relative
   - remote: buf.build/bufbuild/es
     out: gen
+    include_imports: true
+    opt: target=ts
