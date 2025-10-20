@@ -6,10 +6,8 @@ package permission.v1;
 // 用于管理系统的角色、功能集和方法权限
 //
 // 设计说明：
-// 1. 功能集(FunctionSet)是前端展示的辅助概念，用于帮助管理员查看和选择一组相关方法
-// 2. 角色(Role)直接存储方法列表(enabled_methods)，用于实际鉴权
-// 3. 创建/更新角色时，前端直接传入具体的方法列表(enabled_methods)
-// 4. 功能集只用于前端UI，不参与实际的权限控制逻辑
+// 1. 角色(Role)直接存储方法列表(enabled_methods)，用于实际鉴权
+// 2. 创建/更新角色时，前端直接传入具体的方法列表(enabled_methods)
 service PermissionService {
   // ==================== 角色管理 ====================
 
@@ -30,28 +28,9 @@ service PermissionService {
   // DeleteRole 删除角色
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
 
-  // ==================== 功能集管理 ====================
-
-  // ListAllFunctionSets 获取所有功能集列表（不分页）
-  // 功能集仅用于前端展示，帮助管理员快速选择一组方法
-  rpc ListAllFunctionSets(ListAllFunctionSetsRequest) returns (ListAllFunctionSetsResponse);
-
-  // GetFunctionSet 获取单个功能集详情
-  rpc GetFunctionSet(GetFunctionSetRequest) returns (GetFunctionSetResponse);
-
-  // CreateFunctionSet 创建新功能集
-  rpc CreateFunctionSet(CreateFunctionSetRequest) returns (CreateFunctionSetResponse);
-
-  // UpdateFunctionSet 更新功能集信息
-  rpc UpdateFunctionSet(UpdateFunctionSetRequest) returns (UpdateFunctionSetResponse);
-
-  // DeleteFunctionSet 删除功能集
-  rpc DeleteFunctionSet(DeleteFunctionSetRequest) returns (DeleteFunctionSetResponse);
-
   // ==================== 方法管理 ====================
 
   // ListAllMethods 获取所有可用方法列表（不分页）
-  // 方法会在首次被调用时自动注册到数据库
   rpc ListAllMethods(ListAllMethodsRequest) returns (ListAllMethodsResponse);
 
   // ==================== 用户角色分配 ====================
@@ -142,67 +121,6 @@ message DeleteRoleRequest {
 // DeleteRoleResponse 删除角色响应
 message DeleteRoleResponse {}
 
-// ==================== 功能集管理相关消息 ====================
-
-// FunctionSetInfo 功能集信息
-// 功能集是前端展示的辅助工具，帮助管理员查看和选择一组相关方法
-// 功能集不参与实际的权限控制，只用于UI展示
-message FunctionSetInfo {
-  string function_set_id = 1; // 功能集ID
-  string set_name = 2; // 功能集名称（唯一）
-  string description = 3; // 功能集描述
-  repeated string enabled_methods = 4; // 包含的方法全名列表，格式如: "user.v1.UserService/GetUserInfo"
-}
-
-// ListAllFunctionSetsRequest 获取所有功能集列表请求（不分页）
-message ListAllFunctionSetsRequest {}
-
-// ListAllFunctionSetsResponse 获取所有功能集列表响应
-message ListAllFunctionSetsResponse {
-  repeated FunctionSetInfo items = 1; // 功能集列表
-}
-
-// GetFunctionSetRequest 获取功能集详情请求
-message GetFunctionSetRequest {
-  string function_set_id = 1; // 功能集ID
-}
-
-// GetFunctionSetResponse 获取功能集详情响应
-message GetFunctionSetResponse {
-  FunctionSetInfo function_set = 1; // 功能集信息
-}
-
-// CreateFunctionSetRequest 创建功能集请求
-message CreateFunctionSetRequest {
-  string set_name = 1; // 功能集名称（必须唯一）
-  string description = 2; // 功能集描述
-  repeated string enabled_methods = 3; // 方法全名列表，格式如: "user.v1.UserService/GetUserInfo"
-}
-
-// CreateFunctionSetResponse 创建功能集响应
-message CreateFunctionSetResponse {
-  string function_set_id = 1; // 新创建的功能集ID
-}
-
-// UpdateFunctionSetRequest 更新功能集请求
-message UpdateFunctionSetRequest {
-  string function_set_id = 1; // 要更新的功能集ID
-  string set_name = 2; // 功能集名称
-  string description = 3; // 功能集描述
-  repeated string enabled_methods = 4; // 方法全名列表
-}
-
-// UpdateFunctionSetResponse 更新功能集响应
-message UpdateFunctionSetResponse {}
-
-// DeleteFunctionSetRequest 删除功能集请求
-message DeleteFunctionSetRequest {
-  string function_set_id = 1; // 要删除的功能集ID
-}
-
-// DeleteFunctionSetResponse 删除功能集响应
-message DeleteFunctionSetResponse {}
-
 // ==================== 方法管理相关消息 ====================
 
 // MethodInfo 方法信息
@@ -212,12 +130,17 @@ message MethodInfo {
   string description = 2; // 方法描述
 }
 
+// ServiceMethods 服务的方法列表
+message ServiceMethods {
+  repeated MethodInfo methods = 1; // 该服务下的方法列表
+}
+
 // ListAllMethodsRequest 获取所有方法列表请求（不分页）
 message ListAllMethodsRequest {}
 
 // ListAllMethodsResponse 获取所有方法列表响应
 message ListAllMethodsResponse {
-  repeated MethodInfo items = 1; // 方法列表
+  map<string, ServiceMethods> services = 1; // key 是 service 名称，如 "user.v1.UserService"
 }
 
 // AssignRoleToUserResponse 为用户分配角色响应
