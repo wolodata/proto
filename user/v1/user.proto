@@ -12,6 +12,8 @@ service UserService {
   rpc BindMobile(BindMobileRequest) returns (BindMobileResponse) {}
   rpc UnbindMobile(UnbindMobileRequest) returns (UnbindMobileResponse) {}
   rpc GetPermissionList(GetPermissionListRequest) returns (GetPermissionListResponse) {}
+  rpc ListUserDevices(ListUserDevicesRequest) returns (ListUserDevicesResponse) {}
+  rpc LogoutDevice(LogoutDeviceRequest) returns (LogoutDeviceResponse) {}
 
   // 后台
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
@@ -160,3 +162,29 @@ message AdminUpdateUserMobileRequest {
 }
 
 message AdminUpdateUserMobileResponse {}
+
+// 设备信息
+message DeviceInfo {
+  string token_id = 1; // 设备ID/Token ID
+  string login_user_agent = 2; // 登录时的UserAgent
+  string login_ip = 3; // 登录时的IP
+  uint64 login_time = 4; // 登录时间（Unix时间戳）
+  string last_active_user_agent = 5; // 最后活跃时的UserAgent
+  string last_active_ip = 6; // 最后活跃时的IP
+  uint64 last_active_time = 7; // 最后活跃时间（Unix时间戳）
+  bool is_current = 8; // 是否当前设备
+}
+
+// 查询登录设备列表
+message ListUserDevicesRequest {}
+
+message ListUserDevicesResponse {
+  repeated DeviceInfo devices = 1;
+}
+
+// 踢出设备（使设备token失效）
+message LogoutDeviceRequest {
+  string token_id = 1; // 要踢出的设备token_id
+}
+
+message LogoutDeviceResponse {}
