@@ -54,11 +54,7 @@ service PermissionService {
   // 方法会在首次被调用时自动注册到数据库
   rpc ListAllMethods(ListAllMethodsRequest) returns (ListAllMethodsResponse);
   
-  // GetMethod 获取单个方法详情
-  rpc GetMethod(GetMethodRequest) returns (GetMethodResponse);
   
-  // UpdateMethodDescription 更新方法描述信息
-  rpc UpdateMethodDescription(UpdateMethodDescriptionRequest) returns (UpdateMethodDescriptionResponse);
 
   // ==================== 用户角色分配 ====================
   
@@ -229,24 +225,12 @@ message ListAllMethodsResponse {
   repeated MethodInfo items = 1; // 方法列表
 }
 
-// GetMethodRequest 获取方法详情请求
-message GetMethodRequest {
-  string method_id = 1; // 方法ID
-}
 
-// GetMethodResponse 获取方法详情响应
-message GetMethodResponse {
-  MethodInfo method = 1; // 方法信息
-}
 
-// UpdateMethodDescriptionRequest 更新方法描述请求
-message UpdateMethodDescriptionRequest {
-  string method_id = 1; // 方法ID
-  string description = 2; // 新的方法描述
-}
 
-// UpdateMethodDescriptionResponse 更新方法描述响应
-message UpdateMethodDescriptionResponse {}
+
+// AssignRoleToUserResponse 为用户分配角色响应
+message AssignRoleToUserResponse {}
 
 // ==================== 用户角色分配相关消息 ====================
 
@@ -255,6 +239,3 @@ message AssignRoleToUserRequest {
   string user_id = 1; // 用户ID
   string role_id = 2; // 要分配的角色ID
 }
-
-// AssignRoleToUserResponse 为用户分配角色响应
-message AssignRoleToUserResponse {}
