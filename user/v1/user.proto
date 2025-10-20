@@ -96,10 +96,9 @@ message UserWithDescription {
 message CreateUserRequest {
   string username = 1;
   string password = 2;
-  bool can_access_backend = 3;
-  string nickname = 4;
-  string description = 5;
-  string role_id = 6; // 普通用户的角色ID,如果 can_access_backend=true 则可以为空
+  string nickname = 3;
+  string description = 4;
+  string role_id = 5; // 普通用户的角色ID 不可以为空
 }
 
 message CreateUserResponse {
