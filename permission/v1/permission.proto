@@ -208,9 +208,8 @@ message DeleteFunctionSetResponse {}
 // MethodInfo 方法信息
 // 所有的 gRPC 方法会在首次被调用时自动注册到数据库
 message MethodInfo {
-  string method_id = 1; // 方法ID
-  string full_name = 2; // 方法全名，格式如: "user.v1.UserService/GetUserInfo"
-  string description = 3; // 方法描述
+  string full_name = 1; // 方法全名，格式如: "user.v1.UserService/GetUserInfo"
+  string description = 2; // 方法描述
 }
 
 // ListAllMethodsRequest 获取所有方法列表请求（不分页）
