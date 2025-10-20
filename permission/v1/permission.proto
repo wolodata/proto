@@ -12,52 +12,50 @@ package permission.v1;
 // 4. 功能集只用于前端UI，不参与实际的权限控制逻辑
 service PermissionService {
   // ==================== 角色管理 ====================
-  
+
   // ListRoles 获取角色列表（分页）
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
-  
+
   // GetRole 获取单个角色详情
   rpc GetRole(GetRoleRequest) returns (GetRoleResponse);
-  
+
   // CreateRole 创建新角色
   // 前端直接传入 enabled_methods 列表
   rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
-  
+
   // UpdateRole 更新角色信息
   // 前端直接传入 enabled_methods 列表
   rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
-  
+
   // DeleteRole 删除角色
   rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
 
   // ==================== 功能集管理 ====================
-  
+
   // ListAllFunctionSets 获取所有功能集列表（不分页）
   // 功能集仅用于前端展示，帮助管理员快速选择一组方法
   rpc ListAllFunctionSets(ListAllFunctionSetsRequest) returns (ListAllFunctionSetsResponse);
-  
+
   // GetFunctionSet 获取单个功能集详情
   rpc GetFunctionSet(GetFunctionSetRequest) returns (GetFunctionSetResponse);
-  
+
   // CreateFunctionSet 创建新功能集
   rpc CreateFunctionSet(CreateFunctionSetRequest) returns (CreateFunctionSetResponse);
-  
+
   // UpdateFunctionSet 更新功能集信息
   rpc UpdateFunctionSet(UpdateFunctionSetRequest) returns (UpdateFunctionSetResponse);
-  
+
   // DeleteFunctionSet 删除功能集
   rpc DeleteFunctionSet(DeleteFunctionSetRequest) returns (DeleteFunctionSetResponse);
 
   // ==================== 方法管理 ====================
-  
+
   // ListAllMethods 获取所有可用方法列表（不分页）
   // 方法会在首次被调用时自动注册到数据库
   rpc ListAllMethods(ListAllMethodsRequest) returns (ListAllMethodsResponse);
-  
-  
 
   // ==================== 用户角色分配 ====================
-  
+
   // AssignRoleToUser 为用户分配角色
   rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
 }
@@ -216,18 +214,12 @@ message MethodInfo {
 }
 
 // ListAllMethodsRequest 获取所有方法列表请求（不分页）
-message ListAllMethodsRequest {
-  string search_keyword = 1; // 搜索关键词（按方法全名模糊搜索），为空则返回全部
-}
+message ListAllMethodsRequest {}
 
 // ListAllMethodsResponse 获取所有方法列表响应
 message ListAllMethodsResponse {
   repeated MethodInfo items = 1; // 方法列表
 }
-
-
-
-
 
 // AssignRoleToUserResponse 为用户分配角色响应
 message AssignRoleToUserResponse {}
