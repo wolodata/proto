@@ -3,7 +3,6 @@ syntax = "proto3";
 package article.v1;
 
 import "google/protobuf/wrappers.proto";
-import "permission/v1/permission.proto";
 
 service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
@@ -14,21 +13,11 @@ service ArticleService {
   rpc GuessMyInterestedQuestion(GuessMyInterestedQuestionRequest) returns (stream GuessMyInterestedQuestionResponse);
 
   // 后台
-  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleResponse);
+  rpc CreateArticle(CreateArticleRequest) returns (CreateArticleResponse);
+  rpc DownloadArticles(DownloadArticlesRequest) returns (DownloadArticlesResponse);
+  rpc DeleteArticles(DeleteArticlesRequest) returns (DeleteArticlesResponse);
+  rpc BatchOperateArticles(BatchOperateArticlesRequest) returns (BatchOperateArticlesResponse);
 }
 
 message ListArticlesRequest {

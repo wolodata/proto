@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package assistant.v1;
 
-import "permission/v1/permission.proto";
-
 service AssistantService {
   rpc ListAssistants(ListAssistantsRequest) returns (ListAssistantsResponse);
   rpc GetAssistant(GetAssistantRequest) returns (GetAssistantResponse);
@@ -15,21 +13,13 @@ service AssistantService {
   rpc DeleteHistories(DeleteHistoriesRequest) returns (DeleteHistoriesResponse);
 
   // 后台
-  rpc ListAssistantsForBackend(ListAssistantsForBackendRequest) returns (ListAssistantsForBackendResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc ListAssistantsForBackend(ListAssistantsForBackendRequest) returns (ListAssistantsForBackendResponse);
 
-  rpc CreateAssistant(CreateAssistantRequest) returns (CreateAssistantResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc CreateAssistant(CreateAssistantRequest) returns (CreateAssistantResponse);
 
-  rpc UpdateAssistant(UpdateAssistantRequest) returns (UpdateAssistantResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc UpdateAssistant(UpdateAssistantRequest) returns (UpdateAssistantResponse);
 
-  rpc DeleteAssistant(DeleteAssistantRequest) returns (DeleteAssistantResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc DeleteAssistant(DeleteAssistantRequest) returns (DeleteAssistantResponse);
 }
 
 message ListAssistantsRequest {}

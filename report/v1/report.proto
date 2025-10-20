@@ -2,24 +2,15 @@ syntax = "proto3";
 
 package report.v1;
 
-import "permission/v1/permission.proto";
-
 service ReportService {
   rpc ListReports(ListReportsRequest) returns (ListReportsResponse);
   rpc GetReport(GetReportRequest) returns (GetReportResponse);
   rpc CreateCustomReportTask(CreateCustomReportTaskRequest) returns (CreateCustomReportTaskResponse);
 
   // 后台
-  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse);
+  rpc DeleteReports(DeleteReportsRequest) returns (DeleteReportsResponse);
+  rpc UpdateReport(UpdateReportRequest) returns (UpdateReportResponse);
 }
 
 enum ReportType {

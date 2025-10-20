@@ -2,15 +2,11 @@ syntax = "proto3";
 
 package chat.v1;
 
-import "permission/v1/permission.proto";
-
 service ChatService {
   rpc StreamChat(StreamChatRequest) returns (stream StreamChatResponse);
 
   // 后台
-  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc FreeAsk(FreeAskRequest) returns (stream FreeAskResponse);
 }
 
 message StreamChatRequest {

@@ -3,7 +3,6 @@ syntax = "proto3";
 package topic.v1;
 
 import "google/type/date.proto";
-import "permission/v1/permission.proto";
 
 service TopicService {
   rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
@@ -12,34 +11,13 @@ service TopicService {
   rpc ListHitByDate(ListHitByDateRequest) returns (ListHitByDateResponse);
 
   // 后台
-  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse);
+  rpc DeleteDomain(DeleteDomainRequest) returns (DeleteDomainResponse);
+  rpc UpdateDomain(UpdateDomainRequest) returns (UpdateDomainResponse);
+  rpc CreateTopic(CreateTopicRequest) returns (CreateTopicResponse);
+  rpc DeleteTopic(DeleteTopicRequest) returns (DeleteTopicResponse);
+  rpc UpdateTopic(UpdateTopicRequest) returns (UpdateTopicResponse);
+  rpc RedeployTopic(RedeployTopicRequest) returns (RedeployTopicResponse);
 }
 
 message ListDomainsRequest {}

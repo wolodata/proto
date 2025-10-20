@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package user.v1;
 
-import "permission/v1/permission.proto";
-import "role/v1/role.proto";
-
 service UserService {
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
   rpc ChangeNickname(ChangeNicknameRequest) returns (ChangeNicknameResponse) {}
@@ -16,34 +13,12 @@ service UserService {
   rpc LogoutDevice(LogoutDeviceRequest) returns (LogoutDeviceResponse) {}
 
   // 后台
-  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateUserRole(UpdateUserRoleRequest) returns (UpdateUserRoleResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc AdminUpdateUserPassword(AdminUpdateUserPasswordRequest) returns (AdminUpdateUserPasswordResponse);
+  rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse);
+  rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse);
+  rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse);
 }
 
 message GetUserInfoRequest {}
@@ -51,7 +26,7 @@ message GetUserInfoRequest {}
 message GetUserInfoResponse {
   string user_id = 1;
   string username = 2;
-  role.v1.Role role = 3;
+  bool can_access_backend = 3;
   string nickname = 4;
   uint64 created_at = 5;
   string mobile = 6;
@@ -107,7 +82,7 @@ message ListUsersResponse {
 message UserWithDescription {
   string user_id = 1;
   string username = 2;
-  role.v1.Role role = 3;
+  bool can_access_backend = 3;
   bool enabled = 4;
   string nickname = 5;
   string description = 6;
@@ -118,7 +93,7 @@ message UserWithDescription {
 message CreateUserRequest {
   string username = 1;
   string password = 2;
-  role.v1.Role role = 3;
+  bool can_access_backend = 3;
   string nickname = 4;
   string description = 5;
 }
@@ -133,13 +108,6 @@ message AdminUpdateUserPasswordRequest {
 }
 
 message AdminUpdateUserPasswordResponse {}
-
-message UpdateUserRoleRequest {
-  string user_id = 1;
-  role.v1.Role role = 2;
-}
-
-message UpdateUserRoleResponse {}
 
 message UpdateUserStatusRequest {
   string user_id = 1;

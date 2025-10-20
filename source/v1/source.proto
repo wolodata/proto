@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package source.v1;
 
-import "permission/v1/permission.proto";
-
 service SourceService {
   rpc ListSources(ListSourcesRequest) returns (ListSourcesResponse);
   rpc GetSource(GetSourceRequest) returns (GetSourceResponse);
@@ -11,40 +9,22 @@ service SourceService {
   // 后台
 
   // 创建信源
-  rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc CreateSource(CreateSourceRequest) returns (CreateSourceResponse);
 
   // 删除信源
-  rpc DeleteSource(DeleteSourceRequest) returns (DeleteSourceResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc DeleteSource(DeleteSourceRequest) returns (DeleteSourceResponse);
 
   // 更新信源
-  rpc UpdateSource(UpdateSourceRequest) returns (UpdateSourceResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc UpdateSource(UpdateSourceRequest) returns (UpdateSourceResponse);
 
   // 创建目录
-  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse);
 
   // 更新目录
-  rpc UpdateFolder(UpdateFolderRequest) returns (UpdateFolderResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc UpdateFolder(UpdateFolderRequest) returns (UpdateFolderResponse);
 
   // 删除目录
-  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse);
 
   // 获取目录
   rpc GetFolder(GetFolderRequest) returns (GetFolderResponse) {}
@@ -53,16 +33,10 @@ service SourceService {
   rpc GetFolderTree(GetFolderTreeRequest) returns (GetFolderTreeResponse) {}
 
   // 移动信源到其他目录
-  rpc MoveSourceToFolder(MoveSourceToFolderRequest) returns (MoveSourceToFolderResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc MoveSourceToFolder(MoveSourceToFolderRequest) returns (MoveSourceToFolderResponse);
 
   // 批量调整同一目录内项目（目录或信源）的排序
-  rpc UpdateItemsOrderInSameFolder(UpdateItemsOrderInSameFolderRequest) returns (UpdateItemsOrderInSameFolderResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc UpdateItemsOrderInSameFolder(UpdateItemsOrderInSameFolderRequest) returns (UpdateItemsOrderInSameFolderResponse);
 }
 
 message ListSourcesRequest {}

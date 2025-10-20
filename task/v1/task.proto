@@ -2,19 +2,11 @@ syntax = "proto3";
 
 package task.v1;
 
-import "permission/v1/permission.proto";
-
 service TaskService {
   // 后台
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc UpdateTaskPriority(UpdateTaskPriorityRequest) returns (UpdateTaskPriorityResponse) {
-    option (permission.v1.is_backend) = true;
-  }
-  rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse) {
-    option (permission.v1.is_backend) = true;
-  }
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+  rpc UpdateTaskPriority(UpdateTaskPriorityRequest) returns (UpdateTaskPriorityResponse);
+  rpc DeleteTasks(DeleteTasksRequest) returns (DeleteTasksResponse);
 }
 
 message ListTasksRequest {

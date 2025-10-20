@@ -2,24 +2,13 @@ syntax = "proto3";
 
 package category.v1;
 
-import "permission/v1/permission.proto";
-
 service CategoryService {
   rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
 
   // 后台
-  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
-  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse) {
-    option (permission.v1.is_backend) = true;
-    option (permission.v1.minimum_role) = ROLE_SUPER_ADMIN;
-  }
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse);
 }
 
 message ListCategoriesRequest {
