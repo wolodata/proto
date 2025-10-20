@@ -60,7 +60,7 @@ message UnbindMobileResponse {}
 message GetPermissionListRequest {}
 
 message GetPermissionListResponse {
-  repeated string function_sets_enabled = 1;
+  repeated string enabled_methods = 1; // 用户角色拥有的方法权限列表
   repeated string llm_models_disabled = 2;
   uint64 count_limit_daily_llm_talk_right_side = 3;
   uint64 count_limit_keyword = 4;
