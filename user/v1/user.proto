@@ -19,6 +19,7 @@ service UserService {
   rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse);
   rpc AdminUpdateUserNicknameAndDescription(AdminUpdateUserNicknameAndDescriptionRequest) returns (AdminUpdateUserNicknameAndDescriptionResponse);
   rpc AdminUpdateUserMobile(AdminUpdateUserMobileRequest) returns (AdminUpdateUserMobileResponse);
+  rpc AdminUpdateUserMaxDevices(AdminUpdateUserMaxDevicesRequest) returns (AdminUpdateUserMaxDevicesResponse);
 }
 
 message GetUserInfoRequest {}
@@ -31,6 +32,7 @@ message GetUserInfoResponse {
   uint64 created_at = 5;
   string mobile = 6;
   uint64 expired_at = 7;
+  uint32 max_devices = 8; // 最大设备数量限制
 }
 
 message ChangeNicknameRequest {
@@ -88,6 +90,7 @@ message UserWithDescription {
   string description = 6;
   uint64 created_at = 7;
   string mobile = 8;
+  uint32 max_devices = 9; // 最大设备数量限制
 }
 
 message CreateUserRequest {
@@ -130,6 +133,13 @@ message AdminUpdateUserMobileRequest {
 }
 
 message AdminUpdateUserMobileResponse {}
+
+message AdminUpdateUserMaxDevicesRequest {
+  string user_id = 1;
+  uint32 max_devices = 2; // 最大设备数量限制
+}
+
+message AdminUpdateUserMaxDevicesResponse {}
 
 // 设备信息
 message DeviceInfo {
