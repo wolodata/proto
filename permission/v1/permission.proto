@@ -1,0 +1,256 @@
+syntax = "proto3";
+
+package permission.v1;
+
+// PermissionService 权限管理服务
+// 用于管理系统的角色、功能集和方法权限
+//
+// 设计说明：
+// 1. 功能集(FunctionSet)是前端管理的辅助概念，用于快速配置角色权限
+// 2. 角色(Role)直接存储展开后的方法列表(enabled_methods)，用于实际鉴权
+// 3. 创建/更新角色时，前端选择功能集，后端自动展开并存储到角色的 enabled_methods
+service PermissionService {
+  // ==================== 角色管理 ====================
+
+  // ListRoles 获取角色列表（分页）
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
+
+  // GetRole 获取单个角色详情
+  rpc GetRole(GetRoleRequest) returns (GetRoleResponse);
+
+  // CreateRole 创建新角色
+  // 前端传入 function_set_ids，后端自动展开成 enabled_methods 存储
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
+
+  // UpdateRole 更新角色信息
+  // 前端传入 function_set_ids，后端自动展开成 enabled_methods 存储
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
+
+  // DeleteRole 删除角色
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
+
+  // ==================== 功能集管理 ====================
+
+  // ListAllFunctionSets 获取所有功能集列表
+  rpc ListAllFunctionSets(ListAllFunctionSetsRequest) returns (ListAllFunctionSetsResponse);
+
+  // GetFunctionSet 获取单个功能集详情
+  rpc GetFunctionSet(GetFunctionSetRequest) returns (GetFunctionSetResponse);
+
+  // CreateFunctionSet 创建新功能集
+  rpc CreateFunctionSet(CreateFunctionSetRequest) returns (CreateFunctionSetResponse);
+
+  // UpdateFunctionSet 更新功能集信息
+  rpc UpdateFunctionSet(UpdateFunctionSetRequest) returns (UpdateFunctionSetResponse);
+
+  // DeleteFunctionSet 删除功能集
+  rpc DeleteFunctionSet(DeleteFunctionSetRequest) returns (DeleteFunctionSetResponse);
+
+  // ==================== 方法管理 ====================
+
+  // ListAllMethods 获取所有可用方法列表
+  // 方法会在首次被调用时自动注册到数据库
+  rpc ListAllMethods(ListAllMethodsRequest) returns (ListAllMethodsResponse);
+
+  // GetMethod 获取单个方法详情
+  rpc GetMethod(GetMethodRequest) returns (GetMethodResponse);
+
+  // UpdateMethodDescription 更新方法描述信息
+  rpc UpdateMethodDescription(UpdateMethodDescriptionRequest) returns (UpdateMethodDescriptionResponse);
+
+  // ==================== 用户角色分配 ====================
+
+  // AssignRoleToUser 为用户分配角色
+  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
+}
+
+// ==================== 角色管理相关消息 ====================
+
+// RoleInfo 角色信息
+message RoleInfo {
+  string role_id = 1; // 角色ID
+  string role_name = 2; // 角色名称（唯一）
+  string description = 3; // 角色描述
+  repeated string enabled_methods = 4; // 展开后的方法全名列表（实际存储在数据库中用于鉴权）
+  repeated string llm_models_disabled = 5; // 禁用的LLM模型列表
+  uint64 count_limit_daily_llm_talk_right_side = 6; // 右侧AI对话每日次数限制（0表示不限制）
+  uint64 count_limit_keyword = 7; // 关键词数量限制（0表示不限制）
+  uint64 count_limit_category = 8; // 范畴数量限制（0表示不限制）
+  uint64 count_limit_daily_free_ask = 9; // 智慧对话每日次数限制（0表示不限制）
+  uint64 updated_at = 10; // 更新时间（Unix时间戳）
+}
+
+// ListRolesRequest 获取角色列表请求
+message ListRolesRequest {
+  uint32 page_number = 1; // 页码，从1开始
+  uint32 limit = 2; // 每页数量
+}
+
+// ListRolesResponse 获取角色列表响应
+message ListRolesResponse {
+  uint32 total_count = 1; // 总记录数
+  uint32 page_size = 2; // 每页大小
+  uint32 total_page = 3; // 总页数
+  uint32 current_page = 4; // 当前页码
+  repeated RoleInfo items = 5; // 角色列表
+}
+
+// GetRoleRequest 获取角色详情请求
+message GetRoleRequest {
+  string role_id = 1; // 角色ID
+}
+
+// GetRoleResponse 获取角色详情响应
+message GetRoleResponse {
+  RoleInfo role = 1; // 角色信息
+}
+
+// CreateRoleRequest 创建角色请求
+message CreateRoleRequest {
+  string role_name = 1; // 角色名称（必须唯一）
+  string description = 2; // 角色描述
+  repeated string function_set_ids = 3; // 功能集ID列表（前端传入，后端会自动展开成方法列表）
+  repeated string llm_models_disabled = 4; // 禁用的LLM模型列表
+  uint64 count_limit_daily_llm_talk_right_side = 5; // 右侧AI对话每日次数限制
+  uint64 count_limit_keyword = 6; // 关键词数量限制
+  uint64 count_limit_category = 7; // 范畴数量限制
+  uint64 count_limit_daily_free_ask = 8; // 智慧对话每日次数限制
+}
+
+// CreateRoleResponse 创建角色响应
+message CreateRoleResponse {
+  string role_id = 1; // 新创建的角色ID
+}
+
+// UpdateRoleRequest 更新角色请求
+message UpdateRoleRequest {
+  string role_id = 1; // 要更新的角色ID
+  string role_name = 2; // 角色名称
+  string description = 3; // 角色描述
+  repeated string function_set_ids = 4; // 功能集ID列表（前端传入，后端会自动展开成方法列表）
+  repeated string llm_models_disabled = 5; // 禁用的LLM模型列表
+  uint64 count_limit_daily_llm_talk_right_side = 6; // 右侧AI对话每日次数限制
+  uint64 count_limit_keyword = 7; // 关键词数量限制
+  uint64 count_limit_category = 8; // 范畴数量限制
+  uint64 count_limit_daily_free_ask = 9; // 智慧对话每日次数限制
+}
+
+// UpdateRoleResponse 更新角色响应
+message UpdateRoleResponse {}
+
+// DeleteRoleRequest 删除角色请求
+message DeleteRoleRequest {
+  string role_id = 1; // 要删除的角色ID
+}
+
+// DeleteRoleResponse 删除角色响应
+message DeleteRoleResponse {}
+
+// ==================== 功能集管理相关消息 ====================
+
+// FunctionSetInfo 功能集信息
+// 功能集是前端管理的辅助概念，是一组方法的集合，用于快速配置角色权限
+// 后端不会在角色表中存储功能集ID，只会展开成方法列表存储
+message FunctionSetInfo {
+  string function_set_id = 1; // 功能集ID
+  string set_name = 2; // 功能集名称（唯一）
+  string description = 3; // 功能集描述
+  repeated string enabled_methods = 4; // 包含的方法全名列表，格式如: "user.v1.UserService/GetUserInfo"
+}
+
+// ListAllFunctionSetsRequest 获取所有功能集列表请求
+message ListAllFunctionSetsRequest {}
+
+// ListAllFunctionSetsResponse 获取所有功能集列表响应
+message ListAllFunctionSetsResponse {
+  repeated FunctionSetInfo items = 1; // 功能集列表
+}
+
+// GetFunctionSetRequest 获取功能集详情请求
+message GetFunctionSetRequest {
+  string function_set_id = 1; // 功能集ID
+}
+
+// GetFunctionSetResponse 获取功能集详情响应
+message GetFunctionSetResponse {
+  FunctionSetInfo function_set = 1; // 功能集信息
+}
+
+// CreateFunctionSetRequest 创建功能集请求
+message CreateFunctionSetRequest {
+  string set_name = 1; // 功能集名称（必须唯一）
+  string description = 2; // 功能集描述
+  repeated string enabled_methods = 3; // 方法全名列表，格式如: "user.v1.UserService/GetUserInfo"
+}
+
+// CreateFunctionSetResponse 创建功能集响应
+message CreateFunctionSetResponse {
+  string function_set_id = 1; // 新创建的功能集ID
+}
+
+// UpdateFunctionSetRequest 更新功能集请求
+message UpdateFunctionSetRequest {
+  string function_set_id = 1; // 要更新的功能集ID
+  string set_name = 2; // 功能集名称
+  string description = 3; // 功能集描述
+  repeated string enabled_methods = 4; // 方法全名列表
+}
+
+// UpdateFunctionSetResponse 更新功能集响应
+message UpdateFunctionSetResponse {}
+
+// DeleteFunctionSetRequest 删除功能集请求
+message DeleteFunctionSetRequest {
+  string function_set_id = 1; // 要删除的功能集ID
+}
+
+// DeleteFunctionSetResponse 删除功能集响应
+message DeleteFunctionSetResponse {}
+
+// ==================== 方法管理相关消息 ====================
+
+// MethodInfo 方法信息
+// 所有的 gRPC 方法会在首次被调用时自动注册到数据库
+message MethodInfo {
+  string method_id = 1; // 方法ID
+  string full_name = 2; // 方法全名，格式如: "user.v1.UserService/GetUserInfo"
+  string description = 3; // 方法描述
+}
+
+// ListAllMethodsRequest 获取所有方法列表请求
+message ListAllMethodsRequest {}
+
+// ListAllMethodsResponse 获取所有方法列表响应
+message ListAllMethodsResponse {
+  repeated MethodInfo items = 1; // 方法列表
+}
+
+// GetMethodRequest 获取方法详情请求
+message GetMethodRequest {
+  string method_id = 1; // 方法ID
+}
+
+// GetMethodResponse 获取方法详情响应
+message GetMethodResponse {
+  MethodInfo method = 1; // 方法信息
+}
+
+// UpdateMethodDescriptionRequest 更新方法描述请求
+message UpdateMethodDescriptionRequest {
+  string method_id = 1; // 方法ID
+  string description = 2; // 新的方法描述
+}
+
+// UpdateMethodDescriptionResponse 更新方法描述响应
+message UpdateMethodDescriptionResponse {}
+
+// ==================== 用户角色分配相关消息 ====================
+
+// AssignRoleToUserRequest 为用户分配角色请求
+message AssignRoleToUserRequest {
+  string user_id = 1; // 用户ID
+  string role_id = 2; // 要分配的角色ID
+}
+
+// AssignRoleToUserResponse 为用户分配角色响应
+message AssignRoleToUserResponse {}
