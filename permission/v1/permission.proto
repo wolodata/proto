@@ -35,7 +35,7 @@ service PermissionService {
 
   // ==================== 用户角色分配 ====================
 
-  // AssignRoleToUser 为用户分配角色
+  // AssignRoleToUser 管理员为用户分配角色
   rpc AssignRoleToUser(AssignRoleToUserRequest) returns (AssignRoleToUserResponse);
 }
 
@@ -143,13 +143,13 @@ message ListAllMethodsResponse {
   map<string, ServiceMethods> services = 1; // key 是 service 名称，如 "user.v1.UserService"
 }
 
-// AssignRoleToUserResponse 为用户分配角色响应
-message AssignRoleToUserResponse {}
-
 // ==================== 用户角色分配相关消息 ====================
 
-// AssignRoleToUserRequest 为用户分配角色请求
+// AssignRoleToUserRequest 管理员为用户分配角色请求
 message AssignRoleToUserRequest {
   string user_id = 1; // 用户ID
   string role_id = 2; // 要分配的角色ID
 }
+
+// AssignRoleToUserResponse 管理员为用户分配角色响应
+message AssignRoleToUserResponse {}
